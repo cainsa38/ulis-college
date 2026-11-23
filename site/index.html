@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Crect width=%228%22 height=%228%22 fill=%22%23E4572E%22/%3E%3Crect x=%228%22 width=%228%22 height=%228%22 fill=%22%238E5CC2%22/%3E%3Crect y=%228%22 width=%228%22 height=%228%22 fill=%22%233A86C8%22/%3E%3Crect x=%228%22 y=%228%22 width=%228%22 height=%228%22 fill=%22%2343A047%22/%3E%3C/svg%3E">
+<title>ULIS Collège - EDL-Numération - calculs posés - Géométrie</title>
+<style>
+
+@font-face{font-family:'Andika';font-weight:400;font-display:swap;src:url('fonts/andika-latin-400-normal.woff') format('woff')}
+@font-face{font-family:'Andika';font-weight:700;font-display:swap;src:url('fonts/andika-latin-700-normal.woff') format('woff')}
+/* VOICE: calme et pratique, pour des enseignants pressés.
+   IDEA: le classeur de l'élève et ses intercalaires de couleur (un par bloc de notions).
+   PICTURE: la fiche de suivi de la classe (élèves × 16 notions colorées) et le classeur ouvert à onglets.
+   COLOUR and TYPE: papier blanc, encre presque noire, les 5 couleurs de blocs du dossier ; Andika (police des fiches).
+   LAYOUT: mes élèves (suivi + impression de la suite), imprimer sur mesure, notions, démarche, documents ; lecteur PDF en surimpression. */
+:root{color-scheme:light dark;--bg:light-dark(#F6F4EE,#15171B);--paper:light-dark(#FFFFFF,#1F2228);--ink:light-dark(#1D1D1B,#ECEAE4);--soft:light-dark(#5A5852,#A9A69E);--line:light-dark(#DCD8CC,#353841);--tab:light-dark(#F1EEE4,#2A2D34);--accent:#E4572E;--ok:#2F8F4E;--ko:#C2412D;
+--b1:#F7CB2D;--b2:#9AD27E;--b3:#86C5EF;--b4:#C3A6E6;--b5:#F6A93B}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.55 'Andika',system-ui,sans-serif;overflow-x:clip}
+a{color:inherit}button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+[hidden]{display:none!important}
+.wrap{max-width:1240px;margin:0 auto;padding:0 max(4vw,16px)}
+.band{padding-block:clamp(26px,3.6vw,52px)}
+nav.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+nav.top .wrap{display:flex;align-items:center;gap:16px;min-height:60px;flex-wrap:wrap}
+.brand{font-weight:700;font-size:17px;display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto}
+.brand i{display:inline-flex;gap:2px}.brand i b{width:6px;height:20px;border-radius:2px}
+nav.top a.l{text-decoration:none;font-size:15px;padding:8px 2px;border-bottom:2px solid transparent}
+nav.top a.l:hover{border-color:var(--accent)}
+.pill{border:1.5px solid var(--ink);border-radius:999px;padding:6px 14px;text-decoration:none;font-size:15px;min-height:40px;display:inline-flex;align-items:center;background:var(--paper)}
+h1{font-size:clamp(32px,4.4vw,50px);line-height:1.05;margin:0 0 12px;text-wrap:balance}
+h2{font-size:clamp(26px,3vw,34px);line-height:1.1;margin:0 0 10px;text-wrap:balance}
+h3{font-size:19px;margin:0 0 6px}
+.lead{font-size:18px;color:var(--soft);max-width:68ch;margin:0}
+.btn{border:1.5px solid var(--ink);border-radius:12px;background:var(--paper);min-height:46px;padding:0 18px;font-size:16px;font-weight:700}
+.btn.pri{background:var(--ink);color:var(--bg)}
+.btn:disabled{opacity:.45;cursor:default}
+/* Classeur enseignant */
+.binder{display:grid;grid-template-columns:minmax(0,290px) minmax(0,1fr);margin-top:18px;background:var(--paper);border:1.5px solid var(--ink);border-radius:18px;overflow:hidden;box-shadow:0 14px 0 -6px var(--line)}
+.tabs{border-right:1.5px solid var(--ink);padding:14px 0 14px 14px;background:var(--tab);display:flex;flex-direction:column;gap:5px}
+.tabs .bl{font-size:13px;color:var(--soft);margin:6px 0 1px 4px}
+.tab{display:flex;align-items:center;gap:10px;text-align:left;border:1.5px solid transparent;border-right:none;border-radius:10px 0 0 10px;background:transparent;padding:7px 10px;min-height:44px;font-size:15px;line-height:1.2}
+.nb{flex:none;width:28px;height:28px;border-radius:7px;border:1.5px solid #1D1D1B;display:inline-flex;align-items:center;justify-content:center;font-weight:700;color:#1D1D1B}
+.tab[aria-selected=true]{margin-right:-1.5px;font-weight:700;background:var(--paper);border-color:var(--ink);z-index:1;box-shadow:inset 6px 0 0 var(--c)}
+.tab:not([aria-selected=true]):hover{background:var(--paper);border-color:var(--line)}
+.sheet{padding:clamp(18px,2.6vw,30px)}
+.hd{display:flex;align-items:center;gap:14px;margin-bottom:4px}
+.big{flex:none;width:58px;height:58px;border-radius:14px;border:2px solid #1D1D1B;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:#1D1D1B}
+.meta{color:var(--soft);font-size:15px}
+.path{display:grid;gap:12px;margin-top:18px}
+.step{border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;display:grid;grid-template-columns:minmax(0,180px) minmax(0,1fr);gap:12px;align-items:center}
+.step .k{font-weight:700;line-height:1.25}.step .k small{display:block;font-weight:400;color:var(--soft);font-size:13.5px}
+.btns{display:flex;flex-wrap:wrap;gap:8px}
+.pg{border:1.5px solid var(--ink);background:var(--paper);border-radius:10px;padding:8px 12px;min-height:44px;font-size:15px;line-height:1.15;text-align:left;transition:transform .12s}
+.pg:hover{transform:translateY(-2px)}
+.pg b{display:block;font-size:15.5px}.pg span{font-size:13px;color:var(--soft)}
+.pg.lv{color:#1D1D1B}.pg.lv span{color:#4a4a44}
+.pg.c{background:var(--tab);border-color:var(--line)}
+.arrow{color:var(--soft);font-size:14px;margin:-4px 0 -4px 14px}
+/* Impression */
+.printer{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:18px;margin-top:18px}
+.panel{background:var(--paper);border:1.5px solid var(--ink);border-radius:16px;padding:18px 20px}
+.panel h3{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.panel h3 button{font-size:14px;font-weight:400;border:1px solid var(--line);background:var(--paper);border-radius:8px;min-height:36px;padding:0 10px}
+.nchips{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:6px;margin:8px 0 4px}
+.chk{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:10px;padding:6px 10px;min-height:44px;font-size:14.5px;line-height:1.2;cursor:pointer;background:var(--paper)}
+.chk input{width:20px;height:20px;flex:none;accent-color:#1D1D1B}
+.chk:has(input:checked){border-color:var(--ink);background:var(--tab)}
+.chk .nb{width:24px;height:24px;font-size:13px}
+.opts{display:grid;gap:6px;margin-top:8px}
+.sum{font-size:28px;font-weight:700;line-height:1.1;margin:6px 0 2px}
+.sum small{font-size:15px;font-weight:400;color:var(--soft)}
+.ptlist{font-size:14.5px;color:var(--soft);margin:10px 0 14px;max-height:170px;overflow:auto;padding-left:18px}
+.status{font-size:14.5px;margin-top:10px;min-height:1.5em}
+/* Démarche */
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:18px}
+.card{background:var(--paper);border:1.5px solid var(--ink);border-radius:16px;padding:16px 18px}
+.card .n{display:inline-flex;width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--bg);align-items:center;justify-content:center;font-weight:700;margin-bottom:8px}
+.card p{margin:0;font-size:15.5px}
+.helper{margin-top:22px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:18px}
+label.f{display:block;font-weight:700;margin:0 0 6px}
+select,input.t{font:inherit;font-size:16px;width:100%;min-height:46px;border:1.5px solid var(--ink);border-radius:10px;background:var(--paper);color:var(--ink);padding:0 10px}
+.seg{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.seg button{border:1.5px solid var(--ink);border-radius:999px;background:var(--paper);padding:9px 14px;min-height:44px;font-size:15px}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.advice{background:var(--paper);border:1.5px solid var(--ink);border-radius:16px;padding:18px 20px}
+.advice h3{font-size:20px}.advice p{margin:6px 0 12px}
+.tip{font-size:14.5px;color:var(--soft);border-top:1px dashed var(--line);padding-top:10px;margin:12px 0 0}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+.levels{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.levels span{border:1.5px solid;border-radius:999px;padding:5px 12px;font-size:15px;color:#1D1D1B;white-space:nowrap}
+table.tb{width:100%;border-collapse:collapse;margin-top:14px;background:var(--paper);border:1.5px solid var(--ink);font-size:15px}
+table.tb th,table.tb td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+table.tb th{background:var(--tab)}table.tb td:first-child{font-weight:700}
+.docs{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px;margin-top:10px}
+.doc{background:var(--paper);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.code{display:inline-block;background:var(--ink);color:var(--bg);border-radius:6px;padding:1px 8px;font-weight:700;font-size:14px;margin-right:6px}
+.doc h4{margin:0;font-size:17px;line-height:1.25}
+.doc p{margin:0;font-size:14.5px;color:var(--soft);flex:1}
+.doc .act{display:flex;gap:8px;flex-wrap:wrap}
+.doc .act button{border:1.5px solid var(--ink);border-radius:10px;background:var(--paper);min-height:44px;padding:0 14px;font-size:15px}
+.doc .act button.pri{background:var(--ink);color:var(--bg)}
+.note{font-size:14.5px;color:var(--soft);margin-top:12px}
+.dots{display:flex;gap:3px;flex-wrap:wrap}
+.dots i{width:20px;height:20px;border-radius:5px;border:1px solid var(--line);font-style:normal;font-size:11px;display:inline-flex;align-items:center;justify-content:center;color:#1D1D1B}
+footer.site{border-top:1px solid var(--line);padding:22px 0 40px;color:var(--soft);font-size:14.5px}
+/* Lecteur + cahier en ligne */
+.viewer{position:fixed;inset:0;z-index:50;background:rgba(15,16,19,.9);display:none;flex-direction:column}
+.viewer.open{display:flex}
+.vbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px max(2vw,10px);background:#1D1D1B;color:#F2F0EA}
+.vbar .t{margin-right:auto;font-weight:700;font-size:15px;line-height:1.2}.vbar .t small{display:block;font-weight:400;color:#bdb9ae}
+.vbar button{background:#2E2E2B;border:1px solid #4a4a45;color:#F2F0EA;border-radius:9px;min-height:44px;min-width:44px;padding:0 12px;font-size:15px}
+.vbar button:disabled{opacity:.35}
+.vbar button[aria-pressed=true]{background:#F2F0EA;color:#1D1D1B}
+.vbar input{width:62px;min-height:44px;font:inherit;font-size:16px;text-align:center;border-radius:9px;border:1px solid #4a4a45;background:#2E2E2B;color:#F2F0EA}
+.vlabel{background:#F2F0EA;color:#1D1D1B;border-radius:9px;padding:6px 10px;font-weight:700;font-size:15px;white-space:nowrap}
+.vbody{flex:1;overflow:auto;display:flex;justify-content:center;align-items:flex-start;padding:16px}
+.vmsg{color:#F2F0EA;margin:auto;font-size:17px;text-align:center;max-width:40ch}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:70;background:#1D1D1B;color:#fff;border-radius:12px;padding:10px 16px;font-size:15px;display:none}
+@media (max-width:900px){.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}.helper,.printer{grid-template-columns:minmax(0,1fr)}.grid3{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:760px){.doors{grid-template-columns:minmax(0,1fr)}.door{min-height:280px}.binder{grid-template-columns:minmax(0,1fr)}.tabs{border-right:none;border-bottom:1.5px solid var(--ink);flex-direction:row;overflow-x:auto;padding:10px}.tabs .bl{display:none}.tab{flex:none;border-radius:10px}.tab .tx{display:none}.tab[aria-selected=true]{margin-right:0;box-shadow:inset 0 -5px 0 var(--c)}.step{grid-template-columns:minmax(0,1fr)}.next{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:600px){.grid4{grid-template-columns:minmax(0,1fr)}nav.top a.l{display:none}table.tb{font-size:13.5px}.door svg{width:120px}}
+#suivi{min-height:80vh}
+
+/* Suivi des élèves */
+.mode{display:block;border:1.5px solid var(--line);background:var(--paper);border-radius:12px;padding:10px 14px;font-size:15px;margin-top:14px}
+.mode.warn{border-color:#F6A93B;background:light-dark(#FFF6E5,#2b2416)}
+
+.addrow{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,1.3fr) auto;gap:10px;align-items:end;margin-top:16px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:18px}
+.toolbar .sp{flex:1}
+.stable{overflow-x:auto;margin-top:12px;border:1.5px solid var(--ink);border-radius:14px;background:var(--paper)}
+table.st{border-collapse:collapse;width:100%;min-width:1000px;font-size:15px}
+table.st th,table.st td{padding:8px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+table.st thead th{background:var(--tab);font-size:13.5px;position:sticky;top:0}
+table.st th.nh{text-align:center;padding:6px 1px;width:34px}
+table.st th.nh span{display:inline-flex;width:24px;height:24px;border-radius:6px;border:1.2px solid #1D1D1B;align-items:center;justify-content:center;color:#1D1D1B;font-size:12.5px}
+table.st td.nc{padding:6px 1px;text-align:center}
+.cell{width:30px;height:30px;border-radius:7px;border:1.5px solid var(--line);background:transparent;font-size:12px;font-weight:700;padding:0;color:var(--soft)}
+.cell.ok{background:#9AD27E;border-color:#5f9e47;color:#1D1D1B}
+.cell.passe{background:#F6A93B;border-color:#c9822a;color:#1D1D1B}
+.cell.cours{background:#FDF0B8;border-color:#E8C34A;color:#1D1D1B}
+.cell.next{box-shadow:0 0 0 2.5px var(--accent)}
+td.nm button{background:none;border:none;padding:0;font-weight:700;font-size:16px;text-align:left;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+td.nm{min-width:190px}td.nm small{display:block;color:var(--soft);font-size:13px}
+td.nx{font-size:14px;line-height:1.3;min-width:180px}
+td.ac{white-space:nowrap}
+td.ac button{border:1.5px solid var(--ink);border-radius:10px;background:var(--ink);color:var(--bg);min-height:40px;padding:0 12px;font-size:14px;font-weight:700}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--soft);margin-top:10px}
+.legend i{display:inline-block;width:16px;height:16px;border-radius:4px;vertical-align:-3px;margin-right:5px;border:1px solid var(--line)}
+.empty{padding:28px;text-align:center;color:var(--soft)}
+/* Fenêtres */
+.dlg{position:fixed;inset:0;z-index:60;background:rgba(15,16,19,.55);display:none;align-items:flex-start;justify-content:center;padding:6vh 12px;overflow:auto}
+.dlg.open{display:flex}
+.box{background:var(--paper);color:var(--ink);border:2px solid var(--ink);border-radius:18px;width:min(620px,100%);padding:20px 22px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.box h3{font-size:21px;margin:0 0 4px}
+.box .meta{margin-bottom:12px}
+.slot{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.slot b{font-size:15.5px}.slot small{display:block;color:var(--soft);font-size:13px}
+.tri{display:flex;gap:4px}
+.tri button{min-height:40px;min-width:44px;border:1.5px solid var(--line);border-radius:9px;background:var(--paper);font-size:14px;padding:0 10px}
+.tri button[aria-pressed=true][data-v=ok]{background:#9AD27E;border-color:#5f9e47;color:#1D1D1B;font-weight:700}
+.tri button[aria-pressed=true][data-v=ko]{background:#F6A93B;border-color:#c9822a;color:#1D1D1B;font-weight:700}
+.tri button[aria-pressed=true][data-v=""]{background:var(--tab);border-color:var(--ink)}
+.box .foot{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;margin-top:16px}
+.steps{display:grid;gap:8px;margin:10px 0}
+.stp{border:1.5px solid var(--line);border-radius:12px;padding:10px 12px}
+.stp b{display:block}.stp span{font-size:14px;color:var(--soft)}
+.stp.sim{border-style:dashed}
+textarea.t{width:100%;min-height:70px;font:inherit;font-size:15px;border:1.5px solid var(--ink);border-radius:10px;padding:8px 10px;background:var(--paper);color:var(--ink)}
+@media (max-width:760px){.addrow{grid-template-columns:minmax(0,1fr)}}
+
+
+/* ---- multi-matières ---- */
+.tabsnav{display:flex;gap:6px;flex-wrap:wrap}
+.tabsnav a{text-decoration:none;font-size:15px;padding:7px 12px;border-radius:999px;border:1.5px solid transparent;display:inline-flex;align-items:center;gap:7px;min-height:40px}
+.tabsnav a i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.tabsnav a:hover{border-color:var(--line)}
+.tabsnav a[aria-current=page]{border-color:var(--ink);background:var(--paper);font-weight:700}
+.addpanel{margin-top:16px}
+.addrow2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr) auto;gap:14px;align-items:end}
+span.f{display:block;font-weight:700;margin:0 0 6px}
+.subjchk{display:flex;flex-wrap:wrap;gap:6px}
+.subjchk label{display:inline-flex;align-items:center;gap:7px;border:1.5px solid var(--line);border-radius:999px;padding:6px 12px;min-height:44px;cursor:pointer;font-size:15px;background:var(--paper)}
+.subjchk label:has(input:checked){border-color:var(--ink);background:var(--tab);font-weight:700}
+.subjchk input{width:18px;height:18px;accent-color:#1D1D1B}
+table.home{border-collapse:collapse;width:100%;min-width:860px;font-size:15px}
+table.home th,table.home td{padding:10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+table.home thead th{background:var(--tab);font-size:14px}
+table.home th.sj{min-width:150px}
+table.home th.sj i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+.sjcell{display:flex;flex-direction:column;gap:5px;width:100%;text-align:left;background:none;border:1.5px solid var(--line);border-radius:10px;padding:7px 9px;min-height:54px;cursor:pointer}
+.sjcell:hover{border-color:var(--ink)}
+.sjcell .bar{height:7px;border-radius:4px;background:var(--tab);overflow:hidden}
+.sjcell .bar b{display:block;height:100%;border-radius:4px}
+.sjcell small{font-size:12.5px;color:var(--soft);line-height:1.25}
+.sjcell.off{border-style:dashed;color:var(--soft);align-items:center;justify-content:center;font-size:14px}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;line-height:1.2}
+.chip i{width:12px;height:12px;border-radius:3px;border:1px solid #888;flex:none}
+footer.contact{border-top:1px solid var(--line);background:var(--paper)}
+footer.contact .wrap{display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:space-between;padding-block:20px;font-size:15.5px}
+footer.contact a.btn{display:inline-flex;align-items:center;text-decoration:none}
+.subjhead{padding:clamp(22px,3vw,40px) 0 10px;border-bottom:4px solid var(--sacc)}
+.subjhead .wrap{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.subjhead .dot{width:52px;height:52px;border-radius:14px;background:var(--sacc);flex:none}
+.subjhead h1{margin:0}
+.subnav{display:flex;gap:6px;flex-wrap:wrap;padding-top:14px;padding-bottom:4px;position:sticky;top:60px;z-index:10;background:var(--bg)}
+.subnav a{text-decoration:none;border:1.5px solid var(--line);border-radius:10px;padding:8px 14px;font-size:15px;background:var(--paper);min-height:42px;display:inline-flex;align-items:center}
+.subnav a:hover{border-color:var(--ink)}
+.box.wide{width:min(760px,100%)}
+.sjblock{border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;margin-top:10px}
+.sjblock.on{border-color:var(--ink)}
+.sjblock h4{margin:0;display:flex;align-items:center;gap:10px;font-size:16.5px}
+.sjblock h4 label{display:inline-flex;gap:8px;align-items:center;cursor:pointer}
+.sjblock h4 input{width:20px;height:20px;accent-color:#1D1D1B}
+.sjblock .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:10px}
+.sjblock .btns{margin-top:10px}
+.unitlist{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.unitbtn{border:1.5px solid var(--line);border-radius:10px;background:var(--paper);min-height:44px;padding:6px 10px;display:inline-flex;align-items:center;gap:8px;font-size:14.5px}
+.unitbtn[aria-selected=true]{border-color:var(--ink);box-shadow:0 0 0 2px var(--sacc)}
+.ub{flex:none;min-width:30px;height:30px;padding:0 4px;border-radius:7px;border:1.5px solid #1D1D1B;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#1D1D1B}
+.ub.dk{color:#fff}
+.unitsheet{margin-top:14px;background:var(--paper);border:1.5px solid var(--ink);border-radius:16px;padding:18px 20px}
+table.st th.grp{text-align:center;font-size:12.5px;padding:4px;border-left:2px solid var(--line)}
+table.st th.nh span.dk{color:#fff}
+.stepsel{display:grid;gap:6px;margin:8px 0}
+@media (max-width:760px){.addrow2{grid-template-columns:minmax(0,1fr)}}
+table.st td.nm,table.st thead tr:last-child th:first-child{position:sticky;left:0;z-index:2;background:var(--paper);box-shadow:1px 0 0 var(--line)}
+table.st thead tr:last-child th:first-child{background:var(--tab);z-index:3}
+table.st td.nm{min-width:150px}
+.addrow2{align-items:end}
+.stp .chip{margin-right:6px;vertical-align:-1px}
+
+.upd{margin-top:10px;border:1.5px solid var(--line);border-radius:14px;padding:10px 14px;background:var(--paper);display:flex;gap:10px 14px;align-items:center;flex-wrap:wrap;font-size:15px}
+.upd.new{border-color:#3A86C8;background:#E9F4FC}
+.upd .sp{flex:1}
+.upd .bar{flex-basis:100%;height:8px;border-radius:5px;background:var(--tab);overflow:hidden}.upd .bar b{display:block;height:100%;background:#3A86C8}
+.upd .btn{padding:6px 12px;font-size:14.5px}
+
+</style>
+</head>
+<body>
+<nav class="top"><div class="wrap">
+  <a class="brand" href="#accueil"><i><b style="background:#E4572E"></b><b style="background:#8E5CC2"></b><b style="background:#3A86C8"></b><b style="background:#43A047"></b></i>ULIS Collège</a>
+  <span class="tabsnav" id="subjnav"></span>
+</div></nav>
+
+<!-- ===================== ACCUEIL ===================== -->
+<main id="v-accueil">
+  <section class="wrap band">
+    <h1>Mes élèves</h1>
+    <p class="lead">Choisissez les matières de chaque élève, notez les résultats aux tests : le logiciel indique la suite et prépare les documents à imprimer.</p>
+    <div class="mode" id="mode" aria-live="polite">Chargement du suivi…</div>
+    <div class="upd" id="upd" hidden aria-live="polite"></div><input type="file" id="updfile" accept=".zip,application/zip" hidden>
+    <div class="toolbar" style="margin-top:16px"><label class="f" for="year" style="margin:0">Année scolaire</label><select id="year" style="width:auto;min-width:150px"></select><button class="btn" id="newyear">Nouvelle année…</button><span class="sp"></span><button class="btn" id="backup">Sauvegarder tout mon suivi</button><label class="btn" style="display:inline-flex;align-items:center;cursor:pointer" for="impfile">Restaurer ou importer un fichier</label><input type="file" id="impfile" accept=".json,application/json" multiple hidden></div>
+    <div class="panel addpanel">
+      <h3>Ajouter un élève</h3>
+      <div class="addrow2">
+        <div><label class="f" for="aname">Prénom</label><input class="t" id="aname" maxlength="30" autocomplete="off"></div>
+        <div><span class="f">Matières suivies</span><div class="subjchk" id="asubj"></div></div>
+        <button class="btn pri" id="aadd">Ajouter</button>
+      </div>
+      <p class="note" style="margin:6px 0 0">Le parcours et la ceinture (ou notion) de départ se règlent ensuite pour chaque matière en touchant le prénom.</p>
+    </div>
+    <div class="toolbar">
+      <span class="meta" id="count"></span><span class="sp"></span>
+      <button class="btn" id="printall" disabled>Imprimer la suite de tous</button>
+      <button class="btn" id="bilanall" disabled>Bilans PDF de tous (toutes matières)</button>
+      <button class="btn" id="csv" disabled>Exporter (tableur)</button>
+    </div>
+    <div class="stable"><div id="hometable"></div></div>
+    <p class="note">Touchez une matière pour ouvrir sa fiche de suivi, ou le prénom pour les réglages, les bilans et la transmission.</p>
+  </section>
+  <footer class="contact"><div class="wrap">
+    <span>Une question, une remarque, une erreur repérée dans un document ?</span>
+    <a class="btn" href="mailto:manuel.duchamp@hotmail.fr?subject=Suivi%20ULIS%20coll%C3%A8ge">Me contacter : manuel.duchamp@hotmail.fr</a>
+  </div></footer>
+</main>
+
+<!-- ===================== MATIÈRE ===================== -->
+<main id="v-subj" hidden>
+  <header class="subjhead" id="subjhead"></header>
+  <nav class="subnav wrap" id="subnav"></nav>
+  <section class="wrap band" id="s-suivi"></section>
+  <section class="wrap band" id="s-imprimer"></section>
+  <section class="wrap band" id="s-unites"></section>
+  <section class="wrap band" id="s-demarche"></section>
+  <section class="wrap band" id="s-docs"></section>
+</main>
+
+<footer class="site"><div class="wrap">ULIS Collège - EDL-Numération - calculs posés - Géométrie · logiciel hors ligne (novembre 2026). Les fiches Boutdegomme du fichier d'étude de la langue restent soumises aux conditions d'utilisation de leur auteur.</div></footer>
+
+<div class="dlg" id="dres" role="dialog" aria-modal="true" aria-labelledby="dresh"><div class="box" id="dresbox"></div></div>
+<div class="dlg" id="dstu" role="dialog" aria-modal="true" aria-labelledby="dstuh"><div class="box wide" id="dstubox"></div></div>
+<div class="dlg" id="dprt" role="dialog" aria-modal="true" aria-labelledby="dprth"><div class="box" id="dprtbox"></div></div>
+
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Lecteur de document">
+  <div class="vbar">
+    <div class="t" id="vt">Document<small id="vs"></small></div>
+    <span class="vlabel" id="vl"></span>
+    <button id="vprev" aria-label="Page précédente">‹</button>
+    <input id="vin" inputmode="numeric" aria-label="Numéro de page">
+    <button id="vnext" aria-label="Page suivante">›</button>
+    <button id="vzo" aria-label="Réduire">−</button><button id="vzi" aria-label="Agrandir">+</button>
+    <button id="vdl">Télécharger</button>
+    <button id="vx">Fermer ✕</button>
+  </div>
+  <div class="vbody" id="vbody"></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="lib/pdf.min.js"></script>
+<script src="lib/pdf-lib.min.js"></script>
+<script>
+(function(){
+/* ========== DONNÉES ET OUTILS ========== */
+const D={"subjects": [{"id": "edl", "name": "Étude de la langue", "short": "EDL", "word": "notion", "words": "notions", "accent": "#E4572E", "units": [{"n": 1, "name": "La phrase", "color": "#F7CB2D", "bloc": 1, "fiches": ["Le sujet et le verbe dans la phrase", "Les constituants de la phrase", "Phrase simple ou phrase complexe", "Juxtaposition, coordination, subordination"], "lecon": 1, "testA": 5, "nfiches": 3, "dark": false}, {"n": 2, "name": "Les différentes phrases", "color": "#F7CB2D", "bloc": 1, "fiches": ["Trois façons de poser une question", "Les quatre types de phrases", "Transformer une phrase", "Interrogation totale et partielle"], "lecon": 6, "testA": 8, "nfiches": 1, "dark": false}, {"n": 3, "name": "Passé – présent – futur", "color": "#F7CB2D", "bloc": 1, "fiches": ["L'imparfait (être, avoir, 1er groupe)", "Le passé composé", "Le passé simple (3e personne)", "Le plus-que-parfait et la valeur des temps"], "lecon": 9, "testA": 11, "nfiches": 1, "dark": false}, {"n": 4, "name": "Le verbe", "color": "#F7CB2D", "bloc": 1, "fiches": ["Radical et terminaison", "Les trois groupes de verbes", "Verbe conjugué et infinitif", "Verbes d'action et verbes d'état"], "lecon": 12, "testA": 17, "nfiches": 4, "dark": false}, {"n": 5, "name": "Le groupe sujet", "color": "#9AD27E", "bloc": 2, "fiches": ["Trouver le sujet", "Les différents sujets", "Le sujet inversé", "COD et COI"], "lecon": 18, "testA": 25, "nfiches": 6, "dark": false}, {"n": 6, "name": "Le nom", "color": "#9AD27E", "bloc": 2, "fiches": ["L'ordre alphabétique (dictionnaire)", "Le nom, noyau du groupe nominal", "Noms et familles de mots", "Le nom et ses fonctions"], "lecon": 26, "testA": 33, "nfiches": 6, "dark": false}, {"n": 7, "name": "Le déterminant", "color": "#86C5EF", "bloc": 3, "fiches": ["Articles définis et indéfinis", "Déterminants possessifs et démonstratifs", "Choisir le bon déterminant", "Déterminant ou pronom ?"], "lecon": 34, "testA": 38, "nfiches": 3, "dark": false}, {"n": 8, "name": "La phrase négative", "color": "#86C5EF", "bloc": 3, "fiches": ["La phrase négative : ne … pas", "Les mots de la négation", "La négation au passé composé", "Négation totale et partielle"], "lecon": 39, "testA": 43, "nfiches": 3, "dark": false}, {"n": 9, "name": "Les pronoms personnels", "color": "#86C5EF", "bloc": 3, "fiches": ["Remplacer le groupe sujet par un pronom", "Éviter les répétitions", "Les pronoms compléments", "Les pronoms compléments en, y, lui, leur"], "lecon": 44, "testA": 49, "nfiches": 4, "dark": false}, {"n": 10, "name": "Les accords sujet – verbe", "color": "#86C5EF", "bloc": 3, "fiches": ["Accorder le verbe avec son sujet", "Le sujet éloigné du verbe", "Le sujet inversé et l'accord", "L'accord du participe passé avec être"], "lecon": 50, "testA": 52, "nfiches": 1, "dark": false}, {"n": 11, "name": "Masculin – féminin", "color": "#C3A6E6", "bloc": 4, "fiches": ["Des mots différents", "Les féminins particuliers", "Le féminin des adjectifs", "Le genre des noms difficiles"], "lecon": 53, "testA": 56, "nfiches": 2, "dark": false}, {"n": 12, "name": "Singulier – pluriel", "color": "#C3A6E6", "bloc": 4, "fiches": ["Les noms qui ne changent pas", "Les pluriels en ‑aux et ‑eaux", "Les noms en ‑ou", "Les pluriels irréguliers"], "lecon": 57, "testA": 60, "nfiches": 2, "dark": false}, {"n": 13, "name": "L'adjectif", "color": "#C3A6E6", "bloc": 4, "fiches": ["Trouver l'adjectif", "L'adjectif épithète", "Le complément du nom", "Attribut du sujet ou COD ?"], "lecon": 61, "testA": 67, "nfiches": 5, "dark": false}, {"n": 14, "name": "Les accords dans le groupe nominal", "color": "#C3A6E6", "bloc": 4, "fiches": ["La chaîne d'accords dans le groupe nominal", "Accorder en genre et en nombre", "Plusieurs adjectifs", "L'accord de l'attribut"], "lecon": 68, "testA": 73, "nfiches": 4, "dark": false}, {"n": 15, "name": "L'adverbe", "color": "#F6A93B", "bloc": 5, "fiches": ["Le rôle de l'adverbe", "Former un adverbe en ‑ment", "Les adverbes en ‑amment et ‑emment", "Adverbe ou adjectif ?"], "lecon": 74, "testA": 79, "nfiches": 4, "dark": false}, {"n": 16, "name": "Révisions", "color": "#F6A93B", "bloc": 5, "fiches": ["Les classes de mots", "Reconnaitre les temps", "Les fonctions dans la phrase", "Classe et fonction"], "lecon": 80, "testA": 92, "nfiches": 11, "dark": false}], "lvbg": {"2": "#FDF0B8", "3": "#D9F0D2", "4": "#D6E8F8", "5": "#E7DCF5"}, "lvbd": {"2": "#E8C34A", "3": "#8CC97A", "4": "#84B6E3", "5": "#B49AD8"}, "docs": [{"code": "EDL 0.0", "title": "Guide de l'enseignant", "role": "ens", "file": "edl/edl-0.0-guide.pdf", "pages": 2, "desc": "Étapes de travail, que faire selon les résultats, difficultés et remédiations, numérotation du classeur.", "dl": "EDL 0.0 - GUIDE ENSEIGNANT.pdf"}, {"code": "EDL 0.1", "title": "Progression", "role": "ens", "file": "edl/edl-0.1-progression.pdf", "pages": 2, "desc": "Les 16 notions du niveau 1 en 5 blocs, avec les pages du fichier et les fiches « plus loin ».", "dl": "EDL 0.1 - Progression ENSEIGNANT.pdf"}, {"code": "EDL 1.0", "title": "Évaluation de départ : mode d'emploi", "role": "ens", "file": "edl/edl-1.0-evaluation-mode-emploi.pdf", "pages": 2, "desc": "Passation, corrigé, choix du parcours et de la leçon de départ.", "dl": "EDL 1.0 - Évaluation diagnostique - choix parcours élève - Mode d'emploi ENSEIGNANT.pdf"}, {"code": "EDL 3.0", "title": "Corrigés des entraînements", "role": "ens", "file": "edl/edl-3.0-corriges-entrainements.pdf", "pages": 16, "desc": "Une page par notion.", "dl": "EDL 3.0 - Corriges des entrainements ENSEIGNANT.pdf"}, {"code": "EDL 3.1", "title": "Corrigés des tests A, B, C", "role": "ens", "file": "edl/edl-3.1-corriges-tests.pdf", "pages": 16, "desc": "Une page par notion, avec les seuils de réussite.", "dl": "EDL 3.1 - Corriges des tests A B C ENSEIGNANT.pdf"}, {"code": "EDL 3.2", "title": "Corrigés « pour aller plus loin »", "role": "ens", "file": "edl/edl-3.2-corriges-plus-loin.pdf", "pages": 32, "desc": "Deux pages par notion (fiches des niveaux 2 à 5).", "dl": "EDL 3.2 - Corriges pour aller plus loin ENSEIGNANT.pdf"}, {"code": "EDL 0.2", "title": "Ma fiche de suivi", "role": "ele", "file": "edl/edl-0.2-fiche-de-suivi.pdf", "pages": 2, "desc": "Scores des tests, notions validées, niveaux « plus loin » cochés.", "dl": "EDL 0.2 - Fiche de suivi ELEVE.pdf"}, {"code": "EDL 1.1", "title": "Évaluation de départ", "role": "ele", "file": "edl/edl-1.1-evaluation-eleve.pdf", "pages": 4, "desc": "P. 1-2 : parcours 1 · p. 3 : parcours 2 · p. 4 : parcours 3.", "dl": "EDL 1.1 - Évaluation diagnostique - Étude de la langue ELEVE.pdf"}, {"code": "EDL 2.0", "title": "Parcours élève niveau 1", "role": "ele", "file": "edl/edl-2.0-parcours-niveau1.pdf", "pages": 92, "desc": "Pour chaque notion : leçon, fiches d'exercices, test A (classeur p. 1 à 92).", "dl": "EDL 2.0 - Parcours eleve lecon exercices test A ELEVE.pdf"}, {"code": "EDL 2.1", "title": "Entraînements et tests de repassage", "role": "ele", "file": "edl/edl-2.1-entrainements-tests-BC.pdf", "pages": 64, "desc": "Entraînement 1, test B, entraînement 2, test C (pages a à d).", "dl": "EDL 2.1 - Entrainements et tests de repassage ELEVE.pdf"}, {"code": "EDL 2.2", "title": "Pour aller plus loin", "role": "ele", "file": "edl/edl-2.2-pour-aller-plus-loin.pdf", "pages": 192, "desc": "Niveaux 2 à 5, une fiche de 3 pages par niveau et par notion (pages « bis »).", "dl": "EDL 2.2 - Pour aller plus loin ELEVE.pdf"}]}, {"id": "cp", "name": "Calcul posé", "short": "Calcul", "word": "ceinture", "words": "ceintures", "accent": "#3A86C8", "units": [{"n": 1, "name": "Paille", "color": "#F3E3A1", "comp": "Tables d'addition (5 + 7)", "obj": "8 / 10", "memo": [1], "memoC": [1], "fiches": [[1], [2], [3], [4]], "tests": {"A": [1], "B": [2], "C": [3]}, "corr": [[1], [2], [3], [4]], "corrC": [[1], [2], [3], [4]], "tcorr": [1], "dark": false}, {"n": 2, "name": "Beige", "color": "#E3CDA4", "comp": "Addition posée sans retenue", "obj": "8 / 10", "memo": [2], "memoC": [2], "fiches": [[5], [6], [7], [8]], "tests": {"A": [4], "B": [5], "C": [6]}, "corr": [[5], [6], [7], [8]], "corrC": [[5], [6], [7], [8]], "tcorr": [1], "dark": false}, {"n": 3, "name": "Ivoire", "color": "#FFF4D6", "comp": "Addition posée avec une retenue", "obj": "8 / 10", "memo": [3], "memoC": [3], "fiches": [[9], [10], [11], [12]], "tests": {"A": [7], "B": [8], "C": [9]}, "corr": [[9], [10], [11], [12]], "corrC": [[9], [10], [11], [12]], "tcorr": [1], "dark": false}, {"n": 4, "name": "Blanche", "color": "#FFFFFF", "comp": "Addition posée à 3 chiffres", "obj": "8 / 10", "memo": [4], "memoC": [4], "fiches": [[13], [14], [15], [16]], "tests": {"A": [10], "B": [11], "C": [12]}, "corr": [[13], [14], [15], [16]], "corrC": [[13], [14], [15], [16]], "tcorr": [2], "dark": false}, {"n": 5, "name": "Jaune", "color": "#F7CB2D", "comp": "Soustraction posée (2 chiffres)", "obj": "8 / 10", "memo": [5], "memoC": [16], "fiches": [[17], [18], [19], [20]], "tests": {"A": [13], "B": [14], "C": [15]}, "corr": [[17], [18], [19], [20]], "corrC": [[17], [18], [19], [20]], "tcorr": [2], "dark": false}, {"n": 6, "name": "Orange", "color": "#F6A93B", "comp": "Multiplication par 1 chiffre", "obj": "10 / 12", "memo": [6], "memoC": [6], "fiches": [[21], [22], [23], [24]], "tests": {"A": [16], "B": [17], "C": [18]}, "corr": [[21], [22], [23], [24]], "corrC": [[21], [22], [23], [24]], "tcorr": [2], "dark": false}, {"n": 7, "name": "Rose", "color": "#F4A7C0", "comp": "Grandes additions (3 nombres)", "obj": "10 / 12", "memo": [7], "memoC": [7], "fiches": [[25], [26], [27], [28]], "tests": {"A": [19], "B": [20], "C": [21]}, "corr": [[25], [26], [27], [28]], "corrC": [[25], [26], [27], [28]], "tcorr": [3], "dark": false}, {"n": 8, "name": "Vert clair", "color": "#9AD27E", "comp": "Soustraction posée (3 chiffres)", "obj": "10 / 12", "memo": [8], "memoC": [17], "fiches": [[29], [30], [31], [32]], "tests": {"A": [22], "B": [23], "C": [24]}, "corr": [[29], [30], [31], [32]], "corrC": [[29], [30], [31], [32]], "tcorr": [3], "dark": false}, {"n": 9, "name": "Vert foncé", "color": "#2E7D32", "comp": "Multiplication par 2 chiffres", "obj": "10 / 12", "memo": [9], "memoC": [9], "fiches": [[33, 34], [35, 36], [37, 38], [39, 40]], "tests": {"A": [25, 26], "B": [27, 28], "C": [29, 30]}, "corr": [[33, 34], [35, 36], [37, 38], [39, 40]], "corrC": [[33, 34], [35, 36], [37, 38], [39, 40]], "tcorr": [3], "dark": true}, {"n": 10, "name": "Bleu clair", "color": "#86C5EF", "comp": "Division par 1 chiffre", "obj": "10 / 12", "memo": [10], "memoC": [10], "fiches": [[41, 42], [43, 44], [45, 46], [47, 48]], "tests": {"A": [31, 32], "B": [33, 34], "C": [35, 36]}, "corr": [[41, 42], [43, 44], [45, 46], [47, 48]], "corrC": [[41, 42], [43, 44], [45, 46], [47, 48]], "tcorr": [4], "dark": false}, {"n": 11, "name": "Bleu foncé", "color": "#1F4E9C", "comp": "Multiplication par 3 chiffres", "obj": "10 / 12", "memo": [11], "memoC": [11], "fiches": [[49, 50], [51, 52], [53, 54], [55, 56]], "tests": {"A": [37, 38], "B": [39, 40], "C": [41, 42]}, "corr": [[49, 50, 51], [52, 53, 54], [55, 56, 57], [58, 59, 60]], "corrC": [[49, 50, 51], [52, 53, 54], [55, 56, 57], [58, 59, 60]], "tcorr": [4], "dark": true}, {"n": 12, "name": "Violette", "color": "#8E5CC2", "comp": "Addition et soustraction de décimaux", "obj": "10 / 12", "memo": [12], "memoC": [18], "fiches": [[57, 58], [59, 60], [61, 62], [63, 64]], "tests": {"A": [43, 44], "B": [45, 46], "C": [47, 48]}, "corr": [[61, 62], [63, 64], [65, 66], [67, 68]], "corrC": [[61, 62], [63, 64], [65, 66], [67, 68]], "tcorr": [4], "dark": true}, {"n": 13, "name": "Grise", "color": "#9E9E9E", "comp": "Division par 2 chiffres", "obj": "10 / 12", "memo": [13], "memoC": [13], "fiches": [[65, 66], [67, 68], [69, 70], [71, 72]], "tests": {"A": [49, 50], "B": [51, 52], "C": [53, 54]}, "corr": [[69, 70], [71, 72], [73, 74], [75, 76]], "corrC": [[69, 70], [71, 72], [73, 74], [75, 76]], "tcorr": [5], "dark": false}, {"n": 14, "name": "Marron", "color": "#8B5A2B", "comp": "Décimal × entier", "obj": "10 / 12", "memo": [14], "memoC": [14], "fiches": [[73, 74], [75, 76], [77, 78], [79, 80]], "tests": {"A": [55, 56], "B": [57, 58], "C": [59, 60]}, "corr": [[77, 78], [79, 80], [81, 82], [83, 84]], "corrC": [[77, 78], [79, 80], [81, 82], [83, 84]], "tcorr": [5], "dark": true}, {"n": 15, "name": "Noire", "color": "#1D1D1B", "comp": "Décimal ÷ entier", "obj": "10 / 12", "memo": [15], "memoC": [15], "fiches": [[81, 82, 83], [84, 85, 86], [87, 88, 89], [90, 91, 92]], "tests": {"A": [61, 62, 63], "B": [64, 65, 66], "C": [67, 68, 69]}, "corr": [[85, 86, 87], [88, 89, 90], [91, 92, 93], [94, 95, 96]], "corrC": [[85, 86, 87], [88, 89, 90], [91, 92, 93], [94, 95, 96]], "tcorr": [5], "dark": true}], "docs": [{"code": "Guide", "title": "Guide de l'enseignant", "role": "ens", "file": "cp/guide.pdf", "pages": 5, "desc": "Étapes, remédiations, séance type, tableau de suivi.", "dl": "Calcul posé - Guide enseignant.pdf"}, {"code": "Progression", "title": "Progression des 15 ceintures", "role": "ens", "file": "cp/progression.pdf", "pages": 1, "desc": "Compétence, exemple, repère programme et objectif de chaque ceinture.", "dl": "Calcul posé - Progression.pdf"}, {"code": "Éval. corrigé", "title": "Évaluation de départ : corrigés", "role": "ens", "file": "cp/evaluation-corriges.pdf", "pages": 2, "desc": "Corrigés et cohérence avec Eduscol.", "dl": "Calcul posé - Évaluation diagnostique corrigés.pdf"}, {"code": "Tests corrigés", "title": "Corrigés des tests A, B, C", "role": "ens", "file": "cp/tests-corriges.pdf", "pages": 5, "desc": "Résultats des 45 tests et seuil de réussite.", "dl": "Calcul posé - Corrigés des tests.pdf"}, {"code": "Corrigés", "title": "Corrigés des fiches (retenue)", "role": "ens", "file": "cp/fiches-corriges.pdf", "pages": 96, "desc": "Toutes les étapes, soustraction par compensation (retenue).", "dl": "Calcul posé - Corrigés des fiches (retenue).pdf"}, {"code": "Corrigés cassage", "title": "Corrigés des fiches (cassage)", "role": "ens", "file": "cp/fiches-corriges-cassage.pdf", "pages": 96, "desc": "Soustraction par cassage (emprunt).", "dl": "Calcul posé - Corrigés des fiches (cassage).pdf"}, {"code": "Évaluation", "title": "Évaluation de départ", "role": "ele", "file": "cp/evaluation.pdf", "pages": 4, "desc": "4 pages : ceintures 1 à 15.", "dl": "Calcul posé - Évaluation diagnostique.pdf"}, {"code": "Mémos", "title": "Mémos des ceintures", "role": "ele", "file": "cp/memos.pdf", "pages": 18, "desc": "Une page par ceinture + variantes de la soustraction par cassage.", "dl": "Calcul posé - Mémos.pdf"}, {"code": "Fiches", "title": "Fiches (opérations déjà posées)", "role": "ele", "file": "cp/fiches.pdf", "pages": 92, "desc": "4 fiches par ceinture (N°1 à N°4).", "dl": "Calcul posé - Fiches.pdf"}, {"code": "Tests", "title": "Tests de passation A, B, C", "role": "ele", "file": "cp/tests.pdf", "pages": 69, "desc": "3 versions par ceinture, sans le mémo.", "dl": "Calcul posé - Tests.pdf"}]}, {"id": "geo", "name": "Géométrie", "short": "Géo", "word": "ceinture", "words": "ceintures", "accent": "#43A047", "units": [{"n": 1, "name": "Grise", "color": "#9E9E9E", "comp": "Se repérer, reconnaître les formes", "memo": [2], "fiches": [1, 2, 3, 4, 5, 6], "flabel": "fiches G1 à G12", "tests": [2, 3, 4], "dark": false}, {"n": 2, "name": "Turquoise", "color": "#2EC4B6", "comp": "Les solides, tracer à la règle", "memo": [3], "fiches": [7, 8, 9, 10, 11, 12], "flabel": "fiches T1 à T12", "tests": [5, 6, 7], "dark": false}, {"n": 3, "name": "Rouge", "color": "#E53935", "comp": "Mesurer, reproduire, symétrie", "memo": [4], "fiches": [13, 14, 15, 16, 17, 18], "flabel": "fiches R1 à R12", "tests": [8, 9, 10], "dark": false}, {"n": 4, "name": "Blanche", "color": "#FFFFFF", "comp": "Figures simples et alignements", "memo": [5], "fiches": [19, 20, 21, 22, 23, 24], "flabel": "fiches 1 à 12", "tests": [11, 12, 13], "dark": false}, {"n": 5, "name": "Jaune", "color": "#F7CB2D", "comp": "Angles droits, quadrilatères", "memo": [6], "fiches": [25, 26, 27, 28, 29, 30], "flabel": "fiches 13 à 24", "tests": [14, 15, 16], "dark": false}, {"n": 6, "name": "Orange", "color": "#F6A93B", "comp": "Droites, segments, milieu", "memo": [7], "fiches": [31, 32, 33, 34, 35, 36], "flabel": "fiches 25 à 36", "tests": [17, 18, 19], "dark": false}, {"n": 7, "name": "Rose", "color": "#F4A7C0", "comp": "Perpendiculaire", "memo": [8], "fiches": [37, 38, 39, 40, 41, 42], "flabel": "fiches 37 à 48", "tests": [20, 21, 22], "dark": false}, {"n": 8, "name": "Verte", "color": "#43A047", "comp": "Parallèles, polygones", "memo": [9], "fiches": [43, 44, 45, 46, 47, 48], "flabel": "fiches 49 à 60", "tests": [23, 24, 25], "dark": false}, {"n": 9, "name": "Bleue", "color": "#1E88E5", "comp": "Le cercle", "memo": [10], "fiches": [49, 50, 51, 52, 53, 54], "flabel": "fiches 61 à 72", "tests": [26, 27, 28], "dark": false}, {"n": 10, "name": "Violette", "color": "#8E5CC2", "comp": "Les triangles", "memo": [11], "fiches": [55, 56, 57, 58, 59, 60], "flabel": "fiches 73 à 84", "tests": [29, 30, 31], "dark": true}, {"n": 11, "name": "Marron", "color": "#8B5A2B", "comp": "Main levée, symétrie", "memo": [12], "fiches": [61, 62, 63, 64, 65, 66], "flabel": "fiches 85 à 96", "tests": [32, 33, 34, 35, 36], "dark": true}, {"n": 12, "name": "Noire", "color": "#1D1D1B", "comp": "Parallélogramme", "memo": [13], "fiches": [67, 68, 69, 70, 71, 72], "flabel": "fiches 97 à 108", "tests": [37, 38, 39, 40, 41], "dark": true}], "docs": [{"code": "Guide", "title": "Guide de l'enseignant", "role": "ens", "file": "geo/guide.pdf", "pages": 4, "desc": "Étapes, remédiations, séance type, tableau de suivi.", "dl": "Géométrie - Guide enseignant.pdf"}, {"code": "Progression", "title": "Progression des 12 ceintures", "role": "ens", "file": "geo/progression.pdf", "pages": 2, "desc": "Vocabulaire, papier et outils, « je sais faire », fiches.", "dl": "Géométrie - Progression.pdf"}, {"code": "Évaluation", "title": "Évaluation de départ (+ grille)", "role": "ele", "file": "geo/evaluation.pdf", "pages": 4, "desc": "3 pages élève + grille enseignant (page 4).", "dl": "Géométrie - Évaluation diagnostique.pdf"}, {"code": "Mémo", "title": "Mémo de géométrie", "role": "ele", "file": "geo/memo.pdf", "pages": 13, "desc": "Couverture puis une page par ceinture.", "dl": "Géométrie - Mémo.pdf"}, {"code": "Fiches", "title": "Fiches d'entraînement", "role": "ele", "file": "geo/fiches.pdf", "pages": 72, "desc": "12 fiches par ceinture (2 par page).", "dl": "Géométrie - Fiches.pdf"}, {"code": "Tests", "title": "Tests de passation (versions 1 à 3)", "role": "ele", "file": "geo/tests.pdf", "pages": 41, "desc": "Critères soleils et étoiles en haut de chaque test (page 1 : notes de corrections).", "dl": "Géométrie - Tests.pdf"}]}, {"id": "num", "name": "Numération", "short": "Num", "word": "ceinture", "words": "ceintures", "accent": "#8E5CC2", "units": [{"n": 1, "name": "Blanche", "color": "#FFFFFF", "comp": "Nombres 1 à 3", "parcours": "entiers", "block": [4, 5, 6], "tests": {"A": [1], "B": [2], "C": [3]}, "entr": [1, 2], "tcorr": [1], "ecorr": [1], "fcorr": [], "dark": false}, {"n": 2, "name": "Paille", "color": "#F3E3A1", "comp": "Jusqu'à 6", "parcours": "entiers", "block": [7, 8, 9, 10, 11], "tests": {"A": [4], "B": [5], "C": [6]}, "entr": [3, 4], "tcorr": [2], "ecorr": [2], "fcorr": [1], "dark": false}, {"n": 3, "name": "Jaune", "color": "#F7CB2D", "comp": "Jusqu'à 10", "parcours": "entiers", "block": [12, 13, 14], "tests": {"A": [7], "B": [8], "C": [9]}, "entr": [5, 6], "tcorr": [3], "ecorr": [3], "fcorr": [], "dark": false}, {"n": 4, "name": "Jaune-orange", "color": "#F9B233", "comp": "Nombres de 0 à 10", "parcours": "entiers", "block": [15, 16, 17], "tests": {"A": [10], "B": [11], "C": [12]}, "entr": [7, 8], "tcorr": [4], "ecorr": [4], "fcorr": [1], "dark": false}, {"n": 5, "name": "Orange", "color": "#F6A93B", "comp": "Calculer jusqu'à 10", "parcours": "entiers", "block": [18, 19, 20], "tests": {"A": [13], "B": [14], "C": [15]}, "entr": [9, 10], "tcorr": [5], "ecorr": [5], "fcorr": [1], "dark": false}, {"n": 6, "name": "Rose", "color": "#F4A7C0", "comp": "Nombres de 0 à 30", "parcours": "entiers", "block": [21, 22, 23], "tests": {"A": [16], "B": [17], "C": [18]}, "entr": [11, 12], "tcorr": [6], "ecorr": [6], "fcorr": [1], "dark": false}, {"n": 7, "name": "Rouge", "color": "#E53935", "comp": "Nombres de 0 à 60", "parcours": "entiers", "block": [24, 25, 26], "tests": {"A": [19], "B": [20], "C": [21]}, "entr": [13, 14], "tcorr": [7], "ecorr": [7], "fcorr": [2], "dark": false}, {"n": 8, "name": "Vert clair", "color": "#9AD27E", "comp": "Nombres de 60 à 99", "parcours": "entiers", "block": [27, 28, 29], "tests": {"A": [22], "B": [23], "C": [24]}, "entr": [15, 16], "tcorr": [8], "ecorr": [8], "fcorr": [2], "dark": false}, {"n": 9, "name": "Vert", "color": "#43A047", "comp": "Jusqu'à 100 : comparer, ranger", "parcours": "entiers", "block": [30, 31, 32], "tests": {"A": [25], "B": [26], "C": [27]}, "entr": [17, 18], "tcorr": [9], "ecorr": [9], "fcorr": [2], "dark": false, "extra": [33, 34, 35, 36, 37], "extraLabel": "fiches de rattrapage (ancienne ceinture blanche)"}, {"n": 10, "name": "Vert foncé", "color": "#2E7D32", "comp": "Monnaie, doubles et moitiés", "parcours": "entiers", "block": [38, 39, 40], "tests": {"A": [28], "B": [29], "C": [30]}, "entr": [19, 20], "tcorr": [10], "ecorr": [10], "fcorr": [2], "dark": true}, {"n": 11, "name": "Turquoise", "color": "#2EC4B6", "comp": "100 à 999 : écrire, comparer", "parcours": "entiers", "block": [41, 42, 43, 44, 45, 46], "tests": {"A": [31], "B": [32], "C": [33]}, "entr": [21, 22], "tcorr": [11], "ecorr": [11], "fcorr": [], "dark": false}, {"n": 12, "name": "Bleu clair", "color": "#86C5EF", "comp": "100 à 999 : décomposer, encadrer", "parcours": "entiers", "block": [47, 48, 49, 50, 51, 52], "tests": {"A": [34], "B": [35], "C": [36]}, "entr": [23, 24], "tcorr": [12], "ecorr": [12], "fcorr": [], "dark": false}, {"n": 13, "name": "Bleu", "color": "#1E88E5", "comp": "Valeur d'un chiffre, droite graduée", "parcours": "entiers", "block": [53, 54, 55, 56, 57, 58], "tests": {"A": [37], "B": [38], "C": [39]}, "entr": [25, 26], "tcorr": [13], "ecorr": [13], "fcorr": [], "dark": false}, {"n": 14, "name": "Bleu foncé", "color": "#1F4E9C", "comp": "1 000 à 9 999 : écrire, comparer", "parcours": "entiers", "block": [59, 60, 61, 62, 63, 64], "tests": {"A": [40], "B": [41], "C": [42]}, "entr": [27, 28], "tcorr": [14], "ecorr": [14], "fcorr": [], "dark": true}, {"n": 15, "name": "Violet clair", "color": "#B39DDB", "comp": "1 000 à 9 999 : décomposer, encadrer", "parcours": "entiers", "block": [65, 66, 67, 68, 69, 70], "tests": {"A": [43], "B": [44], "C": [45]}, "entr": [29, 30], "tcorr": [15], "ecorr": [15], "fcorr": [], "dark": false}, {"n": 16, "name": "Violet", "color": "#8E5CC2", "comp": "10 000 à 99 999", "parcours": "entiers", "block": [71, 72, 73, 74, 75, 76], "tests": {"A": [46], "B": [47], "C": [48]}, "entr": [31, 32], "tcorr": [16], "ecorr": [16], "fcorr": [], "dark": true}, {"n": 17, "name": "Marron clair", "color": "#C49A6C", "comp": "Jusqu'à 999 999", "parcours": "entiers", "block": [77, 78, 79, 80, 81, 82], "tests": {"A": [49], "B": [50], "C": [51]}, "entr": [33, 34], "tcorr": [17], "ecorr": [17], "fcorr": [], "dark": false}, {"n": 18, "name": "Marron", "color": "#8B5A2B", "comp": "Les millions", "parcours": "entiers", "block": [83, 84, 85, 86, 87, 88], "tests": {"A": [52], "B": [53], "C": [54]}, "entr": [35, 36], "tcorr": [18], "ecorr": [18], "fcorr": [], "dark": true}, {"n": 19, "name": "Gris", "color": "#9E9E9E", "comp": "Les grands millions", "parcours": "entiers", "block": [89, 90, 91, 92, 93, 94], "tests": {"A": [55], "B": [56], "C": [57]}, "entr": [37, 38], "tcorr": [19], "ecorr": [19], "fcorr": [], "dark": false}, {"n": 20, "name": "Noire", "color": "#1D1D1B", "comp": "Les milliards", "parcours": "entiers", "block": [95, 96, 97, 98, 99, 100], "tests": {"A": [58], "B": [59], "C": [60]}, "entr": [39, 40], "tcorr": [20], "ecorr": [20], "fcorr": [], "dark": true}, {"n": 21, "name": "Jaune", "color": "#F7CB2D", "comp": "Fractions d'un tout", "parcours": "fractions", "block": [101, 102, 103, 104, 105, 106, 107], "tests": {"A": [61], "B": [62], "C": [63]}, "entr": [41, 42], "tcorr": [21], "ecorr": [21], "fcorr": [3], "dark": false}, {"n": 22, "name": "Orange", "color": "#F6A93B", "comp": "Fractions plus grandes que 1", "parcours": "fractions", "block": [108, 109, 110, 111, 112, 113, 114], "tests": {"A": [64], "B": [65], "C": [66]}, "entr": [43, 44], "tcorr": [22], "ecorr": [22], "fcorr": [4], "dark": false}, {"n": 23, "name": "Rose", "color": "#F4A7C0", "comp": "Fractions sur une demi-droite", "parcours": "fractions", "block": [115, 116, 117, 118, 119, 120], "tests": {"A": [67], "B": [68], "C": [69]}, "entr": [45, 46], "tcorr": [23], "ecorr": [23], "fcorr": [5], "dark": false}, {"n": 24, "name": "Verte", "color": "#43A047", "comp": "Entier + fraction, encadrer", "parcours": "fractions", "block": [121, 122, 123, 124, 125, 126], "tests": {"A": [70], "B": [71], "C": [72]}, "entr": [47, 48], "tcorr": [24], "ecorr": [24], "fcorr": [6], "dark": false}, {"n": 25, "name": "Bleue", "color": "#1E88E5", "comp": "Problèmes de fractions", "parcours": "fractions", "block": [127, 128, 129, 130, 131, 132, 133, 134, 135, 136], "tests": {"A": [73], "B": [74], "C": [75]}, "entr": [49, 50, 51], "tcorr": [25], "ecorr": [25], "fcorr": [7], "dark": false}, {"n": 26, "name": "Marron", "color": "#8B5A2B", "comp": "Retrouver le tout, comparer", "parcours": "fractions", "block": [137, 138, 139, 140, 141, 142], "tests": {"A": [76], "B": [77], "C": [78]}, "entr": [52, 53], "tcorr": [26], "ecorr": [26], "fcorr": [8], "dark": true}, {"n": 27, "name": "Noire", "color": "#1D1D1B", "comp": "Fractions égales, opérations", "parcours": "fractions", "block": [143, 144, 145, 146, 147, 148, 149], "tests": {"A": [79], "B": [80], "C": [81]}, "entr": [54, 55], "tcorr": [27], "ecorr": [27], "fcorr": [9], "dark": true}, {"n": 28, "name": "Blanche", "color": "#FFFFFF", "comp": "Tableau de numération décimal", "parcours": "decimaux", "block": [150, 151, 152, 153, 154, 155], "tests": {"A": [82], "B": [83], "C": [84]}, "entr": [56, 57], "tcorr": [28], "ecorr": [28], "fcorr": [10], "dark": false}, {"n": 29, "name": "Jaune", "color": "#F7CB2D", "comp": "Écrire un nombre décimal", "parcours": "decimaux", "block": [156, 157, 158, 159, 160, 161, 162], "tests": {"A": [85], "B": [86], "C": [87]}, "entr": [58, 59], "tcorr": [29], "ecorr": [29], "fcorr": [11], "dark": false}, {"n": 30, "name": "Orange", "color": "#F6A93B", "comp": "Fractions décimales", "parcours": "decimaux", "block": [163, 164, 165, 166, 167, 168, 169], "tests": {"A": [88], "B": [89], "C": [90]}, "entr": [60, 61], "tcorr": [30], "ecorr": [30], "fcorr": [12], "dark": false}, {"n": 31, "name": "Rose", "color": "#F4A7C0", "comp": "Comparer, ranger des décimaux", "parcours": "decimaux", "block": [170, 171, 172, 173, 174, 175], "tests": {"A": [91], "B": [92], "C": [93]}, "entr": [62, 63], "tcorr": [31], "ecorr": [31], "fcorr": [13], "dark": false}, {"n": 32, "name": "Verte", "color": "#43A047", "comp": "Encadrer, arrondir à l'unité", "parcours": "decimaux", "block": [176, 177, 178, 179, 180, 181], "tests": {"A": [94], "B": [95], "C": [96]}, "entr": [64, 65], "tcorr": [32], "ecorr": [32], "fcorr": [14], "dark": false}, {"n": 33, "name": "Bleue", "color": "#1E88E5", "comp": "Encadrer au dixième", "parcours": "decimaux", "block": [182, 183, 184, 185, 186, 187], "tests": {"A": [97], "B": [98], "C": [99]}, "entr": [66, 67], "tcorr": [33], "ecorr": [33], "fcorr": [15], "dark": false}, {"n": 34, "name": "Marron", "color": "#8B5A2B", "comp": "Encadrer au centième", "parcours": "decimaux", "block": [188, 189, 190, 191, 192, 193], "tests": {"A": [100], "B": [101], "C": [102]}, "entr": [68, 69], "tcorr": [34], "ecorr": [34], "fcorr": [16], "dark": true}, {"n": 35, "name": "Noire", "color": "#1D1D1B", "comp": "Bilan des nombres décimaux", "parcours": "decimaux", "block": [194, 195, 196, 197, 198, 199], "tests": {"A": [103], "B": [104], "C": [105]}, "entr": [70, 71], "tcorr": [35], "ecorr": [35], "fcorr": [17], "dark": true}], "docs": [{"code": "Guide", "title": "Guide de l'enseignant", "role": "ens", "file": "num/guide.pdf", "pages": 6, "desc": "Étapes, trois parcours, remédiations, séance type.", "dl": "Numération - Guide enseignant.pdf"}, {"code": "Prog. cycles", "title": "Progression par cycle (programmes)", "role": "ens", "file": "num/progression-cycles.pdf", "pages": 5, "desc": "Attendus des programmes et ceintures correspondantes.", "dl": "Numération - Progression par cycle.pdf"}, {"code": "Progression", "title": "Progression unifiée des 35 ceintures", "role": "ens", "file": "num/progression.pdf", "pages": 6, "desc": "Numéros, couleurs, compétences, fiches, correspondances.", "dl": "Numération - Progression unifiée.pdf"}, {"code": "Éval. mode d'emploi", "title": "Évaluation de départ : mode d'emploi et grilles", "role": "ens", "file": "num/evaluation-mode-emploi.pdf", "pages": 3, "desc": "Paliers A à H, nombres à dicter, grilles de positionnement.", "dl": "Numération - Évaluation mode d'emploi.pdf"}, {"code": "Tests corrigés", "title": "Corrigés des tests de passage", "role": "ens", "file": "num/tests-corriges.pdf", "pages": 35, "desc": "Une page par ceinture, avec le seuil.", "dl": "Numération - Corrigés des tests.pdf"}, {"code": "Fiches corrigés", "title": "Corrigés des fiches", "role": "ens", "file": "num/fiches-corriges.pdf", "pages": 17, "desc": "Ceintures 2, 4 à 10 et 21 à 35.", "dl": "Numération - Corrigés des fiches.pdf"}, {"code": "Entr. corrigés", "title": "Corrigés des entraînements", "role": "ens", "file": "num/entrainements-corriges.pdf", "pages": 35, "desc": "Une page par ceinture et objectif à atteindre.", "dl": "Numération - Corrigés des entraînements.pdf"}, {"code": "Évaluation", "title": "Évaluation de départ", "role": "ele", "file": "num/evaluation.pdf", "pages": 12, "desc": "12 pages, paliers A à H.", "dl": "Numération - Évaluation diagnostique.pdf"}, {"code": "Ceintures", "title": "Toutes les ceintures (fiches 1 à 35)", "role": "ele", "file": "num/ceintures.pdf", "pages": 199, "desc": "Ma fiche de suivi (p. 2-3), puis intercalaire, mémo et fiches de chaque ceinture.", "dl": "Numération - Toutes les ceintures.pdf"}, {"code": "Tests", "title": "Tests de passage A, B, C", "role": "ele", "file": "num/tests.pdf", "pages": 105, "desc": "3 versions par ceinture.", "dl": "Numération - Tests.pdf"}, {"code": "Entraînements", "title": "Entraînements (si test raté)", "role": "ele", "file": "num/entrainements.pdf", "pages": 71, "desc": "2 entraînements par ceinture.", "dl": "Numération - Entraînements.pdf"}], "suivi": [2, 3]}]};
+const SUBJ=['edl','num','cp','geo'].map(id=>D.subjects.find(s=>s.id===id)), SJ={};SUBJ.forEach(s=>SJ[s.id]=s);
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const today=()=>new Date().toLocaleDateString('fr-FR');
+const newId=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const LV={2:'CE2',3:'CM1',4:'CM2',5:'6e'};
+function toast(t){const e=$('#toast');e.textContent=t;e.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>e.style.display='none',2800);}
+const docBy=(sid,code)=>SJ[sid].docs.find(d=>d.code===code);
+const fileOf=(sid,code)=>docBy(sid,code).file;
+const range=(a,b)=>{const r=[];for(let i=a;i<=b;i++)r.push(i);return r;};
+const U=(sid,n)=>SJ[sid].units[n-1];
+const uName=(sid,n)=>{const u=U(sid,n);return sid==='edl'?`notion ${n} · ${u.name}`:`ceinture ${n} · ${u.name}`;};
+const ubadge=(sid,n,extra='')=>{const u=U(sid,n);return `<span class="ub ${u.dark?'dk':''}" style="background:${u.color}${extra}">${n}</span>`;};
+
+/* Libellé d'une page (numérotation du classeur pour l'étude de la langue) */
+function plabel(file,p){
+  const E=SJ.edl.units;
+  if(file.endsWith('edl-2.0-parcours-niveau1.pdf'))return 'p. '+p;
+  if(file.endsWith('edl-2.1-entrainements-tests-BC.pdf')){const n=Math.floor((p-1)/4)+1;return 'p. '+E[n-1].testA+' '+'abcd'[(p-1)%4];}
+  if(file.endsWith('edl-2.2-pour-aller-plus-loin.pdf')){const n=Math.floor((p-1)/12)+1;return 'p. '+E[n-1].testA+' bis '+((p-1)%12+1);}
+  return 'page '+p;
+}
+
+/* ========== RÈGLES DE CHAQUE MATIÈRE ==========
+   Chaque matière fournit :
+   - slots(sb,n)  : cases de résultat de la fenêtre « résultats »
+   - state(sb,n)  : 'ok' | 'passe' | 'cours' | ''
+   - steps(sb,res): prochaines étapes [{n,slot,label,pages:[[fichier,page,libellé]],corr:[...]}]
+   - setOk(res,step) : simule la réussite d'une étape (pour imprimer plusieurs étapes d'avance) */
+const ED={p20:'edl/edl-2.0-parcours-niveau1.pdf',p21:'edl/edl-2.1-entrainements-tests-BC.pdf',p22:'edl/edl-2.2-pour-aller-plus-loin.pdf',c30:'edl/edl-3.0-corriges-entrainements.pdf',c31:'edl/edl-3.1-corriges-tests.pdf',c32:'edl/edl-3.2-corriges-plus-loin.pdf'};
+function edlPages(n,what){
+  const x=U('edl',n),e=4*(n-1),f=12*(n-1),r=[];
+  if(what==='p1')for(let p=x.lecon;p<=x.testA;p++)r.push([ED.p20,p]);
+  if(what==='repB')r.push([ED.p21,e+1],[ED.p21,e+2]);
+  if(what==='repC')r.push([ED.p21,e+3],[ED.p21,e+4]);
+  if(/^lv[2-5]$/.test(what)){const L=+what[2]-2;for(let k=1;k<=3;k++)r.push([ED.p22,f+3*L+k]);}
+  if(what==='cT')r.push([ED.c31,n]);
+  if(what==='cE')r.push([ED.c30,n]);
+  if(what==='cP')r.push([ED.c32,2*n-1],[ED.c32,2*n]);
+  return r;
+}
+const triple=(sb,n)=>((sb.res||{})[n]||{});
+function abcState(r){if(r.A==='ok'||r.B==='ok'||r.C==='ok')return 'ok';if(r.C==='ko')return 'passe';return (r.A||r.B)?'cours':'';}
+const ORDER=(start,last,first=1)=>{const out=[];for(let i=0;i<=last-first;i++)out.push((start-first+i)%(last-first+1)+first);return out;};
+
+const RULES={
+ edl:{
+  levelOf:sb=>sb.parcours==2?3:5,
+  slots(sb,n){const T=U('edl',n).testA;
+    if((sb.parcours||1)==1)return [{k:'A',l:'Test A',s:`classeur p. ${T}`},{k:'B',l:'Test B',s:`p. ${T} b, après l'entraînement 1`},{k:'C',l:'Test C',s:`p. ${T} d, après l'entraînement 2`},
+      {h:'Pour aller plus loin (bonus)'},...[2,3,4,5].map(l=>({k:'pl'+l,l:`Niveau ${l} (${LV[l]})`,s:`petit test, p. ${T} bis ${3*(l-2)+3}`}))];
+    const L=this.levelOf(sb);
+    return [{k:'pl'+L,l:`Niveau ${L} (${LV[L]})`,s:`petit test, p. ${T} bis ${3*(L-2)+3}`},{k:'pl'+(L-1),l:`Passerelle : niveau ${L-1} (${LV[L-1]})`,s:`si le niveau ${L} est raté`},{k:'pl'+L+'b',l:`Niveau ${L}, 2e essai`,s:'après la passerelle'}];},
+  state(sb,n){const r=triple(sb,n),pl=r.pl||{};
+    if((sb.parcours||1)==1)return abcState(r);
+    const L=this.levelOf(sb);if(pl[L]==='ok'||pl[L+'b']==='ok')return 'ok';if(pl[L+'b']==='ko')return 'passe';return (pl[L]||pl[L-1])?'cours':'';},
+  steps(sb,res){const t={...sb,res};
+    for(const n of ORDER(sb.start||1,16)){const s=this.state(t,n);if(s==='ok'||s==='passe')continue;const r=res[n]||{},pl=r.pl||{};
+      if((sb.parcours||1)==1){
+        if(!r.A)return [{n,slot:'A',label:'Leçon, exercices et test A',pages:edlPages(n,'p1'),corr:edlPages(n,'cT')}];
+        if(r.A==='ko'&&!r.B)return [{n,slot:'B',label:'Entraînement 1 et test B',pages:edlPages(n,'repB'),corr:[...edlPages(n,'cE'),...edlPages(n,'cT')]}];
+        if(r.B==='ko'&&!r.C)return [{n,slot:'C',label:'Entraînement 2 et test C',pages:edlPages(n,'repC'),corr:[...edlPages(n,'cE'),...edlPages(n,'cT')]}];
+        return [{n,slot:'?',label:'Résultat à noter',pages:[],corr:[]}];}
+      const L=this.levelOf(sb);
+      if(!pl[L])return [{n,slot:'pl'+L,label:`Plus loin niveau ${L} (${LV[L]})`,pages:edlPages(n,'lv'+L),corr:edlPages(n,'cP')}];
+      if(!pl[L-1])return [{n,slot:'pl'+(L-1),label:`Passerelle : plus loin niveau ${L-1} (${LV[L-1]})`,pages:edlPages(n,'lv'+(L-1)),corr:edlPages(n,'cP')}];
+      return [{n,slot:'pl'+L+'b',label:`Plus loin niveau ${L}, 2e essai`,pages:edlPages(n,'lv'+L),corr:edlPages(n,'cP')}];}
+    return [];},
+  cell(sb,n,s){const r=triple(sb,n);return s==='ok'?'✓':s==='passe'?'!':s==='cours'?((sb.parcours||1)==1?(r.B?'C':'B'):'…'):'';}
+ },
+ cp:{
+  slots(sb,n){return [{k:'A',l:'Test A',s:'sans le mémo · objectif '+U('cp',n).obj},{k:'B',l:'Test B',s:'plus tard, si le test A est raté'},{k:'C',l:'Test C',s:'si le test B est raté'}];},
+  state(sb,n){return abcState(triple(sb,n));},
+  steps(sb,res){const t={...sb,res},cas=sb.method==='cassage';
+    for(const n of ORDER(sb.start||1,15)){const s=this.state(t,n);if(s==='ok'||s==='passe')continue;const u=U('cp',n),r=res[n]||{};
+      const memo=(cas?u.memoC:u.memo).map(p=>[fileOf('cp','Mémos'),p,'mémo']);
+      const fiches=u.fiches.flatMap((ps,k)=>ps.map(p=>[fileOf('cp','Fiches'),p,'fiche N°'+(k+1)]));
+      const corrF=(cas?u.corrC:u.corr).flatMap((ps,k)=>ps.map(p=>[fileOf('cp',cas?'Corrigés cassage':'Corrigés'),p,'corrigé N°'+(k+1)]));
+      const tc=u.tcorr.map(p=>[fileOf('cp','Tests corrigés'),p,'corrigé des tests']);
+      const test=v=>u.tests[v].map(p=>[fileOf('cp','Tests'),p,'test '+v]);
+      if(!r.A)return [{n,slot:'A',label:'Mémo, fiches N°1 à N°4 et test A',pages:[...memo,...fiches,...test('A')],corr:[...corrF,...tc]}];
+      if(r.A==='ko'&&!r.B)return [{n,slot:'B',label:'Mémo et test B (après reprise des calculs ratés)',pages:[...memo,...test('B')],corr:tc}];
+      if(r.B==='ko'&&!r.C)return [{n,slot:'C',label:'Mémo et test C',pages:[...memo,...test('C')],corr:tc}];
+      return [{n,slot:'?',label:'Résultat à noter',pages:[],corr:[]}];}
+    return [];},
+  cell(sb,n,s){const r=triple(sb,n);return s==='ok'?'✓':s==='passe'?'!':s==='cours'?(r.B?'C':'B'):'';}
+ },
+ geo:{
+  slots(sb,n){return [{k:'A',l:'Test version 1',s:'tous les soleils + les étoiles demandées'},{k:'B',l:'Test version 2',s:'si la version 1 est ratée'},{k:'C',l:'Test version 3',s:'si la version 2 est ratée'}];},
+  state(sb,n){return abcState(triple(sb,n));},
+  steps(sb,res){const t={...sb,res};
+    for(const n of ORDER(sb.start||1,12)){const s=this.state(t,n);if(s==='ok'||s==='passe')continue;const u=U('geo',n),r=res[n]||{};
+      const memo=u.memo.map(p=>[fileOf('geo','Mémo'),p,'mémo']),fiches=u.fiches.map(p=>[fileOf('geo','Fiches'),p,'fiches']);
+      const test=i=>[[fileOf('geo','Tests'),u.tests[i],'test version '+(i+1)]];
+      if(!r.A)return [{n,slot:'A',label:`Mémo, ${u.flabel} et test version 1`,pages:[...memo,...fiches,...test(0)],corr:[]}];
+      if(r.A==='ko'&&!r.B)return [{n,slot:'B',label:'Mémo et test version 2 (après 1 ou 2 fiches ciblées)',pages:[...memo,...test(1)],corr:[]}];
+      if(r.B==='ko'&&!r.C)return [{n,slot:'C',label:'Mémo et test version 3',pages:[...memo,...test(2)],corr:[]}];
+      return [{n,slot:'?',label:'Résultat à noter',pages:[],corr:[]}];}
+    return [];},
+  cell(sb,n,s){const r=triple(sb,n);return s==='ok'?'✓':s==='passe'?'!':s==='cours'?(r.B?'3':'2'):'';}
+ },
+ num:{
+  tracks:{entiers:[1,20,'Nombres entiers'],fractions:[21,27,'Fractions'],decimaux:[28,35,'Nombres décimaux']},
+  slots(sb,n){return [{k:'A',l:'Test A',s:'seuil ≈ 80 % (corrigé)'},{k:'B',l:'Test B',s:'après les entraînements 1 et 2'},{k:'C',l:'Test C',s:'après de nouveaux entraînements'}];},
+  state(sb,n){return abcState(triple(sb,n));},
+  active(sb,res){const t={...sb,res},ok=n=>this.state(t,n)==='ok',any=(a,b)=>range(a,b).some(n=>res[n]&&Object.keys(res[n]).some(k=>k!=='d'));
+    return {entiers:true,fractions:!!sb.fr||ok(10)||any(21,27),decimaux:!!sb.dec||([21,22,23,24,13].every(ok))||any(28,35)};},
+  stepIn(sb,res,track){const [a,b]=this.tracks[track],t={...sb,res};
+    const st=track==='entiers'?(sb.start||1):track==='fractions'?(sb.startF||21):(sb.startD||28);
+    for(const n of ORDER(Math.min(b,Math.max(a,st)),b,a)){const s=this.state(t,n);if(s==='ok'||s==='passe')continue;const u=U('num',n),r=res[n]||{};
+      const tests=v=>u.tests[v].map(p=>[fileOf('num','Tests'),p,'test '+v]);
+      const entr=u.entr.map((p,i)=>[fileOf('num','Entraînements'),p,'entraînement '+(i+1)]);
+      const tc=u.tcorr.map(p=>[fileOf('num','Tests corrigés'),p,'corrigé du test']),ec=u.ecorr.map(p=>[fileOf('num','Entr. corrigés'),p,'corrigé des entraînements']);
+      const fc=u.fcorr.map(p=>[fileOf('num','Fiches corrigés'),p,'corrigé des fiches']);
+      if(!r.A)return {n,slot:'A',track,label:'Intercalaire, mémo, fiches et test A',pages:[...u.block.map(p=>[fileOf('num','Ceintures'),p,'fiches']),...tests('A')],corr:[...fc,...tc]};
+      if(r.A==='ko'&&!r.B)return {n,slot:'B',track,label:'Entraînements 1 et 2, puis test B',pages:[...entr,...tests('B')],corr:[...ec,...tc]};
+      if(r.B==='ko'&&!r.C)return {n,slot:'C',track,label:'Entraînements 1 et 2, puis test C',pages:[...entr,...tests('C')],corr:[...ec,...tc]};
+      return {n,slot:'?',track,label:'Résultat à noter',pages:[],corr:[]};}
+    return null;},
+  steps(sb,res){const act=this.active(sb,res);return Object.keys(this.tracks).filter(k=>act[k]).map(k=>this.stepIn(sb,res,k)).filter(Boolean);},
+  cell(sb,n,s){const r=triple(sb,n);return s==='ok'?'✓':s==='passe'?'!':s==='cours'?(r.B?'C':'B'):'';}
+ }
+};
+function setOk(res,step){const r=res[step.n]=res[step.n]||{};r.pl=r.pl||{};if(step.slot.startsWith('pl'))r.pl[step.slot.slice(2)]='ok';else if(step.slot!=='?')r[step.slot]='ok';}
+/* Étapes d'avance : on suppose chaque étape réussie pour voir la suite */
+function nextSteps(sid,sb,k){
+  const res=JSON.parse(JSON.stringify(sb.res||{}));const out=[];const seen=new Set();
+  for(let i=0;i<k;i++){const ss=RULES[sid].steps(sb,res).filter(s=>s.pages.length);if(!ss.length)break;
+    ss.forEach(s=>{const key=s.n+s.slot;if(!seen.has(key)){seen.add(key);out.push({...s,sim:i>0});}setOk(res,s);});}
+  return out;
+}
+const SDEF={edl:()=>({on:true,parcours:1,start:1,res:{}}),cp:()=>({on:true,start:1,method:'retenue',res:{}}),geo:()=>({on:true,start:1,res:{}}),num:()=>({on:true,start:1,startF:21,startD:28,fr:false,dec:false,res:{}})};
+/* Ancien format (étude de la langue seule) -> nouveau format multi-matières */
+function migrate(st){
+  if(!st||typeof st!=='object')return st;
+  if(!st.subj){st.subj={edl:{on:true,parcours:+st.parcours||1,start:+st.start||1,res:st.res||{}}};delete st.parcours;delete st.start;delete st.res;}
+  Object.values(st.subj).forEach(sb=>{sb.res=sb.res||{};});
+  return st;
+}
+const sbOf=(st,sid)=>st.subj&&st.subj[sid]&&st.subj[sid].on?st.subj[sid]:null;
+const okCount=(st,sid)=>{const sb=sbOf(st,sid);return sb?SJ[sid].units.filter(u=>RULES[sid].state(sb,u.n)==='ok').length:0;};
+
+/* ========== ENREGISTREMENT ========== */
+let STU={}, META={years:[]}, mode='loading', APPINFO=null;
+const defYear=()=>{const d=new Date(),y=d.getFullYear();return d.getMonth()>=7?`${y}-${y+1}`:`${y-1}-${y}`;};
+let YEAR=(()=>{try{return localStorage.getItem('ulis-year')||defYear();}catch(e){return defYear();}})();
+const LKEY='edl-suivi-v2', MKEY='edl-suivi-meta';
+const lsGet=()=>{try{return JSON.parse(localStorage.getItem(LKEY)||'{}');}catch(e){return {};}};
+const lsSet=v=>{try{localStorage.setItem(LKEY,JSON.stringify(v));return true;}catch(e){return false;}};
+function allYears(){const set=new Set([defYear(),YEAR,...(META.years||[]),...Object.values(STU).map(s=>s.year||defYear())]);return [...set].sort().reverse();}
+function setYear(y){YEAR=y;try{localStorage.setItem('ulis-year',y);}catch(e){}renderYears();renderAll();}
+function renderYears(){$('#year').innerHTML=allYears().map(y=>`<option value="${esc(y)}" ${y===YEAR?'selected':''}>${esc(y)}</option>`).join('');}
+
+function setMode(m){
+  mode=m;const el=$('#mode');
+  const txt={
+    loading:'Chargement du suivi…',
+    app:'<b>Suivi enregistré automatiquement dans le logiciel</b>, à chaque clic, dans le dossier « Donnees » à côté du programme'+(APPINFO?' <span class="meta">('+esc(APPINFO.dataDir)+')</span>':'')+'. Copies de sécurité automatiques. <span id="savedat" class="meta"></span><div class="btns" style="margin-top:8px"><button class="btn" id="opendata">Ouvrir le dossier des données</button><button class="btn" id="mkicon">Créer l\'icône sur le bureau</button><button class="btn" id="quitapp">Quitter le logiciel</button></div>',
+    stopped:'<b>Le logiciel ne répond plus.</b> Gardez cette fenêtre ouverte : vos dernières modifications y sont conservées et seront enregistrées automatiquement dès que le logiciel répondra. Relancez le logiciel si besoin. <span id="savedat" class="meta"></span>',
+    local:'<b>Suivi enregistré dans ce navigateur.</b> Pensez à « Sauvegarder tout mon suivi » régulièrement.'
+  }[m];
+  el.className='mode'+(m==='app'?'':' warn');el.innerHTML=txt;
+}
+let persistT=null,retryT=null,persisting=Promise.resolve(),dirty=false,loaded=false,saveFails=0;
+const payload=()=>JSON.stringify({format:'edl-suivi-logiciel',version:2,stu:STU,meta:META});
+function saveStatus(txt,bad){const s=$('#savedat');if(s){s.textContent=txt;s.style.color=bad?'var(--ko)':'';s.style.fontWeight=bad?'700':'';}}
+function persist(now){
+  if(mode==='local'){lsSet(STU);try{localStorage.setItem(MKEY,JSON.stringify(META));}catch(e){}return Promise.resolve();}
+  if(!loaded)return Promise.resolve();
+  dirty=true;clearTimeout(persistT);
+  const run=()=>{clearTimeout(retryT);persisting=persisting.then(()=>{const body=payload();saveStatus('Enregistrement…');
+      return fetch('api/data',{method:'PUT',headers:{'Content-Type':'application/json'},body}).then(r=>{if(!r.ok)throw 0;return r.json();})
+      .then(j=>{if(payload()===body)dirty=false;saveFails=0;if(mode==='stopped')setMode('app');saveStatus('✓ Enregistré à '+j.saved+'.');})
+      .catch(()=>{saveFails++;if(saveFails>=3&&mode!=='stopped')setMode('stopped');saveStatus('⚠ Pas encore enregistré : nouvel essai dans 5 secondes…',true);retryT=setTimeout(run,5000);});});
+    return persisting;};
+  if(now)return run();persistT=setTimeout(run,250);
+}
+function flushBeacon(){if(!loaded||!dirty||mode==='local')return;try{navigator.sendBeacon('api/data',new Blob([payload()],{type:'application/json'}));}catch(e){}}
+window.addEventListener('pagehide',flushBeacon);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'){if(dirty)persist(true);flushBeacon();}});
+window.addEventListener('beforeunload',()=>{if(dirty)flushBeacon();});
+function saveStu(st){st.updated=Date.now();STU[st.id]=st;persist();renderAll();}
+function delStu(id){delete STU[id];persist();renderAll();}
+function saveMeta(){persist();}
+
+async function start(){
+  let ok=false;
+  try{const r=await fetch('api/info',{cache:'no-store'});if(r.ok){APPINFO=await r.json();ok=APPINFO.app==='edl-ulis';}}catch(e){}
+  if(!ok){STU=lsGet();try{META=JSON.parse(localStorage.getItem(MKEY)||'{"years":[]}');}catch(e){}if(META.corr)CMODE=META.corr;Object.values(STU).forEach(migrate);loaded=true;setMode('local');renderYears();renderAll();return;}
+  try{const r=await fetch('api/data',{cache:'no-store'});if(!r.ok)throw 0;const rec=r.headers.get('X-EDL-Recupere');const d=await r.json();
+    STU=d.stu||{};META=d.meta||{years:[]};META.years=META.years||[];if(META.corr)CMODE=META.corr;Object.values(STU).forEach(migrate);loaded=true;
+    setMode('app');renderYears();renderAll();setTimeout(updPoll,300);
+    if(rec)$('#mode').insertAdjacentHTML('beforeend','<p style="margin:8px 0 0"><b>Le fichier de suivi était abîmé</b> (coupure de courant ?). Il a été récupéré automatiquement à partir de : '+esc(decodeURIComponent(rec))+'.</p>');
+    if(d.version!==2&&Object.keys(STU).length)persist();
+  }catch(e){setMode('stopped');$('#mode').innerHTML='<b>Le fichier de suivi n\'a pas pu être lu.</b> Aucune modification ne sera enregistrée pour ne rien écraser. Quittez et relancez le logiciel ; si le problème continue, voir « Sauvegardes automatiques » dans le dossier Donnees.';renderAll();return;}
+  setInterval(()=>{fetch('api/ping',{method:'POST'}).then(r=>{if(!r.ok)throw 0;if(mode==='stopped'&&loaded){setMode('app');if(dirty)persist(true);}}).catch(()=>{if(mode!=='stopped')setMode('stopped');});},30000);
+}
+document.addEventListener('click',async ev=>{
+  if(ev.target.id==='opendata')fetch('api/open-data',{method:'POST'}).catch(()=>{});
+  if(ev.target.id==='mkicon'){ev.target.disabled=true;try{const j=await (await fetch('api/shortcut',{method:'POST'})).json();toast(j.ok?'Icône placée sur le bureau.':'Impossible de créer l\'icône : '+j.error);}catch(e){toast('Le logiciel ne répond pas.');}ev.target.disabled=false;}
+  if(ev.target.id==='quitapp'){commitStu();await persist(true);if(dirty){toast('Enregistrement impossible : le logiciel reste ouvert.');return;}
+    await fetch('api/quit',{method:'POST'}).catch(()=>{});
+    document.body.innerHTML='<div class="wrap band"><h1>Le logiciel est fermé.</h1><p class="lead">Votre suivi est enregistré. Vous pouvez fermer cette fenêtre.</p></div>';}
+});
+
+/* Téléchargement d'un fichier créé par le logiciel */
+async function saveFile(filename,data){
+  try{const blob=data instanceof Blob?data:new Blob([data]);const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');a.href=url;a.download=filename.normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^\w .()-]/g,'_');
+    document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);toast('Fichier enregistré dans Téléchargements.');return true;}
+  catch(e){toast('Téléchargement impossible.');return false;}
+}
+const pdfBytes={};
+async function srcBytes(file){if(!pdfBytes[file]){const r=await fetch('docs/'+file);if(!r.ok)throw new Error('document introuvable');pdfBytes[file]=await r.arrayBuffer();}return pdfBytes[file];}
+async function buildPdf(pages,name,progress){
+  if(!window.PDFLib){progress('Le module d\'assemblage ne s\'est pas chargé.');return false;}
+  try{const out=await PDFLib.PDFDocument.create();const cache={};
+    for(let i=0;i<pages.length;i++){const [f,p]=pages[i];
+      if(!cache[f]){progress('Chargement des documents…');cache[f]=await PDFLib.PDFDocument.load(await srcBytes(f),{ignoreEncryption:true});}
+      progress(`Assemblage… ${i+1} / ${pages.length}`);const [pg]=await out.copyPages(cache[f],[p-1]);out.addPage(pg);}
+    const bytes=await out.save();progress(`PDF prêt (${pages.length} pages).`);
+    return await saveFile(name,new Blob([bytes],{type:'application/pdf'}));
+  }catch(e){progress('Impossible de créer le PDF : '+(e.message||e));return false;}
+}
+
+/* Sauvegarde complète, import (sauvegarde ou élève transmis) */
+$('#backup').addEventListener('click',async()=>{
+  const d=today();
+  await saveFile('Sauvegarde suivi ULIS - '+d.replace(/\//g,'-')+'.json',JSON.stringify({format:'edl-suivi-ulis-complet',version:2,date:d,meta:META,eleves:Object.values(STU)},null,1));
+});
+async function transmit(st){
+  const o=JSON.parse(JSON.stringify(st));delete o.id;
+  await saveFile(`Transmission ULIS - ${st.name} - ${st.year||YEAR}.json`,JSON.stringify({format:'edl-suivi-ulis',version:2,exporte:today(),eleve:o},null,1));
+}
+$('#impfile').addEventListener('change',async ev=>{
+  const files=[...ev.target.files];let n=0;
+  for(const f of files){try{const o=JSON.parse(await f.text());
+    if(o&&o.format==='edl-suivi-ulis-complet'&&Array.isArray(o.eleves)){
+      ((o.meta&&o.meta.years)||[]).forEach(y=>{if(!META.years.includes(y))META.years.push(y);});
+      let k=0;o.eleves.forEach(e=>{if(!e||!e.id||!e.name)return;migrate(e);const cur=STU[e.id];if(!cur||(cur.updated||0)<(e.updated||0)){STU[e.id]=e;k++;}});
+      persist();renderYears();renderAll();toast(`Sauvegarde du ${o.date||'?'} restaurée : ${k} élève${k>1?'s':''} mis à jour.`);continue;}
+    if(!o||o.format!=='edl-suivi-ulis'||!o.eleve||!o.eleve.name)throw 0;
+    const e=migrate(JSON.parse(JSON.stringify(o.eleve)));
+    const c={id:newId(),year:YEAR,name:String(e.name).slice(0,30),notes:String(e.notes||''),subj:{},created:Date.now(),recu:(e.year||'')+(o.exporte?' (exporté le '+o.exporte+')':'')};
+    for(const sid of Object.keys(SDEF)){const sb=e.subj&&e.subj[sid];if(!sb)continue;const x={...SDEF[sid](),...sb,res:sb.res||{}};const nx=RULES[sid].steps(x,x.res)[0];if(nx&&sid!=='num')x.start=nx.n;c.subj[sid]=x;}
+    saveStu(c);n++;}catch(err){toast('« '+f.name+' » n\'est ni une sauvegarde ni un fichier de transmission.');}}
+  if(n)toast(n+' élève'+(n>1?'s':'')+' importé'+(n>1?'s':'')+' dans '+YEAR+'.');
+  ev.target.value='';
+});
+
+/* Années scolaires */
+$('#year').addEventListener('change',()=>setYear($('#year').value));
+function nextYearOf(y){const m=/^(\d{4})-(\d{4})$/.exec(y);return m?`${+m[1]+1}-${+m[2]+1}`:'';}
+$('#newyear').addEventListener('click',()=>{
+  const list=sorted();const ny=nextYearOf(YEAR)||defYear();
+  $('#dprtbox').innerHTML=`<h3 id="dprth">Nouvelle année scolaire</h3><div class="meta">L'année ${esc(YEAR)} reste enregistrée : vous pourrez la rouvrir à tout moment.</div>
+  <label class="f" for="nyname">Année</label><input class="t" id="nyname" value="${ny}" maxlength="20">
+  ${list.length?`<label class="f" style="margin-top:14px">Reprendre ces élèves avec tous leurs résultats</label><div class="opts">${list.map(st=>`<label class="chk"><input type="checkbox" value="${st.id}" checked>${esc(st.name)}</label>`).join('')}</div>`:''}
+  <div class="foot"><button class="btn" data-close>Annuler</button><button class="btn pri" id="nyok">Créer l'année</button></div>`;
+  openDlg('dprt');
+});
+document.addEventListener('click',ev=>{
+  if(ev.target.id!=='nyok')return;
+  const y=$('#nyname').value.trim();if(!y){$('#nyname').focus();return;}
+  const ids=$$('#dprtbox .opts input:checked').map(i=>i.value);
+  if(!META.years.includes(y)){META.years.push(y);}
+  const exist=new Set(Object.values(STU).filter(s=>s.year===y).map(s=>s.from));
+  ids.forEach(id=>{const o=STU[id];if(!o||exist.has(o.id))return;const c=JSON.parse(JSON.stringify(o));c.id=newId();c.year=y;c.from=o.id;c.created=Date.now();
+    for(const sid of Object.keys(c.subj||{})){const sb=c.subj[sid];const nx=RULES[sid].steps(sb,sb.res||{});if(sid==='num'){nx.forEach(s=>{if(s.track==='entiers')sb.start=s.n;if(s.track==='fractions')sb.startF=s.n;if(s.track==='decimaux')sb.startD=s.n;});}else if(nx[0])sb.start=nx[0].n;}
+    STU[c.id]=c;c.updated=Date.now();});
+  persist();closeDlg('dprt');setYear(y);toast('Année '+y+' créée'+(ids.length?' avec '+ids.length+' élève'+(ids.length>1?'s':''):'')+'.');
+});
+
+/* ========== NAVIGATION ========== */
+let CUR='accueil';
+$('#subjnav').innerHTML=`<a href="#accueil" data-v="accueil">Accueil</a>`+SUBJ.map(s=>`<a href="#${s.id}" data-v="${s.id}"><i style="background:${s.accent}"></i>${esc(s.name)}</a>`).join('');
+$('#asubj').innerHTML=SUBJ.map(s=>`<label><input type="checkbox" value="${s.id}"><i style="width:10px;height:10px;border-radius:50%;background:${s.accent};display:inline-block"></i>${esc(s.name)}</label>`).join('');
+function route(){
+  let h=(location.hash||'#accueil').slice(1);const [v,sec]=h.split('-');
+  CUR=SJ[v]?v:'accueil';
+  $('#v-accueil').hidden=CUR!=='accueil';$('#v-subj').hidden=CUR==='accueil';
+  $$('#subjnav a').forEach(a=>a.setAttribute('aria-current',a.dataset.v===CUR?'page':'false'));
+  if(CUR!=='accueil'){renderSubject();if(sec&&document.getElementById('s-'+sec))requestAnimationFrame(()=>document.getElementById('s-'+sec).scrollIntoView());else window.scrollTo(0,0);}
+  else{renderHome();window.scrollTo(0,0);}
+}
+window.addEventListener('hashchange',route);
+function renderAll(){if(CUR==='accueil')renderHome();else renderSuivi();}
+function sorted(){return Object.values(STU).filter(s=>(s.year||defYear())===YEAR).sort((a,b)=>a.name.localeCompare(b.name,'fr'));}
+
+/* ========== ACCUEIL ========== */
+function homeCell(st,s){
+  const sb=sbOf(st,s.id);
+  if(!sb)return `<button class="sjcell off" data-enable="${st.id}|${s.id}">+ ajouter</button>`;
+  const ok=okCount(st,s.id),tot=s.units.length,nx=RULES[s.id].steps(sb,sb.res||{});
+  const nxt=nx.length?nx.map(x=>`<span class="chip"><i style="background:${U(s.id,x.n).color}"></i>${s.id==='edl'?'notion':'ceint.'} ${x.n}${x.slot==='B'||x.slot==='C'?' · test '+(s.id==='geo'?{B:'v2',C:'v3'}[x.slot]:x.slot):''}</span>`).join(' '):'<span class="chip">terminé</span>';
+  return `<button class="sjcell" data-go="${s.id}|${st.id}" title="Ouvrir la fiche de suivi ${esc(s.name)}"><span><b>${ok}</b> / ${tot} ${s.words} réussi${s.id==='edl'?'e':'e'}s</span><span class="bar"><b style="width:${Math.round(100*ok/tot)}%;background:${s.accent}"></b></span><small>Suite : ${nxt}</small></button>`;
+}
+function renderHome(){
+  const list=sorted();
+  $('#count').textContent=`${YEAR} · ${list.length} élève${list.length>1?'s':''}`;
+  $('#printall').disabled=!list.length||mode==='loading';$('#csv').disabled=!list.length;$('#bilanall').disabled=!list.length;
+  if(mode==='loading'){$('#hometable').innerHTML='<div class="empty">Chargement…</div>';return;}
+  if(!list.length){$('#hometable').innerHTML=`<div class="empty">Aucun élève pour l'année ${esc(YEAR)}. Ajoutez un prénom ci-dessus, ou reprenez vos élèves de l'an dernier avec « Nouvelle année… ».</div>`;return;}
+  $('#hometable').innerHTML=`<table class="home"><thead><tr><th>Élève</th>${SUBJ.map(s=>`<th class="sj"><i style="background:${s.accent}"></i>${esc(s.name)}</th>`).join('')}<th></th></tr></thead><tbody>${list.map(st=>`<tr>
+    <td class="nm"><button data-stu="${st.id}">${esc(st.name)}</button><small>${SUBJ.filter(s=>sbOf(st,s.id)).length} matière(s)</small></td>
+    ${SUBJ.map(s=>`<td>${homeCell(st,s)}</td>`).join('')}
+    <td class="ac"><button data-printstu="${st.id}">Imprimer la suite</button></td></tr>`).join('')}</tbody></table>`;
+}
+$('#aadd').addEventListener('click',()=>{
+  const name=$('#aname').value.trim();if(!name){$('#aname').focus();return;}
+  if(mode==='loading'){toast('Patientez, le suivi se charge.');return;}
+  const subs=$$('#asubj input:checked').map(i=>i.value);if(!subs.length){toast('Cochez au moins une matière.');return;}
+  const st={id:newId(),year:YEAR,name,notes:'',subj:{},created:Date.now()};subs.forEach(s=>st.subj[s]=SDEF[s]());
+  saveStu(st);$('#aname').value='';$('#aname').focus();toast(name+' ajouté(e).');
+});
+$('#aname').addEventListener('keydown',ev=>{if(ev.key==='Enter')$('#aadd').click();});
+
+/* ========== PAGE D'UNE MATIÈRE ========== */
+function renderSubject(){
+  const s=SJ[CUR];document.documentElement.style.setProperty('--sacc',s.accent);
+  $('#subjhead').innerHTML=`<div class="wrap"><span class="dot"></span><div><h1>${esc(s.name)}</h1><p class="lead">${s.units.length} ${s.words} · fiche de suivi, impression de la suite, documents</p></div></div>`;
+  $('#subnav').innerHTML=[['suivi','Fiche de suivi'],['imprimer','Imprimer sur mesure'],['unites',s.id==='edl'?'Notion par notion':'Ceinture par ceinture'],['demarche','Démarche'],['docs','Documents']].map(([k,t])=>`<a href="#${s.id}-${k}">${t}</a>`).join('');
+  renderSuivi();renderPrinter();selUnit=1;renderUnits();renderDemarche();renderDocs();
+}
+/* --- fiche de suivi d'une matière --- */
+function renderSuivi(){
+  if(CUR==='accueil')return;const s=SJ[CUR],R=RULES[s.id];
+  const all=sorted(),list=all.filter(st=>sbOf(st,s.id)),others=all.filter(st=>!sbOf(st,s.id));
+  let head='';
+  if(s.id==='num')head=`<tr><th></th>${[['Nombres entiers',20],['Fractions',7],['Nombres décimaux',8]].map(([t,k])=>`<th class="grp" colspan="${k}">${t}</th>`).join('')}<th></th><th></th></tr>`;
+  const body=list.map(st=>{const sb=sbOf(st,s.id),nx=R.steps(sb,sb.res||{}),nset=new Set(nx.map(x=>x.n));
+    const sub=s.id==='edl'?`Parcours ${sb.parcours||1} · départ notion ${sb.start||1}`:s.id==='cp'?`Départ ceinture ${sb.start||1} · ${sb.method==='cassage'?'cassage':'retenue'}`:s.id==='num'?`Départ ${sb.start||1} · fractions ${sb.startF||21} · décimaux ${sb.startD||28}`:`Départ ceinture ${sb.start||1}`;
+    return `<tr><td class="nm"><button data-stu="${st.id}">${esc(st.name)}</button><small>${sub}</small></td>${s.units.map(u=>{const stt=R.state(sb,u.n),r=(sb.res||{})[u.n]||{};
+      return `<td class="nc"><button class="cell ${stt} ${nset.has(u.n)?'next':''}" data-cell="${st.id}|${s.id}|${u.n}" aria-label="${esc(st.name)}, ${esc(uName(s.id,u.n))}" title="${esc(uName(s.id,u.n))}${r.d?' · '+r.d:''}">${R.cell(sb,u.n,stt)}</button></td>`;}).join('')}
+      <td class="nx">${nx.length?nx.map(x=>`<b>${s.id==='edl'?'Notion':'Ceinture'} ${x.n}</b> · ${esc(x.label)}`).join('<br>'):'Tout est traité'}</td>
+      <td class="ac"><button data-print="${st.id}|${s.id}" ${nx.some(x=>x.pages.length)?'':'disabled'}>Imprimer la suite</button></td></tr>`;}).join('');
+  $('#s-suivi').innerHTML=`<h2>Fiche de suivi · ${esc(s.name)} · ${esc(YEAR)}</h2>
+  <p class="lead" style="font-size:16px">Touchez une case pour noter un résultat (enregistré tout de suite). La colonne « Prochaine étape » se met à jour seule.</p>
+  ${list.length?`<div class="toolbar"><span class="sp"></span><button class="btn" id="bilansubj">Bilans PDF de tous les élèves (${esc(s.name)})</button><button class="btn" id="printsubj">Imprimer la suite de tous (${esc(s.name)})</button></div>
+  <div class="stable"><table class="st"><thead>${head}<tr><th>Élève</th>${s.units.map(u=>`<th class="nh" title="${esc(uName(s.id,u.n))}"><span class="${u.dark?'dk':''}" style="background:${u.color}">${u.n}</span></th>`).join('')}<th>Prochaine étape</th><th></th></tr></thead><tbody>${body}</tbody></table></div>
+  <div class="legend"><span><i style="background:#9AD27E"></i>Réussie</span><span><i style="background:#FDF0B8"></i>En cours (lettre = prochain test)</span><span><i style="background:#F6A93B"></i>À reprendre plus tard</span><span><i style="box-shadow:0 0 0 2.5px var(--accent)"></i>Prochaine étape</span></div>`
+  :`<div class="empty panel">Aucun élève ne suit cette matière en ${esc(YEAR)}.</div>`}
+  ${others.length?`<p class="note">Ne suivent pas cette matière : ${others.map(st=>`<button class="pill" data-enable="${st.id}|${s.id}" style="margin:2px">+ ${esc(st.name)}</button>`).join(' ')}</p>`:''}`;
+}
+/* --- impression sur mesure --- */
+const POPT={
+  edl:[['p1','Leçon, exercices et test A'],['repB','Entraînement 1 et test B (pages a, b)'],['repC','Entraînement 2 et test C (pages c, d)'],['lv2','Plus loin · niveau 2 (CE2)'],['lv3','Plus loin · niveau 3 (CM1)'],['lv4','Plus loin · niveau 4 (CM2)'],['lv5','Plus loin · niveau 5 (6e)']],
+  cp:[['memo','Mémo'],['memoC','Mémo variante cassage (ceintures 5, 8, 12)'],['fiches','Fiches N°1 à N°4'],['tA','Test A'],['tB','Test B'],['tC','Test C']],
+  geo:[['memo','Mémo'],['fiches','Fiches (12)'],['t0','Test version 1'],['t1','Test version 2'],['t2','Test version 3']],
+  num:[['block','Intercalaire, mémo et fiches'],['extra','Fiches de rattrapage (ceinture 9)'],['tA','Test A'],['tB','Test B'],['tC','Test C'],['entr','Entraînements 1 et 2']]
+};
+/* Corrigés correspondant à ce qui est imprimé */
+const CORR={
+  edl:{p1:['cT'],repB:['cE','cT'],repC:['cE','cT'],lv2:['cP'],lv3:['cP'],lv4:['cP'],lv5:['cP']},
+  cp:{fiches:['FICHES'],tA:['tcorr'],tB:['tcorr'],tC:['tcorr']},
+  geo:{},
+  num:{block:['fcorr'],tA:['tcorr'],tB:['tcorr'],tC:['tcorr'],entr:['ecorr']}
+};
+const hasCorr=sid=>Object.keys(CORR[sid]).length>0;
+const dedup=a=>{const seen=new Set();return a.filter(([f,p])=>{const k=f+'#'+p;if(seen.has(k))return false;seen.add(k);return true;});};
+/* Choix des corrigés : sans / à la fin du PDF / dans un PDF à part (mémorisé) */
+let CMODE=(()=>{try{return localStorage.getItem('ulis-corr')||'non';}catch(e){return 'non';}})();
+function setCmode(m){CMODE=m;try{localStorage.setItem('ulis-corr',m);}catch(e){}if(META.corr!==m){META.corr=m;saveMeta();}}
+function corrChoice(id,avail,note){
+  if(!avail)return `<label class="f" style="margin-top:12px">Corrigés pour l'enseignant</label><p class="note" style="margin:0">${note||'Pas de corrigé pour ce qui est imprimé.'}</p>`;
+  return `<label class="f" style="margin-top:12px">Corrigés pour l'enseignant : les imprimer ?</label><div class="seg cmode" id="${id}" style="margin-top:0">${[['non','Non, sans les corrigés'],['fin','Oui, à la fin du PDF'],['part','Oui, dans un PDF à part']].map(([v,t])=>`<button type="button" data-cm="${v}" aria-pressed="${CMODE===v}">${t}</button>`).join('')}</div>`;}
+function unitPages(sid,n,o){
+  const u=U(sid,n),F=c=>fileOf(sid,c);
+  if(sid==='edl')return edlPages(n,o).map(([f,p])=>[f,p]);
+  if(sid==='cp'){if(o==='memo')return u.memo.map(p=>[F('Mémos'),p]);if(o==='memoC')return (u.memoC[0]!==u.memo[0]?u.memoC:[]).map(p=>[F('Mémos'),p]);
+    if(o==='fiches')return u.fiches.flat().map(p=>[F('Fiches'),p]);if(o[0]==='t'&&o.length===2)return u.tests[o[1]].map(p=>[F('Tests'),p]);
+    if(o==='corr')return u.corr.flat().map(p=>[F('Corrigés'),p]);if(o==='corrC')return u.corrC.flat().map(p=>[F('Corrigés cassage'),p]);if(o==='tcorr')return u.tcorr.map(p=>[F('Tests corrigés'),p]);}
+  if(sid==='geo'){if(o==='memo')return u.memo.map(p=>[F('Mémo'),p]);if(o==='fiches')return u.fiches.map(p=>[F('Fiches'),p]);if(o[0]==='t')return u.tests[+o[1]]?[[F('Tests'),u.tests[+o[1]]]]:[];}
+  if(sid==='num'){if(o==='block')return u.block.map(p=>[F('Ceintures'),p]);if(o==='extra')return (u.extra||[]).map(p=>[F('Ceintures'),p]);if(o[0]==='t'&&o.length===2)return u.tests[o[1]].map(p=>[F('Tests'),p]);
+    if(o==='entr')return u.entr.map(p=>[F('Entraînements'),p]);if(o==='fcorr')return u.fcorr.map(p=>[F('Fiches corrigés'),p]);if(o==='tcorr')return u.tcorr.map(p=>[F('Tests corrigés'),p]);if(o==='ecorr')return u.ecorr.map(p=>[F('Entr. corrigés'),p]);}
+  return [];
+}
+function renderPrinter(){
+  const s=SJ[CUR];
+  $('#s-imprimer').innerHTML=`<h2>Imprimer sur mesure · ${esc(s.name)}</h2><p class="lead" style="font-size:16px">Cochez les ${s.words} et ce qu'il faut : le logiciel assemble un seul PDF, dans l'ordre.</p>
+  <div class="printer"><div class="panel">
+    <h3>1. Les ${s.words} <button id="pall" type="button">Tout cocher</button></h3><div class="nchips" id="pnot">${s.units.map(u=>`<label class="chk"><input type="checkbox" value="${u.n}" data-g="n">${ubadge(s.id,u.n)}${esc(u.name)}</label>`).join('')}</div>
+    <h3 style="margin-top:16px">2. Pour chaque ${s.word}</h3><div class="opts">${POPT[s.id].map(([k,t],i)=>`<label class="chk"><input type="checkbox" value="${k}" data-g="o" ${i===0?'checked':''}>${t}</label>`).join('')}</div>
+    <h3 style="margin-top:16px">3. Les corrigés</h3><div id="pcorr"></div>
+    <h3 style="margin-top:16px">4. Documents entiers à ajouter</h3><div class="opts">${s.docs.filter(d=>d.pages<=20).map(d=>`<label class="chk"><input type="checkbox" value="${esc(d.code)}" data-g="x">${esc(d.title)} (${d.pages} p.)</label>`).join('')}</div>
+  </div><div class="panel" style="align-self:start"><h3>Votre impression</h3><div class="sum" id="psum">0 <small>page</small></div><div class="status" id="pstat" aria-live="polite"></div><button class="btn pri" id="pgo" disabled>Créer le PDF à imprimer</button><button class="btn" id="pgoc" hidden style="margin-top:8px">Créer le PDF des corrigés</button>
+  ${s.id==='geo'?'<p class="tip">Géométrie : imprimer à 100 % (« taille réelle ») pour garder les mesures.</p>':''}</div></div>`;
+  planRender();
+}
+let cpCorr='retenue';
+function plan2(){const s=SJ[CUR],ns=$$('#pnot input:checked').map(i=>+i.value),os=$$('#s-imprimer [data-g=o]:checked').map(i=>i.value),xs=$$('#s-imprimer [data-g=x]:checked').map(i=>i.value);
+  const ex=[],co=[];
+  ns.forEach(n=>POPT[s.id].map(x=>x[0]).filter(o=>os.includes(o)).forEach(o=>ex.push(...unitPages(s.id,n,o))));
+  xs.forEach(c=>{const d=docBy(s.id,c);for(let p=1;p<=d.pages;p++)ex.push([d.file,p]);});
+  ns.forEach(n=>{const cs=[];os.forEach(o=>(CORR[s.id][o]||[]).forEach(c=>{c=c==='FICHES'?(cpCorr==='cassage'?'corrC':'corr'):c;if(!cs.includes(c))cs.push(c);}));cs.forEach(c=>co.push(...unitPages(s.id,n,c)));});
+  return {ex:dedup(ex),co:dedup(co)};}
+function plan(){const {ex,co}=plan2();return CMODE==='fin'?dedup([...ex,...co]):ex;}
+function planRender(){const {ex,co}=plan2();
+  $('#pcorr').innerHTML=corrChoice('pcm',co.length,hasCorr(CUR)?'Pas de corrigé pour ce qui est coché.':'Le dossier de géométrie ne contient pas de corrigés.')
+    +(CUR==='cp'&&co.length&&CMODE!=='non'?`<div class="seg" id="pcpc" style="margin-top:6px">${[['retenue','Corrigés des fiches : retenue'],['cassage','Corrigés des fiches : cassage']].map(([v,t])=>`<button type="button" data-cp="${v}" aria-pressed="${cpCorr===v}">${t}</button>`).join('')}</div>`:'');
+  const fin=CMODE==='fin'&&co.length,part=CMODE==='part'&&co.length,pl=fin?dedup([...ex,...co]):ex;
+  $('#psum').innerHTML=`${pl.length} <small>page${pl.length>1?'s':''}${fin?' (dont '+co.length+' de corrigés)':''}</small>${part?`<div class="meta" style="font-size:15px">+ ${co.length} page${co.length>1?'s':''} de corrigés à part</div>`:''}`;
+  $('#pgo').disabled=!ex.length;$('#pgoc').hidden=!part;}
+document.addEventListener('change',ev=>{if(ev.target.closest('#s-imprimer'))planRender();});
+document.addEventListener('click',async ev=>{
+  if(ev.target.id==='pall'){const all=$$('#pnot input'),on=all.some(i=>!i.checked);all.forEach(i=>i.checked=on);ev.target.textContent=on?'Tout décocher':'Tout cocher';planRender();}
+  const cm=ev.target.closest('#pcm button');if(cm){setCmode(cm.dataset.cm);planRender();return;}
+  const cpb=ev.target.closest('#pcpc button');if(cpb){cpCorr=cpb.dataset.cp;planRender();return;}
+  if(ev.target.id==='pgoc'){const {co}=plan2();const ns=$$('#pnot input:checked').map(i=>i.value);ev.target.disabled=true;
+    await buildPdf(co,`Corriges ${SJ[CUR].name}${ns.length?' - '+(ns.length===SJ[CUR].units.length?'tout':ns.join('-')):''}.pdf`,t=>{$('#pstat').textContent=t;});ev.target.disabled=false;}
+  if(ev.target.id==='pgo'){const pl=plan();const ns=$$('#pnot input:checked').map(i=>i.value);ev.target.disabled=true;
+    await buildPdf(pl,`Impression ${SJ[CUR].name}${ns.length?' - '+(ns.length===SJ[CUR].units.length?'tout':ns.join('-')):''}.pdf`,t=>{$('#pstat').textContent=t;});ev.target.disabled=false;}
+});
+/* --- ceinture par ceinture --- */
+let selUnit=1;
+function pbtn(file,p,title,sub,cls=''){return `<button class="pg ${cls}" data-open="${esc(file)}|${p}"><b>${esc(title)}</b><span>${esc(sub)}</span></button>`;}
+function renderUnits(){
+  const s=SJ[CUR],u=U(s.id,selUnit),F=c=>fileOf(s.id,c);let rows='';
+  const step=(k,sub,btns)=>`<div class="step"><div class="k">${k}<small>${sub}</small></div><div class="btns">${btns}</div></div>`;
+  if(s.id==='edl'){const T=u.testA,e=4*(u.n-1),f=12*(u.n-1);
+    rows=step('Leçon et exercices','EDL 2.0',pbtn(ED.p20,u.lecon,'Leçon','p. '+u.lecon)+(u.lecon+1<T?pbtn(ED.p20,u.lecon+1,'Exercices',`p. ${u.lecon+1} à ${T-1}`):'')+pbtn(ED.p20,T,'Test A','p. '+T))
+     +step('Repassage','EDL 2.1',['Entraînement 1','Test B','Entraînement 2','Test C'].map((t,i)=>pbtn(ED.p21,e+i+1,t,T+' '+'abcd'[i])).join(''))
+     +step('Pour aller plus loin','EDL 2.2',u.fiches.map((t,k)=>pbtn(ED.p22,f+3*k+1,'Niveau '+(k+2)+' · '+t,`${T} bis ${3*k+1} à ${3*k+3}`,'lv')).join(''))
+     +step('Corrigés','enseignant',pbtn(ED.c31,u.n,'Tests A, B, C','EDL 3.1','c')+pbtn(ED.c30,u.n,'Entraînements','EDL 3.0','c')+pbtn(ED.c32,2*u.n-1,'Plus loin','EDL 3.2','c'));}
+  if(s.id==='cp'){rows=step('Je découvre','mémo',pbtn(F('Mémos'),u.memo[0],'Mémo','page '+u.memo[0])+(u.memoC[0]!==u.memo[0]?pbtn(F('Mémos'),u.memoC[0],'Mémo · cassage','variante'):''))
+     +step('Je m\'entraîne','4 fiches',u.fiches.map((ps,k)=>pbtn(F('Fiches'),ps[0],'Fiche N°'+(k+1),ps.length>1?ps.length+' pages':'1 page')).join(''))
+     +step('Je passe le test','sans le mémo · '+u.obj,'ABC'.split('').map(v=>pbtn(F('Tests'),u.tests[v][0],'Test '+v,'objectif '+u.obj)).join(''))
+     +step('Corrigés','enseignant',u.corr.map((ps,k)=>pbtn(F('Corrigés'),ps[0],'Corrigé N°'+(k+1),'retenue','c')).join('')+pbtn(F('Corrigés cassage'),u.corrC[0][0],'Corrigés cassage','N°1 à N°4','c')+pbtn(F('Tests corrigés'),u.tcorr[0],'Corrigé des tests','A, B, C','c'));}
+  if(s.id==='geo'){rows=step('Je découvre','mémo',pbtn(F('Mémo'),u.memo[0],'Mémo','page '+u.memo[0]))
+     +step('Je m\'entraîne',u.flabel,u.fiches.map((p,k)=>pbtn(F('Fiches'),p,'Page '+(k+1),'2 fiches')).join(''))
+     +step('Je passe le test','tous les soleils + les étoiles',u.tests.map((p,k)=>pbtn(F('Tests'),p,'Version '+(k+1),k<3?'':'version supplémentaire')).join(''));}
+  if(s.id==='num'){rows=step('Je découvre et je m\'entraîne','intercalaire, mémo, fiches',pbtn(F('Ceintures'),u.block[0],'Intercalaire et fiches',u.block.length+' pages')+(u.extra?pbtn(F('Ceintures'),u.extra[0],'Rattrapage',u.extra.length+' pages'):''))
+     +step('Je passe le test','seuil ≈ 80 %','ABC'.split('').map(v=>pbtn(F('Tests'),u.tests[v][0],'Test '+v,'')).join(''))
+     +step('Si le test est raté','avant de repasser le test',u.entr.map((p,k)=>pbtn(F('Entraînements'),p,'Entraînement '+(k+1),'')).join(''))
+     +step('Corrigés','enseignant',pbtn(F('Tests corrigés'),u.tcorr[0],'Corrigé du test','A, B, C','c')+pbtn(F('Entr. corrigés'),u.ecorr[0],'Corrigé des entraînements','','c')+(u.fcorr.length?pbtn(F('Fiches corrigés'),u.fcorr[0],'Corrigé des fiches','','c'):''));}
+  $('#s-unites').innerHTML=`<h2>${s.id==='edl'?'Notion par notion':'Ceinture par ceinture'}</h2><div class="unitlist" role="tablist">${s.units.map(x=>`<button class="unitbtn" role="tab" aria-selected="${x.n===selUnit}" data-unit="${x.n}">${ubadge(s.id,x.n)}${esc(x.name)}</button>`).join('')}</div>
+  <div class="unitsheet"><div class="hd">${ubadge(s.id,u.n,';width:48px;height:48px;font-size:20px;border-radius:12px')}<div><h2 style="margin:0">${s.id==='edl'?'Notion':'Ceinture'} ${u.n} · ${esc(u.name)}</h2><div class="meta">${esc(u.comp||('Bloc '+u.bloc))}${s.id==='num'?' · '+RULES.num.tracks[u.parcours][2]:''}</div></div></div><div class="path">${rows}</div></div>`;
+}
+document.addEventListener('click',ev=>{const b=ev.target.closest('[data-unit]');if(b){selUnit=+b.dataset.unit;renderUnits();}});
+/* --- démarche --- */
+const DEM={
+  edl:[['Leçon','Lire la leçon avec l\'élève, à voix haute. Faire manipuler, dire avec ses mots.'],['Exercices','Fiches d\'exercices : consignes lues, un exemple fait ensemble.'],['Test A','Seul, sans la leçon. Réussi à 80 % (seuil sur le corrigé).'],['Bilan','Test A raté : entraînement 1 + test B ; puis entraînement 2 + test C. Réussi : notion suivante, ou « plus loin » (niveaux 2 à 5).']],
+  cp:[['Je découvre','Lire le mémo avec l\'élève : exemple résolu, étapes, erreurs à éviter. Manipuler avant d\'écrire.'],['Je m\'entraîne','Fiches N°1 à N°4 dans l\'ordre, correction après chaque fiche.'],['Je passe le test','Quand l\'élève se sent prêt : test A, seul, sans le mémo.'],['Je valide','8/10 ou 10/12 : ceinture validée. Raté : même couleur, puis test B, puis test C.']],
+  geo:[['Je découvre','Lire la page de la ceinture dans le mémo : vocabulaire, outils, codes. Manipuler.'],['Je m\'entraîne','Fiches dans l\'ordre ; une consigne à la fois : « je lis → je trace → je coche ».'],['Je passe le test','Après 3 fiches réussies de suite sans aide : test version 1, seul, sans le mémo.'],['Je valide','Tous les soleils + les étoiles demandées. Raté : fiches ciblées, puis version 2, puis 3.']],
+  num:[['Je découvre','Intercalaire de la ceinture ; mémo à partir de la ceinture 11. Manipuler (jetons, monnaie, tableau).'],['Je m\'entraîne','Fiches dans l\'ordre ; consignes lues, nombres dictés deux fois.'],['Je passe le test','Fiches réussies sans aide : test A, seul. Seuil ≈ 80 % (corrigé).'],['Je valide','Raté : entraînements 1 et 2, puis test B ; puis test C. Fractions dès la ceinture 10 ; décimaux après 21 à 24 et 13.']]
+};
+function renderDemarche(){const s=SJ[CUR];
+  $('#s-demarche').innerHTML=`<h2>La démarche · ${esc(s.name)}</h2><div class="grid4">${DEM[s.id].map(([t,p],i)=>`<div class="card"><span class="n">${i+1}</span><h3>${t}</h3><p>${p}</p></div>`).join('')}</div>
+  <p class="note">Le détail (difficultés, remédiations, séance type) est dans le guide de l'enseignant : ${pbtn(fileOf(s.id,s.id==='edl'?'EDL 0.0':'Guide'),1,'Ouvrir le guide','','c')}</p>`;}
+/* --- documents --- */
+function renderDocs(){const s=SJ[CUR];const card=d=>`<div class="doc"><h4><span class="code">${esc(d.code)}</span>${esc(d.title)}</h4><p>${esc(d.desc)} · ${d.pages} page${d.pages>1?'s':''}</p><div class="act"><button class="pri" data-open="${esc(d.file)}|1">Lire</button><button data-dlfile="${esc(d.file)}|${esc(d.dl)}">Télécharger</button></div></div>`;
+  $('#s-docs').innerHTML=`<h2>Documents · ${esc(s.name)}</h2><h3 style="margin-top:14px">Pour l'enseignant</h3><div class="docs">${s.docs.filter(d=>d.role==='ens').map(card).join('')}</div><h3 style="margin-top:18px">Pour l'élève</h3><div class="docs">${s.docs.filter(d=>d.role==='ele').map(card).join('')}</div>`;}
+document.addEventListener('click',async ev=>{const b=ev.target.closest('[data-dlfile]');if(!b)return;const [f,n]=b.dataset.dlfile.split('|');try{await saveFile(n,new Blob([await srcBytes(f)],{type:'application/pdf'}));}catch(e){toast('Fichier introuvable.');}});
+
+/* ========== FENÊTRES ========== */
+let lastFocus=null;
+function openDlg(id){lastFocus=document.activeElement;$('#'+id).classList.add('open');const f=$('#'+id+' button, #'+id+' input, #'+id+' select');if(f)f.focus();}
+function closeDlg(id){if(id==='dstu')commitStu();$('#'+id).classList.remove('open');if(lastFocus&&lastFocus.focus&&document.contains(lastFocus))lastFocus.focus();}
+$$('.dlg').forEach(d=>d.addEventListener('click',ev=>{if(ev.target===d||ev.target.closest('[data-close]'))closeDlg(d.id);}));
+document.addEventListener('keydown',ev=>{if(ev.key==='Escape'&&!$('#viewer').classList.contains('open')){const o=$('.dlg.open');if(o)closeDlg(o.id);}});
+
+/* --- résultats d'une ceinture / notion --- */
+let edit=null;
+function triBtns(key,val){return `<div class="tri" data-key="${key}">${[['ok','Réussi'],['ko','Raté'],['','—']].map(([v,t])=>`<button data-v="${v}" aria-pressed="${(val||'')===v}">${t}</button>`).join('')}</div>`;}
+function openRes(id,sid,n){
+  const st=STU[id],sb=st&&sbOf(st,sid);if(!sb)return;
+  edit={id,sid,n,r:JSON.parse(JSON.stringify((sb.res||{})[n]||{}))};edit.r.pl=edit.r.pl||{};
+  const r=edit.r,slots=RULES[sid].slots(sb,n);
+  $('#dresbox').innerHTML=`<h3 id="dresh">${esc(st.name)} · ${esc(SJ[sid].name)}</h3><div class="meta">${ubadge(sid,n)} ${esc(uName(sid,n))}${r.d?' · dernier résultat le '+r.d:''}</div>
+  ${slots.map(x=>x.h?`<h4 style="margin:14px 0 2px">${x.h}</h4>`:`<div class="slot"><div><b>${x.l}</b><small>${x.s}</small></div>${triBtns(x.k,x.k.startsWith('pl')?r.pl[x.k.slice(2)]:r[x.k])}</div>`).join('')}
+  <p class="note" style="margin-top:10px">Chaque choix est enregistré immédiatement.</p><div class="foot"><button class="btn pri" data-close>Fermer</button></div>`;
+  openDlg('dres');
+}
+$('#dresbox').addEventListener('click',ev=>{const b=ev.target.closest('.tri button');if(!b)return;
+  const k=b.parentElement.dataset.key,v=b.dataset.v;b.parentElement.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  if(k.startsWith('pl'))edit.r.pl[k.slice(2)]=v;else edit.r[k]=v;commitRes();});
+function commitRes(){const st=STU[edit.id],sb=st&&sbOf(st,edit.sid);if(!sb)return;sb.res=sb.res||{};
+  const r=JSON.parse(JSON.stringify(edit.r));delete r.d;Object.keys(r).forEach(k=>{if(r[k]==='')delete r[k];});Object.keys(r.pl||{}).forEach(k=>{if(!r.pl[k])delete r.pl[k];});
+  const old=JSON.parse(JSON.stringify(sb.res[edit.n]||{}));delete old.d;
+  if(JSON.stringify(old)!==JSON.stringify(r)){r.d=today();edit.r.d=r.d;sb.res[edit.n]=r;saveStu(st);}}
+
+/* --- fiche d'un élève : matières, réglages, bilans, transmission --- */
+const opt=(sid,a,b,sel)=>range(a,b).map(n=>`<option value="${n}" ${+sel===n?'selected':''}>${n}. ${esc(U(sid,n).name)}${sid==='num'||sid==='cp'||sid==='geo'?' — '+esc(U(sid,n).comp):''}</option>`).join('');
+function subjSettings(st,s){const sb=st.subj&&st.subj[s.id];const on=!!(sb&&sb.on);const v=sb||SDEF[s.id]();let g='';
+  if(s.id==='edl')g=`<div><label class="f" for="x-edl-parcours">Parcours</label><select id="x-edl-parcours" data-k="parcours"><option value="1">Parcours 1 · niveau 1 (CE1)</option><option value="2">Parcours 2 · niveau 3 (CM1)</option><option value="3">Parcours 3 · niveau 5 (6e)</option></select></div><div><label class="f" for="x-edl-start">Notion de départ</label><select id="x-edl-start" data-k="start">${opt('edl',1,16,v.start)}</select></div>`;
+  if(s.id==='cp')g=`<div><label class="f" for="x-cp-start">Ceinture de départ</label><select id="x-cp-start" data-k="start">${opt('cp',1,15,v.start)}</select></div><div><label class="f" for="x-cp-method">Soustraction (mémos et corrigés)</label><select id="x-cp-method" data-k="method"><option value="retenue">par compensation (retenue)</option><option value="cassage">par cassage (emprunt)</option></select></div>`;
+  if(s.id==='geo')g=`<div><label class="f" for="x-geo-start">Ceinture de départ</label><select id="x-geo-start" data-k="start">${opt('geo',1,12,v.start)}</select></div>`;
+  if(s.id==='num')g=`<div><label class="f" for="x-num-start">Départ · nombres entiers</label><select id="x-num-start" data-k="start">${opt('num',1,20,v.start)}</select></div>
+    <div><label class="f" for="x-num-startF">Départ · fractions</label><select id="x-num-startF" data-k="startF">${opt('num',21,27,v.startF||21)}</select><label class="chk" style="margin-top:6px"><input type="checkbox" data-k="fr" ${v.fr?'checked':''}>Fractions commencées</label></div>
+    <div><label class="f" for="x-num-startD">Départ · nombres décimaux</label><select id="x-num-startD" data-k="startD">${opt('num',28,35,v.startD||28)}</select><label class="chk" style="margin-top:6px"><input type="checkbox" data-k="dec" ${v.dec?'checked':''}>Décimaux commencés</label></div>`;
+  return `<div class="sjblock ${on?'on':''}" data-sid="${s.id}"><h4><label><input type="checkbox" data-k="on" ${on?'checked':''}><i style="width:12px;height:12px;border-radius:50%;background:${s.accent};display:inline-block"></i>${esc(s.name)}</label></h4>
+  ${on?`<div class="grid">${g}</div><div class="btns"><button class="btn" data-bilan="${s.id}">Bilan PDF · ${esc(s.name)}</button><button class="btn" data-print="${st.id}|${s.id}">Imprimer la suite</button></div>`:'<p class="note" style="margin:6px 0 0">Cochez pour suivre cette matière.</p>'}</div>`;}
+function openStu(id){const st=STU[id];if(!st)return;
+  $('#dstubox').innerHTML=`<h3 id="dstuh">${esc(st.name)}</h3><div class="meta">${esc(st.year||YEAR)}${st.recu?' · reçu de '+esc(st.recu):''}</div>
+  <label class="f" for="sname">Prénom</label><input class="t" id="sname" value="${esc(st.name)}" maxlength="30">
+  <label class="f" for="snotes" style="margin-top:12px">Remarques (adaptations, aides, difficultés)</label><textarea class="t" id="snotes">${esc(st.notes||'')}</textarea>
+  <h4 style="margin:16px 0 0">Matières suivies et réglages</h4><div id="sjblocks">${SUBJ.map(s=>subjSettings(st,s)).join('')}</div>
+  <h4 style="margin:18px 0 6px">Bilans et transmission</h4><div class="btns"><button class="btn pri" data-bilan="all">Bilan PDF toutes matières</button><button class="btn" id="strans">Fichier de transmission</button></div>
+  <p class="note" style="margin-top:6px">Le fichier de transmission s'importe par le professeur suivant (« Restaurer ou importer un fichier ») : il retrouve tout le suivi.</p>
+  <div class="foot"><button class="btn" id="sdel" style="margin-right:auto">Supprimer l'élève</button><button class="btn pri" data-close>Fermer</button></div><p class="note" style="margin:8px 0 0;text-align:right">Les modifications sont enregistrées pendant la saisie.</p>`;
+  $$('#dstubox [data-k=parcours]').forEach(x=>x.value=(st.subj.edl&&st.subj.edl.parcours)||1);$$('#dstubox [data-k=method]').forEach(x=>x.value=(st.subj.cp&&st.subj.cp.method)||'retenue');
+  $('#dstubox').dataset.id=id;openDlg('dstu');}
+let stuT=null;
+function commitStu(){clearTimeout(stuT);const id=$('#dstubox').dataset.id,st=STU[id];if(!st||!$('#sname'))return;let ch=false;
+  const name=$('#sname').value.trim()||st.name,notes=$('#snotes').value;if(name!==st.name||notes!==(st.notes||'')){st.name=name;st.notes=notes;ch=true;}
+  $$('#sjblocks .sjblock').forEach(b=>{const sid=b.dataset.sid;const on=b.querySelector('[data-k=on]').checked;st.subj=st.subj||{};
+    if(on&&!st.subj[sid]){st.subj[sid]=SDEF[sid]();ch=true;}
+    const sb=st.subj[sid];if(!sb)return;if(sb.on!==on){sb.on=on;ch=true;}
+    b.querySelectorAll('[data-k]').forEach(x=>{const k=x.dataset.k;if(k==='on')return;const v=x.type==='checkbox'?x.checked:(['start','startF','startD','parcours'].includes(k)?+x.value:x.value);if(sb[k]!==v){sb[k]=v;ch=true;}});});
+  if(ch){saveStu(st);$('#dstuh').textContent=st.name;}}
+$('#dstubox').addEventListener('input',ev=>{if(ev.target.matches('#sname,#snotes')){clearTimeout(stuT);stuT=setTimeout(commitStu,500);}});
+$('#dstubox').addEventListener('change',ev=>{commitStu();if(ev.target.dataset.k==='on'){const id=$('#dstubox').dataset.id;const sc=$('#dstubox').scrollTop;openStu(id);$('#dstubox').scrollTop=sc;}});
+$('#dstubox').addEventListener('click',ev=>{const id=$('#dstubox').dataset.id,st=STU[id];if(!st)return;
+  const bl=ev.target.closest('[data-bilan]');if(bl){commitStu();bilanPdf(st,bl.dataset.bilan);return;}
+  if(ev.target.id==='strans'){commitStu();transmit(st);return;}
+  if(ev.target.id==='sdel'){const b=ev.target;if(b.dataset.sure!=='1'){b.dataset.sure='1';b.textContent='Confirmer : supprimer '+st.name;return;}$('#dstubox').dataset.id='';delStu(id);closeDlg('dstu');toast(st.name+' supprimé(e).');}});
+
+/* --- imprimer la suite --- */
+let prt={ids:[],sids:[],k:1};
+function prtParts(){const ex=[],co=[];
+  prt.ids.forEach(id=>{const st=STU[id];if(!st)return;
+    prt.sids.forEach(sid=>{const sb=sbOf(st,sid);if(!sb)return;const steps=nextSteps(sid,sb,prt.k);
+      steps.forEach(s=>s.pages.forEach(([f,p])=>ex.push([f,p])));steps.forEach(s=>(s.corr||[]).forEach(([f,p])=>co.push([f,p])));});});
+  return {ex:dedup(ex),co:dedup(co)};}
+function prtPages(){const {ex,co}=prtParts();return CMODE==='fin'?dedup([...ex,...co]):ex;}
+function openPrint(ids,sids){prt={ids,sids,k:1};renderPrint();openDlg('dprt');}
+function renderPrint(){
+  const one=prt.ids.length===1,st=one?STU[prt.ids[0]]:null,pages=prtPages(),{ex,co}=prtParts(),fin=CMODE==='fin'&&co.length,part=CMODE==='part'&&co.length;
+  let detail='';
+  if(one)detail=prt.sids.map(sid=>{const sb=sbOf(st,sid);if(!sb)return '';const steps=nextSteps(sid,sb,prt.k);
+    return `<div class="stp"><b><span class="chip"><i style="background:${SJ[sid].accent}"></i></span>${esc(SJ[sid].name)}</b>${steps.length?steps.map(s=>`<span>${s.sim?'puis, si réussi : ':''}${esc(uName(sid,s.n))} — ${esc(s.label)} (${s.pages.length} p.)</span>`).join('<br>'):'<span>Rien à imprimer : notez d\'abord les résultats.</span>'}</div>`;}).join('');
+  $('#dprtbox').innerHTML=`<h3 id="dprth">${one?'Imprimer la suite de '+esc(st.name):'Imprimer la suite de '+prt.ids.length+' élèves'}</h3>
+  <div class="meta">${prt.sids.length===1?esc(SJ[prt.sids[0]].name):'Matières : '+prt.sids.map(s=>esc(SJ[s].name)).join(', ')}${one?'':' · élèves dans l\'ordre alphabétique'}</div>
+  ${prt.sids.length>1||!one?`<label class="f">Matières</label><div class="subjchk" id="prtsj">${SUBJ.map(s=>`<label><input type="checkbox" value="${s.id}" ${prt.sids.includes(s.id)?'checked':''}>${esc(s.name)}</label>`).join('')}</div>`:''}
+  <label class="f" style="margin-top:12px">Combien d'étapes ?</label><div class="seg" id="prtk" style="margin-top:0">${[1,2,3].map(k=>`<button aria-pressed="${prt.k===k}" data-k="${k}">${k===1?'La prochaine':k+' étapes'}</button>`).join('')}</div>
+  ${one?`<div class="steps">${detail}</div>`:''}
+  ${corrChoice('prtcm',co.length,ex.length&&prt.sids.every(s=>s==='geo')?'Le dossier de géométrie ne contient pas de corrigés.':'Pas de corrigé pour ce qui sera imprimé.')}
+  <p class="sum" style="margin-top:12px">${pages.length} <small>page${pages.length>1?'s':''}${fin?' (dont '+co.length+' de corrigés à la fin)':''}</small>${part?`<span class="meta" style="font-size:15px;margin-left:10px">+ ${co.length} page${co.length>1?'s':''} de corrigés à part</span>`:''}</p><div class="status" id="prtstat" aria-live="polite"></div>
+  <div class="foot"><button class="btn" data-close>Fermer</button>${part?'<button class="btn" id="prtgoc">Créer le PDF des corrigés</button>':''}<button class="btn pri" id="prtgo" ${ex.length?'':'disabled'}>Créer le PDF à imprimer</button></div>`;
+}
+$('#dprtbox').addEventListener('click',async ev=>{
+  const k=ev.target.closest('#prtk button');if(k){prt.k=+k.dataset.k;renderPrint();return;}
+  const cm=ev.target.closest('#prtcm button');if(cm){setCmode(cm.dataset.cm);renderPrint();return;}
+  if(ev.target.id==='prtgoc'){const {co}=prtParts(),one=prt.ids.length===1;
+    const name=(one?`Corriges - ${STU[prt.ids[0]].name}`:`Corriges - ${prt.ids.length} eleve${prt.ids.length>1?'s':''}`)+(prt.sids.length===1?' - '+SJ[prt.sids[0]].name:'')+'.pdf';
+    ev.target.disabled=true;await buildPdf(co,name,t=>{const s=$('#prtstat');if(s)s.textContent=t;});const b=$('#prtgoc');if(b)b.disabled=false;return;}
+  if(ev.target.closest('#prtsj input')){prt.sids=$$('#prtsj input:checked').map(i=>i.value);renderPrint();return;}
+  if(ev.target.id==='prtgo'){const pages=prtPages(),one=prt.ids.length===1;
+    const name=(one?`Suite - ${STU[prt.ids[0]].name}`:`Suite - ${prt.ids.length} eleve${prt.ids.length>1?'s':''}`)+(prt.sids.length===1?' - '+SJ[prt.sids[0]].name:'')+'.pdf';
+    ev.target.disabled=true;await buildPdf(pages,name,t=>{const s=$('#prtstat');if(s)s.textContent=t;});const b=$('#prtgo');if(b)b.disabled=false;}
+});
+$('#bilanall').addEventListener('click',()=>bilanClass(sorted(),'all'));
+$('#printall').addEventListener('click',()=>openPrint(sorted().map(s=>s.id),SUBJ.map(s=>s.id)));
+document.addEventListener('click',ev=>{
+  if(ev.target.id==='bilansubj'){bilanClass(sorted(),CUR);return;}
+  if(ev.target.id==='printsubj'){openPrint(sorted().filter(st=>sbOf(st,CUR)).map(s=>s.id),[CUR]);return;}
+  const c=ev.target.closest('[data-cell]');if(c){const [id,sid,n]=c.dataset.cell.split('|');openRes(id,sid,+n);return;}
+  const s=ev.target.closest('[data-stu]');if(s){openStu(s.dataset.stu);return;}
+  const p=ev.target.closest('[data-print]');if(p){const [id,sid]=p.dataset.print.split('|');if($('#dstu').classList.contains('open'))closeDlg('dstu');openPrint([id],[sid]);return;}
+  const ps=ev.target.closest('[data-printstu]');if(ps){const st=STU[ps.dataset.printstu];openPrint([st.id],SUBJ.filter(x=>sbOf(st,x.id)).map(x=>x.id));return;}
+  const g=ev.target.closest('[data-go]');if(g){const [sid,id]=g.dataset.go.split('|');location.hash=sid+'-suivi';return;}
+  const en=ev.target.closest('[data-enable]');if(en){const [id,sid]=en.dataset.enable.split('|');const st=STU[id];st.subj=st.subj||{};if(st.subj[sid])st.subj[sid].on=true;else st.subj[sid]=SDEF[sid]();saveStu(st);openStu(id);return;}
+  const o=ev.target.closest('[data-open]');if(o){const i=o.dataset.open.lastIndexOf('|');openDoc(o.dataset.open.slice(0,i),+o.dataset.open.slice(i+1));}
+});
+
+/* ========== EXPORT TABLEUR ========== */
+$('#csv').addEventListener('click',async()=>{
+  const rows=[['Élève','Matière','Réglages','Réussies','Prochaine étape','Détail des résultats','Remarques']];
+  sorted().forEach(st=>SUBJ.forEach(s=>{const sb=sbOf(st,s.id);if(!sb)return;const nx=RULES[s.id].steps(sb,sb.res||{});
+    const det=s.units.filter(u=>sb.res&&sb.res[u.n]).map(u=>{const r=sb.res[u.n],pl=r.pl||{},t=[];['A','B','C'].forEach(k=>r[k]&&t.push((s.id==='geo'?'v'+(' ABC'.indexOf(k)):k)+(r[k]==='ok'?' réussi':' raté')));Object.keys(pl).forEach(k=>t.push('plus loin '+k+(pl[k]==='ok'?' réussi':' raté')));return u.n+'. '+u.name+' : '+t.join(', ')+(r.d?' ('+r.d+')':'');}).join(' | ');
+    rows.push([st.name,s.name,s.id==='edl'?'parcours '+(sb.parcours||1):s.id==='cp'?sb.method:'',okCount(st,s.id)+'/'+s.units.length,nx.map(x=>uName(s.id,x.n)+' : '+x.label).join(' ; '),det,st.notes||'']);}));
+  const csv='﻿'+rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(';')).join('\r\n');
+  await saveFile('Suivi ULIS - '+YEAR+'.csv',new Blob([csv],{type:'text/csv'}));
+});
+
+/* ========== MISES À JOUR ========== */
+let UPD=null,updT=null;
+const mo=n=>n>=1048576?(n/1048576).toFixed(1).replace('.',',')+' Mo':Math.max(1,Math.round(n/1024))+' Ko';
+function updRender(){
+  const el=$('#upd');if(mode!=='app'||!UPD){el.hidden=true;return;}el.hidden=false;
+  const s=UPD,a=s.available;let h='',cls='upd';
+  const fileBtn='<button class="btn" id="updfilebtn">Installer une mise à jour à partir d\'un fichier</button>';
+  if(s.state==='installation'){h=`<b>Installation de la mise à jour…</b> ne fermez pas le logiciel.<span class="sp"></span>${s.total?`<span class="meta">${mo(s.done)} / ${mo(s.total)}</span><div class="bar"><b style="width:${Math.round(100*s.done/Math.max(1,s.total))}%"></b></div>`:''}`;cls+=' new';}
+  else if(a){cls+=' new';h=`<b>Mise à jour ${esc(a.version)} disponible</b>${a.date?' <span class="meta">(du '+esc(a.date)+')</span>':''} : ${esc(a.notes||'')} <span class="meta">· ${a.files} fichier${a.files>1?'s':''}, ${mo(a.size)}</span><span class="sp"></span><button class="btn pri" id="updgo">Installer maintenant</button>`;}
+  else{const t={verification:'Recherche de mises à jour…',ajour:'Logiciel à jour'+(s.checked?' <span class="meta">(vérifié le '+esc(s.checked)+')</span>':''),erreur:esc(s.message||'Vérification impossible.'),nonconfigure:'Mises à jour par internet non configurées.',installee:esc(s.message||'Mise à jour installée.')}[s.state]||'Mises à jour';
+    h=`<span>Version ${esc(s.current)} · ${t}</span><span class="sp"></span>${s.configured?'<button class="btn" id="updcheck">Vérifier</button>':''}${fileBtn}`;}
+  if(a&&s.state!=='installation')h+=fileBtn;
+  if(s.state==='erreur'&&a)h+=`<div style="flex-basis:100%;color:var(--ko)">${esc(s.message)}</div>`;
+  el.className=cls;el.innerHTML=h;
+}
+async function updPoll(){clearTimeout(updT);if(mode==='local'||mode==='loading')return;
+  try{const r=await fetch('api/update/status',{cache:'no-store'});if(!r.ok)throw 0;const prev=UPD&&UPD.state;UPD=await r.json();updRender();
+    if(prev==='installation'&&UPD.state==='installee'){await updDone(UPD.message);return;}
+    updT=setTimeout(updPoll,UPD.state==='installation'||UPD.state==='verification'?700:60000);}catch(e){updT=setTimeout(updPoll,10000);}}
+async function updDone(msg){commitStu();await persist(true);toast(msg+' Le logiciel redémarre…');try{sessionStorage.setItem('ulis-maj',msg);}catch(e){}setTimeout(()=>location.reload(),1500);}
+document.addEventListener('click',async ev=>{
+  if(ev.target.id==='updcheck'){ev.target.disabled=true;UPD={...UPD,state:'verification'};updRender();try{UPD=await (await fetch('api/update/check',{method:'POST'})).json();}catch(e){}updRender();}
+  if(ev.target.id==='updgo'){if(dirty)await persist(true);UPD={...UPD,state:'installation',done:0};updRender();try{await fetch('api/update/install',{method:'POST'});}catch(e){}updPoll();}
+  if(ev.target.id==='updfilebtn')$('#updfile').click();
+});
+$('#updfile').addEventListener('change',async ev=>{const f=ev.target.files[0];ev.target.value='';if(!f)return;
+  if(dirty)await persist(true);UPD={...(UPD||{}),state:'installation',total:0};updRender();
+  try{const j=await (await fetch('api/update/file',{method:'POST',body:f})).json();
+    if(j.ok){await updDone('Mise à jour '+j.version+' installée.');return;}toast('Mise à jour refusée : '+j.error);}catch(e){toast('Le logiciel ne répond pas.');}
+  updPoll();});
+try{const m=sessionStorage.getItem('ulis-maj');if(m){sessionStorage.removeItem('ulis-maj');setTimeout(()=>toast(m),800);}}catch(e){}
+
+/* ========== LECTEUR ========== */
+const V={file:null,p:1,zoom:1,cache:{},task:null};
+if(window.pdfjsLib)pdfjsLib.GlobalWorkerOptions.workerSrc='lib/pdf.worker.min.js';
+function docOfFile(file){for(const s of SUBJ){const d=s.docs.find(x=>x.file===file);if(d)return [s,d];}return [null,null];}
+function vmsg(t){$('#vbody').innerHTML=`<div class="vmsg">${t}</div>`;}
+function openDoc(file,p){
+  V.file=file;V.p=p||1;const [s,d]=docOfFile(file);
+  $('#vt').firstChild.nodeValue=d?`${s.short||s.name} · ${d.title}`:'Document';$('#vs').textContent=d?d.pages+' pages':'';
+  $('#viewer').classList.add('open');document.body.style.overflow='hidden';$('#vx').focus();show();
+}
+async function show(){
+  if(!window.pdfjsLib){vmsg('Le lecteur ne peut pas démarrer ici. Utilisez « Télécharger ».');return;}
+  const file=V.file;if(!V.cache[file])vmsg('Chargement du document…');
+  try{if(!V.cache[file])V.cache[file]=await pdfjsLib.getDocument({url:'docs/'+file}).promise;}catch(e){vmsg('Impossible d\'ouvrir ce document.');return;}
+  if(V.file!==file)return;const pdf=V.cache[file],n=pdf.numPages;V.p=Math.max(1,Math.min(n,V.p));
+  $('#vin').value=V.p;$('#vprev').disabled=V.p<=1;$('#vnext').disabled=V.p>=n;
+  $('#vl').textContent=(file.startsWith('edl/edl-2.')?'Classeur ':'')+plabel(file,V.p)+' / '+n;
+  const page=await pdf.getPage(V.p);const base=page.getViewport({scale:1});
+  const cssW=Math.max(260,Math.min($('#vbody').clientWidth-32,900)*V.zoom),scale=cssW/base.width,dpr=Math.min(window.devicePixelRatio||1,2),vp=page.getViewport({scale:scale*dpr});
+  $('#vbody').innerHTML=`<canvas id="vc" style="width:${cssW}px;height:${base.height*scale}px;background:#fff;box-shadow:0 6px 30px rgba(0,0,0,.5)"></canvas>`;
+  const c=$('#vc');c.width=vp.width;c.height=vp.height;
+  if(V.task)try{V.task.cancel();}catch(e){}
+  V.task=page.render({canvasContext:c.getContext('2d'),viewport:vp});try{await V.task.promise;}catch(e){}
+  $('#vbody').scrollTop=0;
+}
+function closeViewer(){$('#viewer').classList.remove('open');document.body.style.overflow='';}
+$('#vprev').addEventListener('click',()=>{V.p--;show();});$('#vnext').addEventListener('click',()=>{V.p++;show();});
+$('#vin').addEventListener('change',()=>{V.p=parseInt($('#vin').value,10)||1;show();});
+$('#vzi').addEventListener('click',()=>{V.zoom=Math.min(2.5,V.zoom*1.2);show();});
+$('#vzo').addEventListener('click',()=>{V.zoom=Math.max(.5,V.zoom/1.2);show();});
+$('#vx').addEventListener('click',closeViewer);
+$('#vdl').addEventListener('click',async()=>{const [,d]=docOfFile(V.file);try{await saveFile(d?d.dl:'document.pdf',new Blob([await srcBytes(V.file)],{type:'application/pdf'}));}catch(e){toast('Fichier introuvable.');}});
+document.addEventListener('keydown',ev=>{if(!$('#viewer').classList.contains('open'))return;if(ev.key==='Escape')closeViewer();if(ev.target.tagName==='INPUT')return;if(ev.key==='ArrowRight'){V.p++;show();}if(ev.key==='ArrowLeft'){V.p--;show();}});
+let rz;window.addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{if($('#viewer').classList.contains('open'))show();},200);});
+
+/* ========== BILANS PDF (par matière ou toutes matières) ========== */
+async function makeBilan(st,which){
+  const sids=which==='all'?SUBJ.filter(s=>sbOf(st,s.id)).map(s=>s.id):[which];
+  if(!sids.length||!sbOf(st,sids[0]))return null;
+  const {PDFDocument,StandardFonts,rgb}=PDFLib;
+  const clean=t=>String(t).replace(/→/g,'->').replace(/[‑–—]/g,'-').replace(/≈/g,'env.').replace(/[✓]/g,'').replace(/[^\x20-\x7E\xA0-\xFFŒœ’…]/g,'');
+  const pdf=await PDFDocument.create();const F=await pdf.embedFont(StandardFonts.Helvetica),B=await pdf.embedFont(StandardFonts.HelveticaBold);
+  const hex=h=>{const n=parseInt(h.slice(1),16);return rgb((n>>16&255)/255,(n>>8&255)/255,(n&255)/255);};
+  let page,y;const L=50,W=495;const np=()=>{page=pdf.addPage([595.28,841.89]);y=800;};np();
+  const line=(t,o={})=>{const f=o.b?B:F,sz=o.s||10.5;const words=clean(t).split(' ');let cur='';const out=[];
+    words.forEach(w=>{const tr=cur?cur+' '+w:w;if(f.widthOfTextAtSize(tr,sz)>W-(o.x||0)){out.push(cur);cur=w;}else cur=tr;});out.push(cur);
+    out.forEach(l=>{if(y<60)np();page.drawText(l,{x:L+(o.x||0),y,size:sz,font:f,color:o.c||rgb(.11,.11,.1)});y-=sz*1.35;});};
+  const grey=rgb(.35,.35,.33);
+  const title=which==='all'?'Bilan de suivi - toutes matières':'Bilan de suivi - '+SJ[which].name;
+  line(title,{b:1,s:18});y-=4;line('ULIS collège - document de transmission',{s:11,c:grey});y-=10;
+  line(`Élève : ${st.name}`,{b:1,s:13});line(`Année scolaire : ${st.year||YEAR}   ·   Bilan édité le ${today()}`,{c:grey});
+  if(which==='all'){y-=6;sids.forEach(sid=>line(`${SJ[sid].name} : ${okCount(st,sid)} / ${SJ[sid].units.length} ${SJ[sid].words} réussies`,{x:10}));}
+  const lab={ok:'Réussie',passe:'À reprendre plus tard',cours:'En cours','':'Non travaillée'};
+  sids.forEach((sid,i)=>{const s=SJ[sid],sb=sbOf(st,sid),R=RULES[sid],res=sb.res||{};
+    if(which==='all'&&i>0)np();else y-=12;
+    page.drawRectangle({x:L,y:y-4,width:W,height:22,color:hex(s.accent)});page.drawText(clean(s.name),{x:L+8,y:y+2,size:13,font:B,color:rgb(1,1,1)});y-=28;
+    const set=sid==='edl'?`Parcours ${sb.parcours||1} (${sb.parcours==2?'niveau 3 - CM1':sb.parcours==3?'niveau 5 - 6e':'niveau 1 - CE1'}) · notion de départ : ${sb.start||1}`
+      :sid==='cp'?`Ceinture de départ : ${sb.start||1} · soustraction ${sb.method==='cassage'?'par cassage':'par compensation (retenue)'}`
+      :sid==='num'?`Départs : entiers ${sb.start||1}, fractions ${sb.startF||21}, décimaux ${sb.startD||28}`:`Ceinture de départ : ${sb.start||1}`;
+    line(set,{c:grey});line(`${okCount(st,sid)} / ${s.units.length} ${s.words} réussies`,{b:1});
+    const nx=R.steps(sb,res);line('Prochaine étape : '+(nx.length?nx.map(x=>`${uName(sid,x.n)} - ${x.label}`).join(' ; '):'tout est traité'),{b:1});y-=4;
+    page.drawLine({start:{x:L,y:y+6},end:{x:L+W,y:y+6},thickness:1,color:rgb(.11,.11,.1)});y-=8;
+    let grp='';
+    s.units.forEach(u=>{
+      if(sid==='num'&&u.parcours!==grp){grp=u.parcours;if(y<110)np();y-=2;line(R.tracks[grp][2],{b:1,s:11,c:hex(s.accent)});}
+      const r=res[u.n]||{},pl=r.pl||{},stt=R.state(sb,u.n);const det=[];
+      ['A','B','C'].forEach(k=>r[k]&&det.push((sid==='geo'?'test version '+(' ABC'.indexOf(k)):'test '+k)+(r[k]==='ok'?' réussi':' raté')));
+      Object.keys(pl).sort().forEach(k=>det.push('plus loin niv. '+k.replace('b',' (2e essai)')+(pl[k]==='ok'?' réussi':' raté')));
+      if(y<90)np();
+      const nm=clean(`${u.n}. ${u.name}${u.comp&&sid!=='edl'?' - '+u.comp:''}`);let nmt=nm;while(F.widthOfTextAtSize(nmt,10)>285&&nmt.length>10)nmt=nmt.slice(0,-2);if(nmt!==nm)nmt=nmt.trim()+'…';
+      page.drawText(nmt,{x:L,y,size:10,font:B});
+      page.drawText(clean(lab[stt]),{x:L+295,y,size:10,font:stt==='ok'?B:F,color:stt==='ok'?rgb(.15,.5,.25):stt==='passe'?rgb(.75,.4,.05):rgb(.25,.25,.25)});
+      if(r.d)page.drawText(clean(r.d),{x:L+430,y,size:9,font:F,color:rgb(.4,.4,.4)});y-=12.5;
+      if(det.length)line(det.join(' ; '),{x:14,s:9,c:grey});y-=3;});
+  });
+  if(st.notes){if(y<120)np();y-=8;line('Remarques',{b:1,s:12});line(st.notes.replace(/\n+/g,' · '));}
+  const pages=pdf.getPages();pages.forEach((pg,i)=>pg.drawText(clean(`${which==='all'?'ULIS Collège':SJ[which].name+' - ULIS collège'} · ${st.name} · ${i+1}/${pages.length}`),{x:L,y:30,size:8.5,font:F,color:rgb(.4,.4,.4)}));
+  return pdf;
+}
+const bname=which=>which==='all'?'toutes matieres':SJ[which].name;
+async function bilanPdf(st,which){
+  if(!window.PDFLib){toast('Module PDF indisponible.');return;}
+  const pdf=await makeBilan(st,which);if(!pdf){toast('Aucune matière suivie pour cet élève.');return;}
+  await saveFile(`Bilan ${bname(which)} - ${st.name} - ${st.year||YEAR}.pdf`,new Blob([await pdf.save()],{type:'application/pdf'}));
+}
+async function bilanClass(sts,which){
+  if(!window.PDFLib){toast('Module PDF indisponible.');return;}
+  const out=await PDFLib.PDFDocument.create();let n=0;
+  for(const st of sts){const p=await makeBilan(st,which);if(!p)continue;const pg=await out.copyPages(p,p.getPageIndices());pg.forEach(x=>out.addPage(x));n++;}
+  if(!n){toast('Aucun élève ne suit cette matière.');return;}
+  await saveFile(`Bilans ${bname(which)} - ${n} eleve${n>1?'s':''} - ${YEAR}.pdf`,new Blob([await out.save()],{type:'application/pdf'}));
+}
+
+/* ========== DÉMARRAGE ========== */
+window.SUIVI={get STU(){return STU;},RULES,SJ,nextSteps,prtPages:()=>prtPages(),prtParts:()=>prtParts(),plan:()=>plan(),plan2:()=>plan2(),unitPages,sbOf};
+route();start();
+
+})();
+</script>
+</body>
+</html>
