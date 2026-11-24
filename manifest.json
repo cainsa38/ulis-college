@@ -1,8 +1,8 @@
 {
  "format": "ulis-maj",
- "version": "2.3",
+ "version": "2.4",
  "date": "24/11/2026",
- "notes": "Nouveau titre ; évaluation de départ proposée à la création d'un élève ; positionnement sur une notion ou une couleur de ceinture ; choix et enchaînement des parcours en étude de la langue.",
+ "notes": "Bouton « Supprimer » dans la liste d'élèves de l'accueil.",
  "files": {
   "docs/cp/evaluation-corriges.pdf": {
    "sha256": "08afcdc101cbfe96355ea7a4e4229fa8197da0e07a9af0af80addab1055d2fff",
@@ -172,8 +172,8 @@
    "size": 36461
   },
   "index.html": {
-   "sha256": "a0fe89e0e5f21c391e546af70d83092cfd065adb536dfe1dbdbf762e5aaf425f",
-   "size": 141519
+   "sha256": "d0c5666861542e560fe1dd80a898d1503f3718a764630d817576dee32103f8fd",
+   "size": 143296
   },
   "lib/pdf-lib.min.js": {
    "sha256": "0f9a5cad07941f0826586c94e089d89b918c46e5c17cf2d5a3c6f666e3bc694f",
@@ -192,7 +192,7 @@
    "size": 72
   },
   "version.json": {
-   "sha256": "37569246cfd0a8d2072ff873f665e1f98ce1be4ee9d7cdcb93ed3ce3b1b22aac",
+   "sha256": "42f3aaa90a4205230b6602451271aeed3a48cdeb1ee5472fb08cc7443f6f80ad",
    "size": 17
   }
  }
