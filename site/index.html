@@ -252,6 +252,10 @@ table.st td.nm{min-width:150px}
 .pos button[aria-pressed=true]{border-color:var(--ink);box-shadow:0 0 0 2px var(--ink);font-weight:700}
 .toast{pointer-events:none}
 
+td.ac button.del{margin-left:6px;background:transparent;color:var(--ko);border-color:var(--ko)}
+td.ac button.del:hover{background:var(--ko);color:#fff}
+.btn.danger{background:var(--ko);border-color:var(--ko);color:#fff}
+
 </style>
 </head>
 <body>
@@ -661,7 +665,7 @@ function renderHome(){
   $('#hometable').innerHTML=`<table class="home"><thead><tr><th>Élève</th>${SUBJ.map(s=>`<th class="sj"><i style="background:${s.accent}"></i>${esc(s.name)}</th>`).join('')}<th></th></tr></thead><tbody>${list.map(st=>`<tr>
     <td class="nm"><button data-stu="${st.id}">${esc(st.name)}</button><small>${SUBJ.filter(s=>sbOf(st,s.id)).length} matière(s)</small></td>
     ${SUBJ.map(s=>`<td>${homeCell(st,s)}</td>`).join('')}
-    <td class="ac"><button data-printstu="${st.id}">Imprimer la suite</button></td></tr>`).join('')}</tbody></table>`;
+    <td class="ac"><button data-printstu="${st.id}">Imprimer la suite</button><button class="del" data-delstu="${st.id}" title="Supprimer ${esc(st.name)}" aria-label="Supprimer ${esc(st.name)}">Supprimer</button></td></tr>`).join('')}</tbody></table>`;
 }
 $('#aadd').addEventListener('click',()=>{
   const name=$('#aname').value.trim();if(!name){$('#aname').focus();return;}
@@ -961,6 +965,20 @@ $('#dprtbox').addEventListener('click',async ev=>{
     await buildPdf(pages,(b.id==='evgoc'?'Evaluation de depart (enseignant) - ':'Evaluation de depart - ')+st.name+nm+'.pdf',t=>{const s=$('#evstat');if(s)s.textContent=t;});b.disabled=false;}
 });
 document.addEventListener('click',ev=>{const e=ev.target.closest('[data-eval]');if(!e)return;const [id,sid]=e.dataset.eval.split('|');commitStu();closeDlg('dstu');openEval(id,[sid],false);});
+
+/* ========== SUPPRIMER UN ÉLÈVE (depuis l'accueil) ========== */
+document.addEventListener('click',ev=>{
+  const d=ev.target.closest('[data-delstu]');
+  if(d){const st=STU[d.dataset.delstu];if(!st)return;
+    const n=SUBJ.filter(x=>sbOf(st,x.id)).reduce((a,x)=>a+Object.keys(sbOf(st,x.id).res||{}).length,0);
+    const other=Object.values(STU).filter(o=>o.id!==st.id&&o.name===st.name&&o.year!==st.year).map(o=>o.year);
+    $('#dprtbox').innerHTML=`<h3 id="dprth">Supprimer ${esc(st.name)} ?</h3>
+    <p class="lead" style="font-size:16px;margin:6px 0">Le suivi de <b>${esc(st.name)}</b> pour l'année <b>${esc(st.year||YEAR)}</b> sera effacé${n?` (résultats notés pour ${n} ${n>1?'ceintures ou notions':'ceinture ou notion'})`:''}.</p>
+    <p class="note" style="margin:0">${other.length?'Ses autres années ('+other.map(esc).join(', ')+') sont conservées. ':''}Conseil : avant de supprimer, vous pouvez télécharger son bilan ou son fichier de transmission (touchez son prénom). Les sauvegardes automatiques du dossier « Donnees » gardent aussi une copie.</p>
+    <div class="foot"><button class="btn" data-close>Annuler</button><button class="btn danger" id="delok" data-id="${st.id}">Supprimer définitivement</button></div>`;
+    openDlg('dprt');return;}
+  if(ev.target.id==='delok'){const id=ev.target.dataset.id,st=STU[id];if(!st)return;closeDlg('dprt');delStu(id);toast(st.name+' supprimé(e).');}
+});
 
 /* ========== MISES À JOUR ========== */
 let UPD=null,updT=null;
