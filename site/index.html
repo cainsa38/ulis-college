@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Crect width=%228%22 height=%228%22 fill=%22%23E4572E%22/%3E%3Crect x=%228%22 width=%228%22 height=%228%22 fill=%22%238E5CC2%22/%3E%3Crect y=%228%22 width=%228%22 height=%228%22 fill=%22%233A86C8%22/%3E%3Crect x=%228%22 y=%228%22 width=%228%22 height=%228%22 fill=%22%2343A047%22/%3E%3C/svg%3E">
-<title>ULIS Collège - EDL-Numération - calculs posés - Géométrie</title>
+<title>ULIS Collège - EDL - Numération - Géométrie - Calculs posés</title>
 <style>
 
 @font-face{font-family:'Andika';font-weight:400;font-display:swap;src:url('fonts/andika-latin-400-normal.woff') format('woff')}
@@ -242,6 +242,16 @@ table.st td.nm{min-width:150px}
 .upd .bar{flex-basis:100%;height:8px;border-radius:5px;background:var(--tab);overflow:hidden}.upd .bar b{display:block;height:100%;background:#3A86C8}
 .upd .btn{padding:6px 12px;font-size:14.5px}
 
+.cell.eval{background:#D9EFCB;border-color:#9AD27E;color:#3d6b2a}
+.sjblock .grid .wide{grid-column:1/-1}
+.pos{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.pos button{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--line);background:var(--paper);border-radius:10px;padding:4px 9px 4px 4px;font:inherit;font-size:14px;cursor:pointer;color:var(--ink)}
+.pos button span{display:inline-grid;place-items:center;min-width:24px;height:24px;border-radius:6px;font-weight:700;font-size:12.5px;color:#1D1D1B;padding:0 3px}
+.pos button span.dk{color:#fff}
+.pos button i{font-style:normal;color:#3d8b2a;font-weight:700}
+.pos button[aria-pressed=true]{border-color:var(--ink);box-shadow:0 0 0 2px var(--ink);font-weight:700}
+.toast{pointer-events:none}
+
 </style>
 </head>
 <body>
@@ -265,7 +275,7 @@ table.st td.nm{min-width:150px}
         <div><span class="f">Matières suivies</span><div class="subjchk" id="asubj"></div></div>
         <button class="btn pri" id="aadd">Ajouter</button>
       </div>
-      <p class="note" style="margin:6px 0 0">Le parcours et la ceinture (ou notion) de départ se règlent ensuite pour chaque matière en touchant le prénom.</p>
+      <p class="note" style="margin:6px 0 0">Après l'ajout, le logiciel propose d'imprimer l'évaluation de départ. Ensuite, touchez le prénom pour positionner l'élève (parcours, notion ou couleur de ceinture).</p>
     </div>
     <div class="toolbar">
       <span class="meta" id="count"></span><span class="sp"></span>
@@ -293,7 +303,7 @@ table.st td.nm{min-width:150px}
   <section class="wrap band" id="s-docs"></section>
 </main>
 
-<footer class="site"><div class="wrap">ULIS Collège - EDL-Numération - calculs posés - Géométrie · logiciel hors ligne (novembre 2026). Les fiches Boutdegomme du fichier d'étude de la langue restent soumises aux conditions d'utilisation de leur auteur.</div></footer>
+<footer class="site"><div class="wrap">ULIS Collège - EDL - Numération - Géométrie - Calculs posés · logiciel hors ligne (novembre 2026). Les fiches Boutdegomme du fichier d'étude de la langue restent soumises aux conditions d'utilisation de leur auteur.</div></footer>
 
 <div class="dlg" id="dres" role="dialog" aria-modal="true" aria-labelledby="dresh"><div class="box" id="dresbox"></div></div>
 <div class="dlg" id="dstu" role="dialog" aria-modal="true" aria-labelledby="dstuh"><div class="box wide" id="dstubox"></div></div>
@@ -320,7 +330,7 @@ table.st td.nm{min-width:150px}
 (function(){
 /* ========== DONNÉES ET OUTILS ========== */
 const D={"subjects": [{"id": "edl", "name": "Étude de la langue", "short": "EDL", "word": "notion", "words": "notions", "accent": "#E4572E", "units": [{"n": 1, "name": "La phrase", "color": "#F7CB2D", "bloc": 1, "fiches": ["Le sujet et le verbe dans la phrase", "Les constituants de la phrase", "Phrase simple ou phrase complexe", "Juxtaposition, coordination, subordination"], "lecon": 1, "testA": 5, "nfiches": 3, "dark": false}, {"n": 2, "name": "Les différentes phrases", "color": "#F7CB2D", "bloc": 1, "fiches": ["Trois façons de poser une question", "Les quatre types de phrases", "Transformer une phrase", "Interrogation totale et partielle"], "lecon": 6, "testA": 8, "nfiches": 1, "dark": false}, {"n": 3, "name": "Passé – présent – futur", "color": "#F7CB2D", "bloc": 1, "fiches": ["L'imparfait (être, avoir, 1er groupe)", "Le passé composé", "Le passé simple (3e personne)", "Le plus-que-parfait et la valeur des temps"], "lecon": 9, "testA": 11, "nfiches": 1, "dark": false}, {"n": 4, "name": "Le verbe", "color": "#F7CB2D", "bloc": 1, "fiches": ["Radical et terminaison", "Les trois groupes de verbes", "Verbe conjugué et infinitif", "Verbes d'action et verbes d'état"], "lecon": 12, "testA": 17, "nfiches": 4, "dark": false}, {"n": 5, "name": "Le groupe sujet", "color": "#9AD27E", "bloc": 2, "fiches": ["Trouver le sujet", "Les différents sujets", "Le sujet inversé", "COD et COI"], "lecon": 18, "testA": 25, "nfiches": 6, "dark": false}, {"n": 6, "name": "Le nom", "color": "#9AD27E", "bloc": 2, "fiches": ["L'ordre alphabétique (dictionnaire)", "Le nom, noyau du groupe nominal", "Noms et familles de mots", "Le nom et ses fonctions"], "lecon": 26, "testA": 33, "nfiches": 6, "dark": false}, {"n": 7, "name": "Le déterminant", "color": "#86C5EF", "bloc": 3, "fiches": ["Articles définis et indéfinis", "Déterminants possessifs et démonstratifs", "Choisir le bon déterminant", "Déterminant ou pronom ?"], "lecon": 34, "testA": 38, "nfiches": 3, "dark": false}, {"n": 8, "name": "La phrase négative", "color": "#86C5EF", "bloc": 3, "fiches": ["La phrase négative : ne … pas", "Les mots de la négation", "La négation au passé composé", "Négation totale et partielle"], "lecon": 39, "testA": 43, "nfiches": 3, "dark": false}, {"n": 9, "name": "Les pronoms personnels", "color": "#86C5EF", "bloc": 3, "fiches": ["Remplacer le groupe sujet par un pronom", "Éviter les répétitions", "Les pronoms compléments", "Les pronoms compléments en, y, lui, leur"], "lecon": 44, "testA": 49, "nfiches": 4, "dark": false}, {"n": 10, "name": "Les accords sujet – verbe", "color": "#86C5EF", "bloc": 3, "fiches": ["Accorder le verbe avec son sujet", "Le sujet éloigné du verbe", "Le sujet inversé et l'accord", "L'accord du participe passé avec être"], "lecon": 50, "testA": 52, "nfiches": 1, "dark": false}, {"n": 11, "name": "Masculin – féminin", "color": "#C3A6E6", "bloc": 4, "fiches": ["Des mots différents", "Les féminins particuliers", "Le féminin des adjectifs", "Le genre des noms difficiles"], "lecon": 53, "testA": 56, "nfiches": 2, "dark": false}, {"n": 12, "name": "Singulier – pluriel", "color": "#C3A6E6", "bloc": 4, "fiches": ["Les noms qui ne changent pas", "Les pluriels en ‑aux et ‑eaux", "Les noms en ‑ou", "Les pluriels irréguliers"], "lecon": 57, "testA": 60, "nfiches": 2, "dark": false}, {"n": 13, "name": "L'adjectif", "color": "#C3A6E6", "bloc": 4, "fiches": ["Trouver l'adjectif", "L'adjectif épithète", "Le complément du nom", "Attribut du sujet ou COD ?"], "lecon": 61, "testA": 67, "nfiches": 5, "dark": false}, {"n": 14, "name": "Les accords dans le groupe nominal", "color": "#C3A6E6", "bloc": 4, "fiches": ["La chaîne d'accords dans le groupe nominal", "Accorder en genre et en nombre", "Plusieurs adjectifs", "L'accord de l'attribut"], "lecon": 68, "testA": 73, "nfiches": 4, "dark": false}, {"n": 15, "name": "L'adverbe", "color": "#F6A93B", "bloc": 5, "fiches": ["Le rôle de l'adverbe", "Former un adverbe en ‑ment", "Les adverbes en ‑amment et ‑emment", "Adverbe ou adjectif ?"], "lecon": 74, "testA": 79, "nfiches": 4, "dark": false}, {"n": 16, "name": "Révisions", "color": "#F6A93B", "bloc": 5, "fiches": ["Les classes de mots", "Reconnaitre les temps", "Les fonctions dans la phrase", "Classe et fonction"], "lecon": 80, "testA": 92, "nfiches": 11, "dark": false}], "lvbg": {"2": "#FDF0B8", "3": "#D9F0D2", "4": "#D6E8F8", "5": "#E7DCF5"}, "lvbd": {"2": "#E8C34A", "3": "#8CC97A", "4": "#84B6E3", "5": "#B49AD8"}, "docs": [{"code": "EDL 0.0", "title": "Guide de l'enseignant", "role": "ens", "file": "edl/edl-0.0-guide.pdf", "pages": 2, "desc": "Étapes de travail, que faire selon les résultats, difficultés et remédiations, numérotation du classeur.", "dl": "EDL 0.0 - GUIDE ENSEIGNANT.pdf"}, {"code": "EDL 0.1", "title": "Progression", "role": "ens", "file": "edl/edl-0.1-progression.pdf", "pages": 2, "desc": "Les 16 notions du niveau 1 en 5 blocs, avec les pages du fichier et les fiches « plus loin ».", "dl": "EDL 0.1 - Progression ENSEIGNANT.pdf"}, {"code": "EDL 1.0", "title": "Évaluation de départ : mode d'emploi", "role": "ens", "file": "edl/edl-1.0-evaluation-mode-emploi.pdf", "pages": 2, "desc": "Passation, corrigé, choix du parcours et de la leçon de départ.", "dl": "EDL 1.0 - Évaluation diagnostique - choix parcours élève - Mode d'emploi ENSEIGNANT.pdf"}, {"code": "EDL 3.0", "title": "Corrigés des entraînements", "role": "ens", "file": "edl/edl-3.0-corriges-entrainements.pdf", "pages": 16, "desc": "Une page par notion.", "dl": "EDL 3.0 - Corriges des entrainements ENSEIGNANT.pdf"}, {"code": "EDL 3.1", "title": "Corrigés des tests A, B, C", "role": "ens", "file": "edl/edl-3.1-corriges-tests.pdf", "pages": 16, "desc": "Une page par notion, avec les seuils de réussite.", "dl": "EDL 3.1 - Corriges des tests A B C ENSEIGNANT.pdf"}, {"code": "EDL 3.2", "title": "Corrigés « pour aller plus loin »", "role": "ens", "file": "edl/edl-3.2-corriges-plus-loin.pdf", "pages": 32, "desc": "Deux pages par notion (fiches des niveaux 2 à 5).", "dl": "EDL 3.2 - Corriges pour aller plus loin ENSEIGNANT.pdf"}, {"code": "EDL 0.2", "title": "Ma fiche de suivi", "role": "ele", "file": "edl/edl-0.2-fiche-de-suivi.pdf", "pages": 2, "desc": "Scores des tests, notions validées, niveaux « plus loin » cochés.", "dl": "EDL 0.2 - Fiche de suivi ELEVE.pdf"}, {"code": "EDL 1.1", "title": "Évaluation de départ", "role": "ele", "file": "edl/edl-1.1-evaluation-eleve.pdf", "pages": 4, "desc": "P. 1-2 : parcours 1 · p. 3 : parcours 2 · p. 4 : parcours 3.", "dl": "EDL 1.1 - Évaluation diagnostique - Étude de la langue ELEVE.pdf"}, {"code": "EDL 2.0", "title": "Parcours élève niveau 1", "role": "ele", "file": "edl/edl-2.0-parcours-niveau1.pdf", "pages": 92, "desc": "Pour chaque notion : leçon, fiches d'exercices, test A (classeur p. 1 à 92).", "dl": "EDL 2.0 - Parcours eleve lecon exercices test A ELEVE.pdf"}, {"code": "EDL 2.1", "title": "Entraînements et tests de repassage", "role": "ele", "file": "edl/edl-2.1-entrainements-tests-BC.pdf", "pages": 64, "desc": "Entraînement 1, test B, entraînement 2, test C (pages a à d).", "dl": "EDL 2.1 - Entrainements et tests de repassage ELEVE.pdf"}, {"code": "EDL 2.2", "title": "Pour aller plus loin", "role": "ele", "file": "edl/edl-2.2-pour-aller-plus-loin.pdf", "pages": 192, "desc": "Niveaux 2 à 5, une fiche de 3 pages par niveau et par notion (pages « bis »).", "dl": "EDL 2.2 - Pour aller plus loin ELEVE.pdf"}]}, {"id": "cp", "name": "Calcul posé", "short": "Calcul", "word": "ceinture", "words": "ceintures", "accent": "#3A86C8", "units": [{"n": 1, "name": "Paille", "color": "#F3E3A1", "comp": "Tables d'addition (5 + 7)", "obj": "8 / 10", "memo": [1], "memoC": [1], "fiches": [[1], [2], [3], [4]], "tests": {"A": [1], "B": [2], "C": [3]}, "corr": [[1], [2], [3], [4]], "corrC": [[1], [2], [3], [4]], "tcorr": [1], "dark": false}, {"n": 2, "name": "Beige", "color": "#E3CDA4", "comp": "Addition posée sans retenue", "obj": "8 / 10", "memo": [2], "memoC": [2], "fiches": [[5], [6], [7], [8]], "tests": {"A": [4], "B": [5], "C": [6]}, "corr": [[5], [6], [7], [8]], "corrC": [[5], [6], [7], [8]], "tcorr": [1], "dark": false}, {"n": 3, "name": "Ivoire", "color": "#FFF4D6", "comp": "Addition posée avec une retenue", "obj": "8 / 10", "memo": [3], "memoC": [3], "fiches": [[9], [10], [11], [12]], "tests": {"A": [7], "B": [8], "C": [9]}, "corr": [[9], [10], [11], [12]], "corrC": [[9], [10], [11], [12]], "tcorr": [1], "dark": false}, {"n": 4, "name": "Blanche", "color": "#FFFFFF", "comp": "Addition posée à 3 chiffres", "obj": "8 / 10", "memo": [4], "memoC": [4], "fiches": [[13], [14], [15], [16]], "tests": {"A": [10], "B": [11], "C": [12]}, "corr": [[13], [14], [15], [16]], "corrC": [[13], [14], [15], [16]], "tcorr": [2], "dark": false}, {"n": 5, "name": "Jaune", "color": "#F7CB2D", "comp": "Soustraction posée (2 chiffres)", "obj": "8 / 10", "memo": [5], "memoC": [16], "fiches": [[17], [18], [19], [20]], "tests": {"A": [13], "B": [14], "C": [15]}, "corr": [[17], [18], [19], [20]], "corrC": [[17], [18], [19], [20]], "tcorr": [2], "dark": false}, {"n": 6, "name": "Orange", "color": "#F6A93B", "comp": "Multiplication par 1 chiffre", "obj": "10 / 12", "memo": [6], "memoC": [6], "fiches": [[21], [22], [23], [24]], "tests": {"A": [16], "B": [17], "C": [18]}, "corr": [[21], [22], [23], [24]], "corrC": [[21], [22], [23], [24]], "tcorr": [2], "dark": false}, {"n": 7, "name": "Rose", "color": "#F4A7C0", "comp": "Grandes additions (3 nombres)", "obj": "10 / 12", "memo": [7], "memoC": [7], "fiches": [[25], [26], [27], [28]], "tests": {"A": [19], "B": [20], "C": [21]}, "corr": [[25], [26], [27], [28]], "corrC": [[25], [26], [27], [28]], "tcorr": [3], "dark": false}, {"n": 8, "name": "Vert clair", "color": "#9AD27E", "comp": "Soustraction posée (3 chiffres)", "obj": "10 / 12", "memo": [8], "memoC": [17], "fiches": [[29], [30], [31], [32]], "tests": {"A": [22], "B": [23], "C": [24]}, "corr": [[29], [30], [31], [32]], "corrC": [[29], [30], [31], [32]], "tcorr": [3], "dark": false}, {"n": 9, "name": "Vert foncé", "color": "#2E7D32", "comp": "Multiplication par 2 chiffres", "obj": "10 / 12", "memo": [9], "memoC": [9], "fiches": [[33, 34], [35, 36], [37, 38], [39, 40]], "tests": {"A": [25, 26], "B": [27, 28], "C": [29, 30]}, "corr": [[33, 34], [35, 36], [37, 38], [39, 40]], "corrC": [[33, 34], [35, 36], [37, 38], [39, 40]], "tcorr": [3], "dark": true}, {"n": 10, "name": "Bleu clair", "color": "#86C5EF", "comp": "Division par 1 chiffre", "obj": "10 / 12", "memo": [10], "memoC": [10], "fiches": [[41, 42], [43, 44], [45, 46], [47, 48]], "tests": {"A": [31, 32], "B": [33, 34], "C": [35, 36]}, "corr": [[41, 42], [43, 44], [45, 46], [47, 48]], "corrC": [[41, 42], [43, 44], [45, 46], [47, 48]], "tcorr": [4], "dark": false}, {"n": 11, "name": "Bleu foncé", "color": "#1F4E9C", "comp": "Multiplication par 3 chiffres", "obj": "10 / 12", "memo": [11], "memoC": [11], "fiches": [[49, 50], [51, 52], [53, 54], [55, 56]], "tests": {"A": [37, 38], "B": [39, 40], "C": [41, 42]}, "corr": [[49, 50, 51], [52, 53, 54], [55, 56, 57], [58, 59, 60]], "corrC": [[49, 50, 51], [52, 53, 54], [55, 56, 57], [58, 59, 60]], "tcorr": [4], "dark": true}, {"n": 12, "name": "Violette", "color": "#8E5CC2", "comp": "Addition et soustraction de décimaux", "obj": "10 / 12", "memo": [12], "memoC": [18], "fiches": [[57, 58], [59, 60], [61, 62], [63, 64]], "tests": {"A": [43, 44], "B": [45, 46], "C": [47, 48]}, "corr": [[61, 62], [63, 64], [65, 66], [67, 68]], "corrC": [[61, 62], [63, 64], [65, 66], [67, 68]], "tcorr": [4], "dark": true}, {"n": 13, "name": "Grise", "color": "#9E9E9E", "comp": "Division par 2 chiffres", "obj": "10 / 12", "memo": [13], "memoC": [13], "fiches": [[65, 66], [67, 68], [69, 70], [71, 72]], "tests": {"A": [49, 50], "B": [51, 52], "C": [53, 54]}, "corr": [[69, 70], [71, 72], [73, 74], [75, 76]], "corrC": [[69, 70], [71, 72], [73, 74], [75, 76]], "tcorr": [5], "dark": false}, {"n": 14, "name": "Marron", "color": "#8B5A2B", "comp": "Décimal × entier", "obj": "10 / 12", "memo": [14], "memoC": [14], "fiches": [[73, 74], [75, 76], [77, 78], [79, 80]], "tests": {"A": [55, 56], "B": [57, 58], "C": [59, 60]}, "corr": [[77, 78], [79, 80], [81, 82], [83, 84]], "corrC": [[77, 78], [79, 80], [81, 82], [83, 84]], "tcorr": [5], "dark": true}, {"n": 15, "name": "Noire", "color": "#1D1D1B", "comp": "Décimal ÷ entier", "obj": "10 / 12", "memo": [15], "memoC": [15], "fiches": [[81, 82, 83], [84, 85, 86], [87, 88, 89], [90, 91, 92]], "tests": {"A": [61, 62, 63], "B": [64, 65, 66], "C": [67, 68, 69]}, "corr": [[85, 86, 87], [88, 89, 90], [91, 92, 93], [94, 95, 96]], "corrC": [[85, 86, 87], [88, 89, 90], [91, 92, 93], [94, 95, 96]], "tcorr": [5], "dark": true}], "docs": [{"code": "Guide", "title": "Guide de l'enseignant", "role": "ens", "file": "cp/guide.pdf", "pages": 5, "desc": "Étapes, remédiations, séance type, tableau de suivi.", "dl": "Calcul posé - Guide enseignant.pdf"}, {"code": "Progression", "title": "Progression des 15 ceintures", "role": "ens", "file": "cp/progression.pdf", "pages": 1, "desc": "Compétence, exemple, repère programme et objectif de chaque ceinture.", "dl": "Calcul posé - Progression.pdf"}, {"code": "Éval. corrigé", "title": "Évaluation de départ : corrigés", "role": "ens", "file": "cp/evaluation-corriges.pdf", "pages": 2, "desc": "Corrigés et cohérence avec Eduscol.", "dl": "Calcul posé - Évaluation diagnostique corrigés.pdf"}, {"code": "Tests corrigés", "title": "Corrigés des tests A, B, C", "role": "ens", "file": "cp/tests-corriges.pdf", "pages": 5, "desc": "Résultats des 45 tests et seuil de réussite.", "dl": "Calcul posé - Corrigés des tests.pdf"}, {"code": "Corrigés", "title": "Corrigés des fiches (retenue)", "role": "ens", "file": "cp/fiches-corriges.pdf", "pages": 96, "desc": "Toutes les étapes, soustraction par compensation (retenue).", "dl": "Calcul posé - Corrigés des fiches (retenue).pdf"}, {"code": "Corrigés cassage", "title": "Corrigés des fiches (cassage)", "role": "ens", "file": "cp/fiches-corriges-cassage.pdf", "pages": 96, "desc": "Soustraction par cassage (emprunt).", "dl": "Calcul posé - Corrigés des fiches (cassage).pdf"}, {"code": "Évaluation", "title": "Évaluation de départ", "role": "ele", "file": "cp/evaluation.pdf", "pages": 4, "desc": "4 pages : ceintures 1 à 15.", "dl": "Calcul posé - Évaluation diagnostique.pdf"}, {"code": "Mémos", "title": "Mémos des ceintures", "role": "ele", "file": "cp/memos.pdf", "pages": 18, "desc": "Une page par ceinture + variantes de la soustraction par cassage.", "dl": "Calcul posé - Mémos.pdf"}, {"code": "Fiches", "title": "Fiches (opérations déjà posées)", "role": "ele", "file": "cp/fiches.pdf", "pages": 92, "desc": "4 fiches par ceinture (N°1 à N°4).", "dl": "Calcul posé - Fiches.pdf"}, {"code": "Tests", "title": "Tests de passation A, B, C", "role": "ele", "file": "cp/tests.pdf", "pages": 69, "desc": "3 versions par ceinture, sans le mémo.", "dl": "Calcul posé - Tests.pdf"}]}, {"id": "geo", "name": "Géométrie", "short": "Géo", "word": "ceinture", "words": "ceintures", "accent": "#43A047", "units": [{"n": 1, "name": "Grise", "color": "#9E9E9E", "comp": "Se repérer, reconnaître les formes", "memo": [2], "fiches": [1, 2, 3, 4, 5, 6], "flabel": "fiches G1 à G12", "tests": [2, 3, 4], "dark": false}, {"n": 2, "name": "Turquoise", "color": "#2EC4B6", "comp": "Les solides, tracer à la règle", "memo": [3], "fiches": [7, 8, 9, 10, 11, 12], "flabel": "fiches T1 à T12", "tests": [5, 6, 7], "dark": false}, {"n": 3, "name": "Rouge", "color": "#E53935", "comp": "Mesurer, reproduire, symétrie", "memo": [4], "fiches": [13, 14, 15, 16, 17, 18], "flabel": "fiches R1 à R12", "tests": [8, 9, 10], "dark": false}, {"n": 4, "name": "Blanche", "color": "#FFFFFF", "comp": "Figures simples et alignements", "memo": [5], "fiches": [19, 20, 21, 22, 23, 24], "flabel": "fiches 1 à 12", "tests": [11, 12, 13], "dark": false}, {"n": 5, "name": "Jaune", "color": "#F7CB2D", "comp": "Angles droits, quadrilatères", "memo": [6], "fiches": [25, 26, 27, 28, 29, 30], "flabel": "fiches 13 à 24", "tests": [14, 15, 16], "dark": false}, {"n": 6, "name": "Orange", "color": "#F6A93B", "comp": "Droites, segments, milieu", "memo": [7], "fiches": [31, 32, 33, 34, 35, 36], "flabel": "fiches 25 à 36", "tests": [17, 18, 19], "dark": false}, {"n": 7, "name": "Rose", "color": "#F4A7C0", "comp": "Perpendiculaire", "memo": [8], "fiches": [37, 38, 39, 40, 41, 42], "flabel": "fiches 37 à 48", "tests": [20, 21, 22], "dark": false}, {"n": 8, "name": "Verte", "color": "#43A047", "comp": "Parallèles, polygones", "memo": [9], "fiches": [43, 44, 45, 46, 47, 48], "flabel": "fiches 49 à 60", "tests": [23, 24, 25], "dark": false}, {"n": 9, "name": "Bleue", "color": "#1E88E5", "comp": "Le cercle", "memo": [10], "fiches": [49, 50, 51, 52, 53, 54], "flabel": "fiches 61 à 72", "tests": [26, 27, 28], "dark": false}, {"n": 10, "name": "Violette", "color": "#8E5CC2", "comp": "Les triangles", "memo": [11], "fiches": [55, 56, 57, 58, 59, 60], "flabel": "fiches 73 à 84", "tests": [29, 30, 31], "dark": true}, {"n": 11, "name": "Marron", "color": "#8B5A2B", "comp": "Main levée, symétrie", "memo": [12], "fiches": [61, 62, 63, 64, 65, 66], "flabel": "fiches 85 à 96", "tests": [32, 33, 34, 35, 36], "dark": true}, {"n": 12, "name": "Noire", "color": "#1D1D1B", "comp": "Parallélogramme", "memo": [13], "fiches": [67, 68, 69, 70, 71, 72], "flabel": "fiches 97 à 108", "tests": [37, 38, 39, 40, 41], "dark": true}], "docs": [{"code": "Guide", "title": "Guide de l'enseignant", "role": "ens", "file": "geo/guide.pdf", "pages": 4, "desc": "Étapes, remédiations, séance type, tableau de suivi.", "dl": "Géométrie - Guide enseignant.pdf"}, {"code": "Progression", "title": "Progression des 12 ceintures", "role": "ens", "file": "geo/progression.pdf", "pages": 2, "desc": "Vocabulaire, papier et outils, « je sais faire », fiches.", "dl": "Géométrie - Progression.pdf"}, {"code": "Évaluation", "title": "Évaluation de départ (+ grille)", "role": "ele", "file": "geo/evaluation.pdf", "pages": 4, "desc": "3 pages élève + grille enseignant (page 4).", "dl": "Géométrie - Évaluation diagnostique.pdf"}, {"code": "Mémo", "title": "Mémo de géométrie", "role": "ele", "file": "geo/memo.pdf", "pages": 13, "desc": "Couverture puis une page par ceinture.", "dl": "Géométrie - Mémo.pdf"}, {"code": "Fiches", "title": "Fiches d'entraînement", "role": "ele", "file": "geo/fiches.pdf", "pages": 72, "desc": "12 fiches par ceinture (2 par page).", "dl": "Géométrie - Fiches.pdf"}, {"code": "Tests", "title": "Tests de passation (versions 1 à 3)", "role": "ele", "file": "geo/tests.pdf", "pages": 41, "desc": "Critères soleils et étoiles en haut de chaque test (page 1 : notes de corrections).", "dl": "Géométrie - Tests.pdf"}]}, {"id": "num", "name": "Numération", "short": "Num", "word": "ceinture", "words": "ceintures", "accent": "#8E5CC2", "units": [{"n": 1, "name": "Blanche", "color": "#FFFFFF", "comp": "Nombres 1 à 3", "parcours": "entiers", "block": [4, 5, 6], "tests": {"A": [1], "B": [2], "C": [3]}, "entr": [1, 2], "tcorr": [1], "ecorr": [1], "fcorr": [], "dark": false}, {"n": 2, "name": "Paille", "color": "#F3E3A1", "comp": "Jusqu'à 6", "parcours": "entiers", "block": [7, 8, 9, 10, 11], "tests": {"A": [4], "B": [5], "C": [6]}, "entr": [3, 4], "tcorr": [2], "ecorr": [2], "fcorr": [1], "dark": false}, {"n": 3, "name": "Jaune", "color": "#F7CB2D", "comp": "Jusqu'à 10", "parcours": "entiers", "block": [12, 13, 14], "tests": {"A": [7], "B": [8], "C": [9]}, "entr": [5, 6], "tcorr": [3], "ecorr": [3], "fcorr": [], "dark": false}, {"n": 4, "name": "Jaune-orange", "color": "#F9B233", "comp": "Nombres de 0 à 10", "parcours": "entiers", "block": [15, 16, 17], "tests": {"A": [10], "B": [11], "C": [12]}, "entr": [7, 8], "tcorr": [4], "ecorr": [4], "fcorr": [1], "dark": false}, {"n": 5, "name": "Orange", "color": "#F6A93B", "comp": "Calculer jusqu'à 10", "parcours": "entiers", "block": [18, 19, 20], "tests": {"A": [13], "B": [14], "C": [15]}, "entr": [9, 10], "tcorr": [5], "ecorr": [5], "fcorr": [1], "dark": false}, {"n": 6, "name": "Rose", "color": "#F4A7C0", "comp": "Nombres de 0 à 30", "parcours": "entiers", "block": [21, 22, 23], "tests": {"A": [16], "B": [17], "C": [18]}, "entr": [11, 12], "tcorr": [6], "ecorr": [6], "fcorr": [1], "dark": false}, {"n": 7, "name": "Rouge", "color": "#E53935", "comp": "Nombres de 0 à 60", "parcours": "entiers", "block": [24, 25, 26], "tests": {"A": [19], "B": [20], "C": [21]}, "entr": [13, 14], "tcorr": [7], "ecorr": [7], "fcorr": [2], "dark": false}, {"n": 8, "name": "Vert clair", "color": "#9AD27E", "comp": "Nombres de 60 à 99", "parcours": "entiers", "block": [27, 28, 29], "tests": {"A": [22], "B": [23], "C": [24]}, "entr": [15, 16], "tcorr": [8], "ecorr": [8], "fcorr": [2], "dark": false}, {"n": 9, "name": "Vert", "color": "#43A047", "comp": "Jusqu'à 100 : comparer, ranger", "parcours": "entiers", "block": [30, 31, 32], "tests": {"A": [25], "B": [26], "C": [27]}, "entr": [17, 18], "tcorr": [9], "ecorr": [9], "fcorr": [2], "dark": false, "extra": [33, 34, 35, 36, 37], "extraLabel": "fiches de rattrapage (ancienne ceinture blanche)"}, {"n": 10, "name": "Vert foncé", "color": "#2E7D32", "comp": "Monnaie, doubles et moitiés", "parcours": "entiers", "block": [38, 39, 40], "tests": {"A": [28], "B": [29], "C": [30]}, "entr": [19, 20], "tcorr": [10], "ecorr": [10], "fcorr": [2], "dark": true}, {"n": 11, "name": "Turquoise", "color": "#2EC4B6", "comp": "100 à 999 : écrire, comparer", "parcours": "entiers", "block": [41, 42, 43, 44, 45, 46], "tests": {"A": [31], "B": [32], "C": [33]}, "entr": [21, 22], "tcorr": [11], "ecorr": [11], "fcorr": [], "dark": false}, {"n": 12, "name": "Bleu clair", "color": "#86C5EF", "comp": "100 à 999 : décomposer, encadrer", "parcours": "entiers", "block": [47, 48, 49, 50, 51, 52], "tests": {"A": [34], "B": [35], "C": [36]}, "entr": [23, 24], "tcorr": [12], "ecorr": [12], "fcorr": [], "dark": false}, {"n": 13, "name": "Bleu", "color": "#1E88E5", "comp": "Valeur d'un chiffre, droite graduée", "parcours": "entiers", "block": [53, 54, 55, 56, 57, 58], "tests": {"A": [37], "B": [38], "C": [39]}, "entr": [25, 26], "tcorr": [13], "ecorr": [13], "fcorr": [], "dark": false}, {"n": 14, "name": "Bleu foncé", "color": "#1F4E9C", "comp": "1 000 à 9 999 : écrire, comparer", "parcours": "entiers", "block": [59, 60, 61, 62, 63, 64], "tests": {"A": [40], "B": [41], "C": [42]}, "entr": [27, 28], "tcorr": [14], "ecorr": [14], "fcorr": [], "dark": true}, {"n": 15, "name": "Violet clair", "color": "#B39DDB", "comp": "1 000 à 9 999 : décomposer, encadrer", "parcours": "entiers", "block": [65, 66, 67, 68, 69, 70], "tests": {"A": [43], "B": [44], "C": [45]}, "entr": [29, 30], "tcorr": [15], "ecorr": [15], "fcorr": [], "dark": false}, {"n": 16, "name": "Violet", "color": "#8E5CC2", "comp": "10 000 à 99 999", "parcours": "entiers", "block": [71, 72, 73, 74, 75, 76], "tests": {"A": [46], "B": [47], "C": [48]}, "entr": [31, 32], "tcorr": [16], "ecorr": [16], "fcorr": [], "dark": true}, {"n": 17, "name": "Marron clair", "color": "#C49A6C", "comp": "Jusqu'à 999 999", "parcours": "entiers", "block": [77, 78, 79, 80, 81, 82], "tests": {"A": [49], "B": [50], "C": [51]}, "entr": [33, 34], "tcorr": [17], "ecorr": [17], "fcorr": [], "dark": false}, {"n": 18, "name": "Marron", "color": "#8B5A2B", "comp": "Les millions", "parcours": "entiers", "block": [83, 84, 85, 86, 87, 88], "tests": {"A": [52], "B": [53], "C": [54]}, "entr": [35, 36], "tcorr": [18], "ecorr": [18], "fcorr": [], "dark": true}, {"n": 19, "name": "Gris", "color": "#9E9E9E", "comp": "Les grands millions", "parcours": "entiers", "block": [89, 90, 91, 92, 93, 94], "tests": {"A": [55], "B": [56], "C": [57]}, "entr": [37, 38], "tcorr": [19], "ecorr": [19], "fcorr": [], "dark": false}, {"n": 20, "name": "Noire", "color": "#1D1D1B", "comp": "Les milliards", "parcours": "entiers", "block": [95, 96, 97, 98, 99, 100], "tests": {"A": [58], "B": [59], "C": [60]}, "entr": [39, 40], "tcorr": [20], "ecorr": [20], "fcorr": [], "dark": true}, {"n": 21, "name": "Jaune", "color": "#F7CB2D", "comp": "Fractions d'un tout", "parcours": "fractions", "block": [101, 102, 103, 104, 105, 106, 107], "tests": {"A": [61], "B": [62], "C": [63]}, "entr": [41, 42], "tcorr": [21], "ecorr": [21], "fcorr": [3], "dark": false}, {"n": 22, "name": "Orange", "color": "#F6A93B", "comp": "Fractions plus grandes que 1", "parcours": "fractions", "block": [108, 109, 110, 111, 112, 113, 114], "tests": {"A": [64], "B": [65], "C": [66]}, "entr": [43, 44], "tcorr": [22], "ecorr": [22], "fcorr": [4], "dark": false}, {"n": 23, "name": "Rose", "color": "#F4A7C0", "comp": "Fractions sur une demi-droite", "parcours": "fractions", "block": [115, 116, 117, 118, 119, 120], "tests": {"A": [67], "B": [68], "C": [69]}, "entr": [45, 46], "tcorr": [23], "ecorr": [23], "fcorr": [5], "dark": false}, {"n": 24, "name": "Verte", "color": "#43A047", "comp": "Entier + fraction, encadrer", "parcours": "fractions", "block": [121, 122, 123, 124, 125, 126], "tests": {"A": [70], "B": [71], "C": [72]}, "entr": [47, 48], "tcorr": [24], "ecorr": [24], "fcorr": [6], "dark": false}, {"n": 25, "name": "Bleue", "color": "#1E88E5", "comp": "Problèmes de fractions", "parcours": "fractions", "block": [127, 128, 129, 130, 131, 132, 133, 134, 135, 136], "tests": {"A": [73], "B": [74], "C": [75]}, "entr": [49, 50, 51], "tcorr": [25], "ecorr": [25], "fcorr": [7], "dark": false}, {"n": 26, "name": "Marron", "color": "#8B5A2B", "comp": "Retrouver le tout, comparer", "parcours": "fractions", "block": [137, 138, 139, 140, 141, 142], "tests": {"A": [76], "B": [77], "C": [78]}, "entr": [52, 53], "tcorr": [26], "ecorr": [26], "fcorr": [8], "dark": true}, {"n": 27, "name": "Noire", "color": "#1D1D1B", "comp": "Fractions égales, opérations", "parcours": "fractions", "block": [143, 144, 145, 146, 147, 148, 149], "tests": {"A": [79], "B": [80], "C": [81]}, "entr": [54, 55], "tcorr": [27], "ecorr": [27], "fcorr": [9], "dark": true}, {"n": 28, "name": "Blanche", "color": "#FFFFFF", "comp": "Tableau de numération décimal", "parcours": "decimaux", "block": [150, 151, 152, 153, 154, 155], "tests": {"A": [82], "B": [83], "C": [84]}, "entr": [56, 57], "tcorr": [28], "ecorr": [28], "fcorr": [10], "dark": false}, {"n": 29, "name": "Jaune", "color": "#F7CB2D", "comp": "Écrire un nombre décimal", "parcours": "decimaux", "block": [156, 157, 158, 159, 160, 161, 162], "tests": {"A": [85], "B": [86], "C": [87]}, "entr": [58, 59], "tcorr": [29], "ecorr": [29], "fcorr": [11], "dark": false}, {"n": 30, "name": "Orange", "color": "#F6A93B", "comp": "Fractions décimales", "parcours": "decimaux", "block": [163, 164, 165, 166, 167, 168, 169], "tests": {"A": [88], "B": [89], "C": [90]}, "entr": [60, 61], "tcorr": [30], "ecorr": [30], "fcorr": [12], "dark": false}, {"n": 31, "name": "Rose", "color": "#F4A7C0", "comp": "Comparer, ranger des décimaux", "parcours": "decimaux", "block": [170, 171, 172, 173, 174, 175], "tests": {"A": [91], "B": [92], "C": [93]}, "entr": [62, 63], "tcorr": [31], "ecorr": [31], "fcorr": [13], "dark": false}, {"n": 32, "name": "Verte", "color": "#43A047", "comp": "Encadrer, arrondir à l'unité", "parcours": "decimaux", "block": [176, 177, 178, 179, 180, 181], "tests": {"A": [94], "B": [95], "C": [96]}, "entr": [64, 65], "tcorr": [32], "ecorr": [32], "fcorr": [14], "dark": false}, {"n": 33, "name": "Bleue", "color": "#1E88E5", "comp": "Encadrer au dixième", "parcours": "decimaux", "block": [182, 183, 184, 185, 186, 187], "tests": {"A": [97], "B": [98], "C": [99]}, "entr": [66, 67], "tcorr": [33], "ecorr": [33], "fcorr": [15], "dark": false}, {"n": 34, "name": "Marron", "color": "#8B5A2B", "comp": "Encadrer au centième", "parcours": "decimaux", "block": [188, 189, 190, 191, 192, 193], "tests": {"A": [100], "B": [101], "C": [102]}, "entr": [68, 69], "tcorr": [34], "ecorr": [34], "fcorr": [16], "dark": true}, {"n": 35, "name": "Noire", "color": "#1D1D1B", "comp": "Bilan des nombres décimaux", "parcours": "decimaux", "block": [194, 195, 196, 197, 198, 199], "tests": {"A": [103], "B": [104], "C": [105]}, "entr": [70, 71], "tcorr": [35], "ecorr": [35], "fcorr": [17], "dark": true}], "docs": [{"code": "Guide", "title": "Guide de l'enseignant", "role": "ens", "file": "num/guide.pdf", "pages": 6, "desc": "Étapes, trois parcours, remédiations, séance type.", "dl": "Numération - Guide enseignant.pdf"}, {"code": "Prog. cycles", "title": "Progression par cycle (programmes)", "role": "ens", "file": "num/progression-cycles.pdf", "pages": 5, "desc": "Attendus des programmes et ceintures correspondantes.", "dl": "Numération - Progression par cycle.pdf"}, {"code": "Progression", "title": "Progression unifiée des 35 ceintures", "role": "ens", "file": "num/progression.pdf", "pages": 6, "desc": "Numéros, couleurs, compétences, fiches, correspondances.", "dl": "Numération - Progression unifiée.pdf"}, {"code": "Éval. mode d'emploi", "title": "Évaluation de départ : mode d'emploi et grilles", "role": "ens", "file": "num/evaluation-mode-emploi.pdf", "pages": 3, "desc": "Paliers A à H, nombres à dicter, grilles de positionnement.", "dl": "Numération - Évaluation mode d'emploi.pdf"}, {"code": "Tests corrigés", "title": "Corrigés des tests de passage", "role": "ens", "file": "num/tests-corriges.pdf", "pages": 35, "desc": "Une page par ceinture, avec le seuil.", "dl": "Numération - Corrigés des tests.pdf"}, {"code": "Fiches corrigés", "title": "Corrigés des fiches", "role": "ens", "file": "num/fiches-corriges.pdf", "pages": 17, "desc": "Ceintures 2, 4 à 10 et 21 à 35.", "dl": "Numération - Corrigés des fiches.pdf"}, {"code": "Entr. corrigés", "title": "Corrigés des entraînements", "role": "ens", "file": "num/entrainements-corriges.pdf", "pages": 35, "desc": "Une page par ceinture et objectif à atteindre.", "dl": "Numération - Corrigés des entraînements.pdf"}, {"code": "Évaluation", "title": "Évaluation de départ", "role": "ele", "file": "num/evaluation.pdf", "pages": 12, "desc": "12 pages, paliers A à H.", "dl": "Numération - Évaluation diagnostique.pdf"}, {"code": "Ceintures", "title": "Toutes les ceintures (fiches 1 à 35)", "role": "ele", "file": "num/ceintures.pdf", "pages": 199, "desc": "Ma fiche de suivi (p. 2-3), puis intercalaire, mémo et fiches de chaque ceinture.", "dl": "Numération - Toutes les ceintures.pdf"}, {"code": "Tests", "title": "Tests de passage A, B, C", "role": "ele", "file": "num/tests.pdf", "pages": 105, "desc": "3 versions par ceinture.", "dl": "Numération - Tests.pdf"}, {"code": "Entraînements", "title": "Entraînements (si test raté)", "role": "ele", "file": "num/entrainements.pdf", "pages": 71, "desc": "2 entraînements par ceinture.", "dl": "Numération - Entraînements.pdf"}], "suivi": [2, 3]}]};
-const SUBJ=['edl','num','cp','geo'].map(id=>D.subjects.find(s=>s.id===id)), SJ={};SUBJ.forEach(s=>SJ[s.id]=s);
+const SUBJ=['edl','num','geo','cp'].map(id=>D.subjects.find(s=>s.id===id)), SJ={};SUBJ.forEach(s=>SJ[s.id]=s);
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const today=()=>new Date().toLocaleDateString('fr-FR');
@@ -364,37 +374,48 @@ function edlPages(n,what){
 const triple=(sb,n)=>((sb.res||{})[n]||{});
 function abcState(r){if(r.A==='ok'||r.B==='ok'||r.C==='ok')return 'ok';if(r.C==='ko')return 'passe';return (r.A||r.B)?'cours':'';}
 const ORDER=(start,last,first=1)=>{const out=[];for(let i=0;i<=last-first;i++)out.push((start-first+i)%(last-first+1)+first);return out;};
+/* Ceintures « à travailler » avant le point de départ (lacunes de l'évaluation) : proposées en premier */
+const ORDG=(sb,start,last,first=1)=>{const res=sb.res||{},gaps=[];for(let n=first;n<start;n++)if((res[n]||{}).ev==='ko')gaps.push(n);return [...gaps,...ORDER(start,last,first).filter(n=>!gaps.includes(n))];};
 
 const RULES={
  edl:{
-  levelOf:sb=>sb.parcours==2?3:5,
-  slots(sb,n){const T=U('edl',n).testA;
-    if((sb.parcours||1)==1)return [{k:'A',l:'Test A',s:`classeur p. ${T}`},{k:'B',l:'Test B',s:`p. ${T} b, après l'entraînement 1`},{k:'C',l:'Test C',s:`p. ${T} d, après l'entraînement 2`},
-      {h:'Pour aller plus loin (bonus)'},...[2,3,4,5].map(l=>({k:'pl'+l,l:`Niveau ${l} (${LV[l]})`,s:`petit test, p. ${T} bis ${3*(l-2)+3}`}))];
-    const L=this.levelOf(sb);
-    return [{k:'pl'+L,l:`Niveau ${L} (${LV[L]})`,s:`petit test, p. ${T} bis ${3*(L-2)+3}`},{k:'pl'+(L-1),l:`Passerelle : niveau ${L-1} (${LV[L-1]})`,s:`si le niveau ${L} est raté`},{k:'pl'+L+'b',l:`Niveau ${L}, 2e essai`,s:'après la passerelle'}];},
-  state(sb,n){const r=triple(sb,n),pl=r.pl||{};
-    if((sb.parcours||1)==1)return abcState(r);
-    const L=this.levelOf(sb);if(pl[L]==='ok'||pl[L+'b']==='ok')return 'ok';if(pl[L+'b']==='ko')return 'passe';return (pl[L]||pl[L-1])?'cours':'';},
-  steps(sb,res){const t={...sb,res};
-    for(const n of ORDER(sb.start||1,16)){const s=this.state(t,n);if(s==='ok'||s==='passe')continue;const r=res[n]||{},pl=r.pl||{};
-      if((sb.parcours||1)==1){
-        if(!r.A)return [{n,slot:'A',label:'Leçon, exercices et test A',pages:edlPages(n,'p1'),corr:edlPages(n,'cT')}];
-        if(r.A==='ko'&&!r.B)return [{n,slot:'B',label:'Entraînement 1 et test B',pages:edlPages(n,'repB'),corr:[...edlPages(n,'cE'),...edlPages(n,'cT')]}];
-        if(r.B==='ko'&&!r.C)return [{n,slot:'C',label:'Entraînement 2 et test C',pages:edlPages(n,'repC'),corr:[...edlPages(n,'cE'),...edlPages(n,'cT')]}];
-        return [{n,slot:'?',label:'Résultat à noter',pages:[],corr:[]}];}
-      const L=this.levelOf(sb);
-      if(!pl[L])return [{n,slot:'pl'+L,label:`Plus loin niveau ${L} (${LV[L]})`,pages:edlPages(n,'lv'+L),corr:edlPages(n,'cP')}];
-      if(!pl[L-1])return [{n,slot:'pl'+(L-1),label:`Passerelle : plus loin niveau ${L-1} (${LV[L-1]})`,pages:edlPages(n,'lv'+(L-1)),corr:edlPages(n,'cP')}];
-      return [{n,slot:'pl'+L+'b',label:`Plus loin niveau ${L}, 2e essai`,pages:edlPages(n,'lv'+L),corr:edlPages(n,'cP')}];}
+  /* Parcours : un seul (1, 2 ou 3) ou un enchaînement (1 puis 2, 1 puis 2 puis 3, 2 puis 3).
+     On passe au parcours suivant quand le précédent est terminé (plus rien à proposer). */
+  chain:sb=>Array.isArray(sb.chain)&&sb.chain.length?sb.chain:[+sb.parcours||1],
+  levelOf:p=>p==2?3:5,
+  evKey:p=>p==1?'ev':'ev'+p,
+  stateP(sb,n,p){const r=triple(sb,n),pl=r.pl||{};
+    const raw=p==1?abcState(r):(()=>{const L=this.levelOf(p);if(pl[L]==='ok'||pl[L+'b']==='ok')return 'ok';if(pl[L+'b']==='ko')return 'passe';return (pl[L]||pl[L-1])?'cours':'';})();
+    if(raw==='')return r[this.evKey(p)]==='ok'?'eval':'';return raw;},
+  stepsP(sb,res,p){const t={...sb,res};
+    for(const n of ORDER(sb.start||1,16)){const s=this.stateP(t,n,p);if(s==='ok'||s==='passe'||s==='eval')continue;const r=res[n]||{},pl=r.pl||{};
+      if(p==1){
+        if(!r.A)return [{n,slot:'A',par:1,label:'Leçon, exercices et test A',pages:edlPages(n,'p1'),corr:edlPages(n,'cT')}];
+        if(r.A==='ko'&&!r.B)return [{n,slot:'B',par:1,label:'Entraînement 1 et test B',pages:edlPages(n,'repB'),corr:[...edlPages(n,'cE'),...edlPages(n,'cT')]}];
+        if(r.B==='ko'&&!r.C)return [{n,slot:'C',par:1,label:'Entraînement 2 et test C',pages:edlPages(n,'repC'),corr:[...edlPages(n,'cE'),...edlPages(n,'cT')]}];
+        return [{n,slot:'?',par:1,label:'Résultat à noter',pages:[],corr:[]}];}
+      const L=this.levelOf(p);
+      if(!pl[L])return [{n,slot:'pl'+L,par:p,label:`Parcours ${p} · plus loin niveau ${L} (${LV[L]})`,pages:edlPages(n,'lv'+L),corr:edlPages(n,'cP')}];
+      if(!pl[L-1])return [{n,slot:'pl'+(L-1),par:p,label:`Parcours ${p} · passerelle niveau ${L-1} (${LV[L-1]})`,pages:edlPages(n,'lv'+(L-1)),corr:edlPages(n,'cP')}];
+      return [{n,slot:'pl'+L+'b',par:p,label:`Parcours ${p} · plus loin niveau ${L}, 2e essai`,pages:edlPages(n,'lv'+L),corr:edlPages(n,'cP')}];}
     return [];},
-  cell(sb,n,s){const r=triple(sb,n);return s==='ok'?'✓':s==='passe'?'!':s==='cours'?((sb.parcours||1)==1?(r.B?'C':'B'):'…'):'';}
+  cur(sb,res){const ch=this.chain(sb);for(const p of ch)if(this.stepsP(sb,res||sb.res||{},p).length)return p;return ch[ch.length-1];},
+  done(sb,p){return !this.stepsP(sb,sb.res||{},p).length;},
+  slots(sb,n){const ch=this.chain(sb),cur=this.cur(sb),T=U('edl',n).testA,out=[];
+    ch.forEach(p=>{if(ch.length>1)out.push({h:`Parcours ${p}${p===cur?' (en cours)':this.done(sb,p)?' (terminé)':''}`});
+      if(p==1){out.push({k:'A',l:'Test A',s:`classeur p. ${T}`},{k:'B',l:'Test B',s:`p. ${T} b, après l'entraînement 1`},{k:'C',l:'Test C',s:`p. ${T} d, après l'entraînement 2`});
+        if(ch.length===1)out.push({h:'Pour aller plus loin (bonus)'},...[2,3,4,5].map(l=>({k:'pl'+l,l:`Niveau ${l} (${LV[l]})`,s:`petit test, p. ${T} bis ${3*(l-2)+3}`})));}
+      else{const L=this.levelOf(p);out.push({k:'pl'+L,l:`Niveau ${L} (${LV[L]})`,s:`petit test, p. ${T} bis ${3*(L-2)+3}`},{k:'pl'+(L-1),l:`Passerelle : niveau ${L-1} (${LV[L-1]})`,s:`si le niveau ${L} est raté`},{k:'pl'+L+'b',l:`Niveau ${L}, 2e essai`,s:'après la passerelle'});}});
+    return out;},
+  state(sb,n){return this.stateP(sb,n,this.cur(sb));},
+  steps(sb,res){return this.stepsP(sb,res,this.cur(sb,res));},
+  cell(sb,n,s){const r=triple(sb,n);return s==='ok'?'✓':s==='passe'?'!':s==='eval'?'É':s==='cours'?(this.cur(sb)==1?(r.B?'C':'B'):'…'):'';}
  },
  cp:{
   slots(sb,n){return [{k:'A',l:'Test A',s:'sans le mémo · objectif '+U('cp',n).obj},{k:'B',l:'Test B',s:'plus tard, si le test A est raté'},{k:'C',l:'Test C',s:'si le test B est raté'}];},
   state(sb,n){return abcState(triple(sb,n));},
   steps(sb,res){const t={...sb,res},cas=sb.method==='cassage';
-    for(const n of ORDER(sb.start||1,15)){const s=this.state(t,n);if(s==='ok'||s==='passe')continue;const u=U('cp',n),r=res[n]||{};
+    for(const n of ORDG(sb,sb.start||1,15)){const s=this.state(t,n);if(s==='ok'||s==='passe'||s==='eval')continue;const u=U('cp',n),r=res[n]||{};
       const memo=(cas?u.memoC:u.memo).map(p=>[fileOf('cp','Mémos'),p,'mémo']);
       const fiches=u.fiches.flatMap((ps,k)=>ps.map(p=>[fileOf('cp','Fiches'),p,'fiche N°'+(k+1)]));
       const corrF=(cas?u.corrC:u.corr).flatMap((ps,k)=>ps.map(p=>[fileOf('cp',cas?'Corrigés cassage':'Corrigés'),p,'corrigé N°'+(k+1)]));
@@ -411,7 +432,7 @@ const RULES={
   slots(sb,n){return [{k:'A',l:'Test version 1',s:'tous les soleils + les étoiles demandées'},{k:'B',l:'Test version 2',s:'si la version 1 est ratée'},{k:'C',l:'Test version 3',s:'si la version 2 est ratée'}];},
   state(sb,n){return abcState(triple(sb,n));},
   steps(sb,res){const t={...sb,res};
-    for(const n of ORDER(sb.start||1,12)){const s=this.state(t,n);if(s==='ok'||s==='passe')continue;const u=U('geo',n),r=res[n]||{};
+    for(const n of ORDG(sb,sb.start||1,12)){const s=this.state(t,n);if(s==='ok'||s==='passe'||s==='eval')continue;const u=U('geo',n),r=res[n]||{};
       const memo=u.memo.map(p=>[fileOf('geo','Mémo'),p,'mémo']),fiches=u.fiches.map(p=>[fileOf('geo','Fiches'),p,'fiches']);
       const test=i=>[[fileOf('geo','Tests'),u.tests[i],'test version '+(i+1)]];
       if(!r.A)return [{n,slot:'A',label:`Mémo, ${u.flabel} et test version 1`,pages:[...memo,...fiches,...test(0)],corr:[]}];
@@ -425,11 +446,11 @@ const RULES={
   tracks:{entiers:[1,20,'Nombres entiers'],fractions:[21,27,'Fractions'],decimaux:[28,35,'Nombres décimaux']},
   slots(sb,n){return [{k:'A',l:'Test A',s:'seuil ≈ 80 % (corrigé)'},{k:'B',l:'Test B',s:'après les entraînements 1 et 2'},{k:'C',l:'Test C',s:'après de nouveaux entraînements'}];},
   state(sb,n){return abcState(triple(sb,n));},
-  active(sb,res){const t={...sb,res},ok=n=>this.state(t,n)==='ok',any=(a,b)=>range(a,b).some(n=>res[n]&&Object.keys(res[n]).some(k=>k!=='d'));
+  active(sb,res){const t={...sb,res},ok=n=>['ok','eval'].includes(this.state(t,n)),any=(a,b)=>range(a,b).some(n=>res[n]&&Object.keys(res[n]).some(k=>k!=='d'));
     return {entiers:true,fractions:!!sb.fr||ok(10)||any(21,27),decimaux:!!sb.dec||([21,22,23,24,13].every(ok))||any(28,35)};},
   stepIn(sb,res,track){const [a,b]=this.tracks[track],t={...sb,res};
     const st=track==='entiers'?(sb.start||1):track==='fractions'?(sb.startF||21):(sb.startD||28);
-    for(const n of ORDER(Math.min(b,Math.max(a,st)),b,a)){const s=this.state(t,n);if(s==='ok'||s==='passe')continue;const u=U('num',n),r=res[n]||{};
+    for(const n of ORDG(sb,Math.min(b,Math.max(a,st)),b,a)){const s=this.state(t,n);if(s==='ok'||s==='passe'||s==='eval')continue;const u=U('num',n),r=res[n]||{};
       const tests=v=>u.tests[v].map(p=>[fileOf('num','Tests'),p,'test '+v]);
       const entr=u.entr.map((p,i)=>[fileOf('num','Entraînements'),p,'entraînement '+(i+1)]);
       const tc=u.tcorr.map(p=>[fileOf('num','Tests corrigés'),p,'corrigé du test']),ec=u.ecorr.map(p=>[fileOf('num','Entr. corrigés'),p,'corrigé des entraînements']);
@@ -443,6 +464,15 @@ const RULES={
   cell(sb,n,s){const r=triple(sb,n);return s==='ok'?'✓':s==='passe'?'!':s==='cours'?(r.B?'C':'B'):'';}
  }
 };
+/* Évaluation de départ : ceintures (ou notions) acquises.
+   - ceintures avant la ceinture de départ (calcul posé, géométrie, numération) : acquises d'office ;
+   - réglage par case dans la fiche de suivi (« Évaluation de départ » : acquise / à travailler). */
+function startOf(sid,sb,n){if(sid==='num')return n>=28?(sb.startD||28):n>=21?(sb.startF||21):(sb.start||1);return sb.start||1;}
+function autoEval(sid,sb,n){if(sid==='edl')return false;if(sid==='num'){const a=n>=28?28:n>=21?21:1;return n>=a&&n<startOf(sid,sb,n);}return n<startOf(sid,sb,n);}
+const hasRes=r=>['A','B','C'].some(k=>r[k])||Object.keys(r.pl||{}).some(k=>r.pl[k]);
+Object.keys(RULES).filter(sid=>sid!=='edl').forEach(sid=>{const R=RULES[sid],orig=R.state,oc=R.cell;
+  R.state=function(sb,n){const r=triple(sb,n);if(!hasRes(r)){if(r.ev==='ok')return 'eval';if(r.ev!=='ko'&&autoEval(sid,sb,n))return 'eval';}return orig.call(this,sb,n);};
+  R.cell=function(sb,n,st){return st==='eval'?'É':oc.call(this,sb,n,st);};});
 function setOk(res,step){const r=res[step.n]=res[step.n]||{};r.pl=r.pl||{};if(step.slot.startsWith('pl'))r.pl[step.slot.slice(2)]='ok';else if(step.slot!=='?')r[step.slot]='ok';}
 /* Étapes d'avance : on suppose chaque étape réussie pour voir la suite */
 function nextSteps(sid,sb,k){
@@ -451,16 +481,21 @@ function nextSteps(sid,sb,k){
     ss.forEach(s=>{const key=s.n+s.slot;if(!seen.has(key)){seen.add(key);out.push({...s,sim:i>0});}setOk(res,s);});}
   return out;
 }
-const SDEF={edl:()=>({on:true,parcours:1,start:1,res:{}}),cp:()=>({on:true,start:1,method:'retenue',res:{}}),geo:()=>({on:true,start:1,res:{}}),num:()=>({on:true,start:1,startF:21,startD:28,fr:false,dec:false,res:{}})};
+const SDEF={edl:()=>({on:true,parcours:1,chain:[1],start:1,res:{}}),cp:()=>({on:true,start:1,method:'retenue',res:{}}),geo:()=>({on:true,start:1,res:{}}),num:()=>({on:true,start:1,startF:21,startD:28,fr:false,dec:false,res:{}})};
 /* Ancien format (étude de la langue seule) -> nouveau format multi-matières */
 function migrate(st){
   if(!st||typeof st!=='object')return st;
   if(!st.subj){st.subj={edl:{on:true,parcours:+st.parcours||1,start:+st.start||1,res:st.res||{}}};delete st.parcours;delete st.start;delete st.res;}
   Object.values(st.subj).forEach(sb=>{sb.res=sb.res||{};});
+  const e=st.subj.edl;if(e&&!Array.isArray(e.chain))e.chain=[+e.parcours||1];
   return st;
 }
 const sbOf=(st,sid)=>st.subj&&st.subj[sid]&&st.subj[sid].on?st.subj[sid]:null;
-const okCount=(st,sid)=>{const sb=sbOf(st,sid);return sb?SJ[sid].units.filter(u=>RULES[sid].state(sb,u.n)==='ok').length:0;};
+const okCount=(st,sid)=>{const sb=sbOf(st,sid);return sb?SJ[sid].units.filter(u=>['ok','eval'].includes(RULES[sid].state(sb,u.n))).length:0;};
+const evalCount=(st,sid)=>{const sb=sbOf(st,sid);return sb?SJ[sid].units.filter(u=>RULES[sid].state(sb,u.n)==='eval').length:0;};
+
+const CHAINS=[['1','Parcours 1 seulement · niveau 1 (CE1)'],['2','Parcours 2 seulement · niveau 3 (CM1)'],['3','Parcours 3 seulement · niveau 5 (6e)'],['1-2','Parcours 1, puis parcours 2 (le 1 validé d\'abord)'],['1-2-3','Parcours 1, puis 2, puis 3 (chacun validé d\'abord)'],['2-3','Parcours 2, puis parcours 3']];
+const chainTxt=sb=>{const ch=RULES.edl.chain(sb),c=RULES.edl.cur(sb);return ch.length===1?'Parcours '+ch[0]:'Parcours '+ch.join(' → ')+' · en cours : '+c;};
 
 /* ========== ENREGISTREMENT ========== */
 let STU={}, META={years:[]}, mode='loading', APPINFO=null;
@@ -564,7 +599,7 @@ $('#impfile').addEventListener('change',async ev=>{
     if(!o||o.format!=='edl-suivi-ulis'||!o.eleve||!o.eleve.name)throw 0;
     const e=migrate(JSON.parse(JSON.stringify(o.eleve)));
     const c={id:newId(),year:YEAR,name:String(e.name).slice(0,30),notes:String(e.notes||''),subj:{},created:Date.now(),recu:(e.year||'')+(o.exporte?' (exporté le '+o.exporte+')':'')};
-    for(const sid of Object.keys(SDEF)){const sb=e.subj&&e.subj[sid];if(!sb)continue;const x={...SDEF[sid](),...sb,res:sb.res||{}};const nx=RULES[sid].steps(x,x.res)[0];if(nx&&sid!=='num')x.start=nx.n;c.subj[sid]=x;}
+    for(const sid of Object.keys(SDEF)){const sb=e.subj&&e.subj[sid];if(!sb)continue;const x={...SDEF[sid](),...sb,res:sb.res||{}};const nx=RULES[sid].steps(x,x.res)[0];if(nx&&sid!=='num'&&nx.n>(x.start||1))x.start=nx.n;c.subj[sid]=x;}
     saveStu(c);n++;}catch(err){toast('« '+f.name+' » n\'est ni une sauvegarde ni un fichier de transmission.');}}
   if(n)toast(n+' élève'+(n>1?'s':'')+' importé'+(n>1?'s':'')+' dans '+YEAR+'.');
   ev.target.value='';
@@ -588,7 +623,7 @@ document.addEventListener('click',ev=>{
   if(!META.years.includes(y)){META.years.push(y);}
   const exist=new Set(Object.values(STU).filter(s=>s.year===y).map(s=>s.from));
   ids.forEach(id=>{const o=STU[id];if(!o||exist.has(o.id))return;const c=JSON.parse(JSON.stringify(o));c.id=newId();c.year=y;c.from=o.id;c.created=Date.now();
-    for(const sid of Object.keys(c.subj||{})){const sb=c.subj[sid];const nx=RULES[sid].steps(sb,sb.res||{});if(sid==='num'){nx.forEach(s=>{if(s.track==='entiers')sb.start=s.n;if(s.track==='fractions')sb.startF=s.n;if(s.track==='decimaux')sb.startD=s.n;});}else if(nx[0])sb.start=nx[0].n;}
+    for(const sid of Object.keys(c.subj||{})){const sb=c.subj[sid];const nx=RULES[sid].steps(sb,sb.res||{});if(sid==='num'){nx.forEach(s=>{if(s.track==='entiers'&&s.n>(sb.start||1))sb.start=s.n;if(s.track==='fractions'&&s.n>(sb.startF||21))sb.startF=s.n;if(s.track==='decimaux'&&s.n>(sb.startD||28))sb.startD=s.n;});}else if(nx[0]&&nx[0].n>(sb.start||1))sb.start=nx[0].n;}
     STU[c.id]=c;c.updated=Date.now();});
   persist();closeDlg('dprt');setYear(y);toast('Année '+y+' créée'+(ids.length?' avec '+ids.length+' élève'+(ids.length>1?'s':''):'')+'.');
 });
@@ -615,7 +650,7 @@ function homeCell(st,s){
   if(!sb)return `<button class="sjcell off" data-enable="${st.id}|${s.id}">+ ajouter</button>`;
   const ok=okCount(st,s.id),tot=s.units.length,nx=RULES[s.id].steps(sb,sb.res||{});
   const nxt=nx.length?nx.map(x=>`<span class="chip"><i style="background:${U(s.id,x.n).color}"></i>${s.id==='edl'?'notion':'ceint.'} ${x.n}${x.slot==='B'||x.slot==='C'?' · test '+(s.id==='geo'?{B:'v2',C:'v3'}[x.slot]:x.slot):''}</span>`).join(' '):'<span class="chip">terminé</span>';
-  return `<button class="sjcell" data-go="${s.id}|${st.id}" title="Ouvrir la fiche de suivi ${esc(s.name)}"><span><b>${ok}</b> / ${tot} ${s.words} réussi${s.id==='edl'?'e':'e'}s</span><span class="bar"><b style="width:${Math.round(100*ok/tot)}%;background:${s.accent}"></b></span><small>Suite : ${nxt}</small></button>`;
+  return `<button class="sjcell" data-go="${s.id}|${st.id}" title="Ouvrir la fiche de suivi ${esc(s.name)}"><span><b>${ok}</b> / ${tot} ${s.words} acquises${s.id==='edl'?' · parcours '+RULES.edl.cur(sb):''}</span><span class="bar"><b style="width:${Math.round(100*ok/tot)}%;background:${s.accent}"></b></span><small>Suite : ${nxt}</small></button>`;
 }
 function renderHome(){
   const list=sorted();
@@ -633,7 +668,7 @@ $('#aadd').addEventListener('click',()=>{
   if(mode==='loading'){toast('Patientez, le suivi se charge.');return;}
   const subs=$$('#asubj input:checked').map(i=>i.value);if(!subs.length){toast('Cochez au moins une matière.');return;}
   const st={id:newId(),year:YEAR,name,notes:'',subj:{},created:Date.now()};subs.forEach(s=>st.subj[s]=SDEF[s]());
-  saveStu(st);$('#aname').value='';$('#aname').focus();toast(name+' ajouté(e).');
+  saveStu(st);$('#aname').value='';toast(name+' ajouté(e).');openEval(st.id,subs,true);
 });
 $('#aname').addEventListener('keydown',ev=>{if(ev.key==='Enter')$('#aadd').click();});
 
@@ -651,7 +686,7 @@ function renderSuivi(){
   let head='';
   if(s.id==='num')head=`<tr><th></th>${[['Nombres entiers',20],['Fractions',7],['Nombres décimaux',8]].map(([t,k])=>`<th class="grp" colspan="${k}">${t}</th>`).join('')}<th></th><th></th></tr>`;
   const body=list.map(st=>{const sb=sbOf(st,s.id),nx=R.steps(sb,sb.res||{}),nset=new Set(nx.map(x=>x.n));
-    const sub=s.id==='edl'?`Parcours ${sb.parcours||1} · départ notion ${sb.start||1}`:s.id==='cp'?`Départ ceinture ${sb.start||1} · ${sb.method==='cassage'?'cassage':'retenue'}`:s.id==='num'?`Départ ${sb.start||1} · fractions ${sb.startF||21} · décimaux ${sb.startD||28}`:`Départ ceinture ${sb.start||1}`;
+    const sub=s.id==='edl'?`${chainTxt(sb)} · départ notion ${sb.start||1}`:s.id==='cp'?`Départ ceinture ${sb.start||1} · ${sb.method==='cassage'?'cassage':'retenue'}`:s.id==='num'?`Départ ${sb.start||1} · fractions ${sb.startF||21} · décimaux ${sb.startD||28}`:`Départ ceinture ${sb.start||1}`;
     return `<tr><td class="nm"><button data-stu="${st.id}">${esc(st.name)}</button><small>${sub}</small></td>${s.units.map(u=>{const stt=R.state(sb,u.n),r=(sb.res||{})[u.n]||{};
       return `<td class="nc"><button class="cell ${stt} ${nset.has(u.n)?'next':''}" data-cell="${st.id}|${s.id}|${u.n}" aria-label="${esc(st.name)}, ${esc(uName(s.id,u.n))}" title="${esc(uName(s.id,u.n))}${r.d?' · '+r.d:''}">${R.cell(sb,u.n,stt)}</button></td>`;}).join('')}
       <td class="nx">${nx.length?nx.map(x=>`<b>${s.id==='edl'?'Notion':'Ceinture'} ${x.n}</b> · ${esc(x.label)}`).join('<br>'):'Tout est traité'}</td>
@@ -660,7 +695,7 @@ function renderSuivi(){
   <p class="lead" style="font-size:16px">Touchez une case pour noter un résultat (enregistré tout de suite). La colonne « Prochaine étape » se met à jour seule.</p>
   ${list.length?`<div class="toolbar"><span class="sp"></span><button class="btn" id="bilansubj">Bilans PDF de tous les élèves (${esc(s.name)})</button><button class="btn" id="printsubj">Imprimer la suite de tous (${esc(s.name)})</button></div>
   <div class="stable"><table class="st"><thead>${head}<tr><th>Élève</th>${s.units.map(u=>`<th class="nh" title="${esc(uName(s.id,u.n))}"><span class="${u.dark?'dk':''}" style="background:${u.color}">${u.n}</span></th>`).join('')}<th>Prochaine étape</th><th></th></tr></thead><tbody>${body}</tbody></table></div>
-  <div class="legend"><span><i style="background:#9AD27E"></i>Réussie</span><span><i style="background:#FDF0B8"></i>En cours (lettre = prochain test)</span><span><i style="background:#F6A93B"></i>À reprendre plus tard</span><span><i style="box-shadow:0 0 0 2.5px var(--accent)"></i>Prochaine étape</span></div>`
+  <div class="legend"><span><i style="background:#9AD27E"></i>Réussie</span><span><i style="background:#D9EFCB"></i>É : acquise à l'évaluation de départ</span><span><i style="background:#FDF0B8"></i>En cours (lettre = prochain test)</span><span><i style="background:#F6A93B"></i>À reprendre plus tard</span><span><i style="box-shadow:0 0 0 2.5px var(--accent)"></i>Prochaine étape</span></div>`
   :`<div class="empty panel">Aucun élève ne suit cette matière en ${esc(YEAR)}.</div>`}
   ${others.length?`<p class="note">Ne suivent pas cette matière : ${others.map(st=>`<button class="pill" data-enable="${st.id}|${s.id}" style="margin:2px">+ ${esc(st.name)}</button>`).join(' ')}</p>`:''}`;
 }
@@ -783,17 +818,20 @@ document.addEventListener('keydown',ev=>{if(ev.key==='Escape'&&!$('#viewer').cla
 
 /* --- résultats d'une ceinture / notion --- */
 let edit=null;
-function triBtns(key,val){return `<div class="tri" data-key="${key}">${[['ok','Réussi'],['ko','Raté'],['','—']].map(([v,t])=>`<button data-v="${v}" aria-pressed="${(val||'')===v}">${t}</button>`).join('')}</div>`;}
+function triBtns(key,val,lab){return `<div class="tri" data-key="${key}">${(lab||[['ok','Réussi'],['ko','Raté'],['','—']]).map(([v,t])=>`<button data-v="${v}" aria-pressed="${(val||'')===v}">${t}</button>`).join('')}</div>`;}
 function openRes(id,sid,n){
   const st=STU[id],sb=st&&sbOf(st,sid);if(!sb)return;
   edit={id,sid,n,r:JSON.parse(JSON.stringify((sb.res||{})[n]||{}))};edit.r.pl=edit.r.pl||{};
   const r=edit.r,slots=RULES[sid].slots(sb,n);
   $('#dresbox').innerHTML=`<h3 id="dresh">${esc(st.name)} · ${esc(SJ[sid].name)}</h3><div class="meta">${ubadge(sid,n)} ${esc(uName(sid,n))}${r.d?' · dernier résultat le '+r.d:''}</div>
   ${slots.map(x=>x.h?`<h4 style="margin:14px 0 2px">${x.h}</h4>`:`<div class="slot"><div><b>${x.l}</b><small>${x.s}</small></div>${triBtns(x.k,x.k.startsWith('pl')?r.pl[x.k.slice(2)]:r[x.k])}</div>`).join('')}
-  <p class="note" style="margin-top:10px">Chaque choix est enregistré immédiatement.</p><div class="foot"><button class="btn pri" data-close>Fermer</button></div>`;
+  <h4 style="margin:14px 0 2px">Évaluation de départ</h4><div class="slot"><div><b>${sid==='edl'?'Notion acquise à l\'évaluation'+(RULES.edl.chain(sb).length>1?' (parcours '+RULES.edl.cur(sb)+')':''):'Ceinture acquise à l\'évaluation'} ?</b><small>${autoEval(sid,sb,n)?'acquise d\'office : elle est avant le point de départ de l\'élève':'si oui, elle ne sera pas proposée'}</small></div>${(k=>triBtns(k,r[k],[['ok','Acquise'],['ko','À travailler'],['','—']]))(sid==='edl'?RULES.edl.evKey(RULES.edl.cur(sb)):'ev')}</div>
+  <p class="note" style="margin-top:10px">Chaque choix est enregistré immédiatement.</p><div class="foot"><button class="btn" id="resstart" style="margin-right:auto" ${startOf(sid,sb,n)===n?'disabled':''}>${startOf(sid,sb,n)===n?'Point de départ actuel':'Faire commencer l\'élève ici'}</button><button class="btn pri" data-close>Fermer</button></div>`;
   openDlg('dres');
 }
-$('#dresbox').addEventListener('click',ev=>{const b=ev.target.closest('.tri button');if(!b)return;
+$('#dresbox').addEventListener('click',ev=>{
+  if(ev.target.id==='resstart'){const {id,sid,n}=edit;setStart(id,sid,n);closeDlg('dres');toast(STU[id].name+' commence maintenant à : '+uName(sid,n)+'.');return;}
+  const b=ev.target.closest('.tri button');if(!b)return;
   const k=b.parentElement.dataset.key,v=b.dataset.v;b.parentElement.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));
   if(k.startsWith('pl'))edit.r.pl[k.slice(2)]=v;else edit.r[k]=v;commitRes();});
 function commitRes(){const st=STU[edit.id],sb=st&&sbOf(st,edit.sid);if(!sb)return;sb.res=sb.res||{};
@@ -802,16 +840,19 @@ function commitRes(){const st=STU[edit.id],sb=st&&sbOf(st,edit.sid);if(!sb)retur
   if(JSON.stringify(old)!==JSON.stringify(r)){r.d=today();edit.r.d=r.d;sb.res[edit.n]=r;saveStu(st);}}
 
 /* --- fiche d'un élève : matières, réglages, bilans, transmission --- */
+function setStart(id,sid,n){const st=STU[id],sb=st&&sbOf(st,sid);if(!sb)return;const k=sid==='num'?(n>=28?'startD':n>=21?'startF':'start'):'start';sb[k]=n;if(sid==='num'&&k==='startF')sb.fr=true;if(sid==='num'&&k==='startD')sb.dec=true;saveStu(st);}
+function posPicker(sid,sb,k,a,b){const cur=+sb[k]||a;
+  return `<div class="pos" data-sid="${sid}" data-k="${k}">${range(a,b).map(n=>{const u=U(sid,n),stt=RULES[sid].state(sb,n);
+    return `<button type="button" data-pos="${sid}|${k}|${n}" aria-pressed="${n===cur}" title="${esc(uName(sid,n))}${u.comp?' — '+esc(u.comp):''}"><span class="${u.dark?'dk':''}" style="background:${u.color}">${n}</span>${esc(u.name)}${stt==='eval'?' <i>✓</i>':''}</button>`;}).join('')}</div>`;}
 const opt=(sid,a,b,sel)=>range(a,b).map(n=>`<option value="${n}" ${+sel===n?'selected':''}>${n}. ${esc(U(sid,n).name)}${sid==='num'||sid==='cp'||sid==='geo'?' — '+esc(U(sid,n).comp):''}</option>`).join('');
-function subjSettings(st,s){const sb=st.subj&&st.subj[s.id];const on=!!(sb&&sb.on);const v=sb||SDEF[s.id]();let g='';
-  if(s.id==='edl')g=`<div><label class="f" for="x-edl-parcours">Parcours</label><select id="x-edl-parcours" data-k="parcours"><option value="1">Parcours 1 · niveau 1 (CE1)</option><option value="2">Parcours 2 · niveau 3 (CM1)</option><option value="3">Parcours 3 · niveau 5 (6e)</option></select></div><div><label class="f" for="x-edl-start">Notion de départ</label><select id="x-edl-start" data-k="start">${opt('edl',1,16,v.start)}</select></div>`;
-  if(s.id==='cp')g=`<div><label class="f" for="x-cp-start">Ceinture de départ</label><select id="x-cp-start" data-k="start">${opt('cp',1,15,v.start)}</select></div><div><label class="f" for="x-cp-method">Soustraction (mémos et corrigés)</label><select id="x-cp-method" data-k="method"><option value="retenue">par compensation (retenue)</option><option value="cassage">par cassage (emprunt)</option></select></div>`;
-  if(s.id==='geo')g=`<div><label class="f" for="x-geo-start">Ceinture de départ</label><select id="x-geo-start" data-k="start">${opt('geo',1,12,v.start)}</select></div>`;
-  if(s.id==='num')g=`<div><label class="f" for="x-num-start">Départ · nombres entiers</label><select id="x-num-start" data-k="start">${opt('num',1,20,v.start)}</select></div>
-    <div><label class="f" for="x-num-startF">Départ · fractions</label><select id="x-num-startF" data-k="startF">${opt('num',21,27,v.startF||21)}</select><label class="chk" style="margin-top:6px"><input type="checkbox" data-k="fr" ${v.fr?'checked':''}>Fractions commencées</label></div>
-    <div><label class="f" for="x-num-startD">Départ · nombres décimaux</label><select id="x-num-startD" data-k="startD">${opt('num',28,35,v.startD||28)}</select><label class="chk" style="margin-top:6px"><input type="checkbox" data-k="dec" ${v.dec?'checked':''}>Décimaux commencés</label></div>`;
+function subjSettings(st,s){const sb=st.subj&&st.subj[s.id];const on=!!(sb&&sb.on);const v=sb||SDEF[s.id](),v0=v;let g='';
+  const P=(lab,k,a,b,extra='')=>`<div class="wide"><label class="f">${lab}</label>${posPicker(s.id,v,k,a,b)}${extra}</div>`;
+  if(s.id==='edl')g=`<div class="wide"><label class="f" for="x-edl-parcours">Parcours de l'élève</label><select id="x-edl-parcours" data-k="chain">${CHAINS.map(([v,t])=>`<option value="${v}" ${RULES.edl.chain(v0).join('-')===v?'selected':''}>${t}</option>`).join('')}</select>${RULES.edl.chain(v0).length>1?`<p class="note" style="margin:4px 0 0">${RULES.edl.chain(v0).map(p=>'Parcours '+p+' : '+(p===RULES.edl.cur(v0)?'en cours':RULES.edl.done(v0,p)?'terminé':'à venir')).join(' · ')}</p>`:''}</div>`+P('Positionner : notion (leçon) par laquelle l\'élève commence','start',1,16);
+  if(s.id==='cp')g=`<div><label class="f" for="x-cp-method">Soustraction (mémos et corrigés)</label><select id="x-cp-method" data-k="method"><option value="retenue">par compensation (retenue)</option><option value="cassage">par cassage (emprunt)</option></select></div>`+P('Positionner : couleur de ceinture par laquelle l\'élève commence (les précédentes sont acquises)','start',1,15);
+  if(s.id==='geo')g=P('Positionner : couleur de ceinture par laquelle l\'élève commence (les précédentes sont acquises)','start',1,12);
+  if(s.id==='num')g=P('Positionner · nombres entiers : ceinture de départ','start',1,20)+P('Positionner · fractions','startF',21,27,`<label class="chk" style="margin-top:6px"><input type="checkbox" data-k="fr" ${v.fr?'checked':''}>Fractions commencées (sinon proposées après la ceinture 10)</label>`)+P('Positionner · nombres décimaux','startD',28,35,`<label class="chk" style="margin-top:6px"><input type="checkbox" data-k="dec" ${v.dec?'checked':''}>Décimaux commencés (sinon proposés après 21 à 24 et 13)</label>`);
   return `<div class="sjblock ${on?'on':''}" data-sid="${s.id}"><h4><label><input type="checkbox" data-k="on" ${on?'checked':''}><i style="width:12px;height:12px;border-radius:50%;background:${s.accent};display:inline-block"></i>${esc(s.name)}</label></h4>
-  ${on?`<div class="grid">${g}</div><div class="btns"><button class="btn" data-bilan="${s.id}">Bilan PDF · ${esc(s.name)}</button><button class="btn" data-print="${st.id}|${s.id}">Imprimer la suite</button></div>`:'<p class="note" style="margin:6px 0 0">Cochez pour suivre cette matière.</p>'}</div>`;}
+  ${on?`<div class="grid">${g}</div><div class="btns"><button class="btn" data-eval="${st.id}|${s.id}">Évaluation de départ</button><button class="btn" data-bilan="${s.id}">Bilan PDF · ${esc(s.name)}</button><button class="btn" data-print="${st.id}|${s.id}">Imprimer la suite</button></div>`:'<p class="note" style="margin:6px 0 0">Cochez pour suivre cette matière.</p>'}</div>`;}
 function openStu(id){const st=STU[id];if(!st)return;
   $('#dstubox').innerHTML=`<h3 id="dstuh">${esc(st.name)}</h3><div class="meta">${esc(st.year||YEAR)}${st.recu?' · reçu de '+esc(st.recu):''}</div>
   <label class="f" for="sname">Prénom</label><input class="t" id="sname" value="${esc(st.name)}" maxlength="30">
@@ -828,11 +869,12 @@ function commitStu(){clearTimeout(stuT);const id=$('#dstubox').dataset.id,st=STU
   $$('#sjblocks .sjblock').forEach(b=>{const sid=b.dataset.sid;const on=b.querySelector('[data-k=on]').checked;st.subj=st.subj||{};
     if(on&&!st.subj[sid]){st.subj[sid]=SDEF[sid]();ch=true;}
     const sb=st.subj[sid];if(!sb)return;if(sb.on!==on){sb.on=on;ch=true;}
-    b.querySelectorAll('[data-k]').forEach(x=>{const k=x.dataset.k;if(k==='on')return;const v=x.type==='checkbox'?x.checked:(['start','startF','startD','parcours'].includes(k)?+x.value:x.value);if(sb[k]!==v){sb[k]=v;ch=true;}});});
+    b.querySelectorAll('[data-k]').forEach(x=>{const k=x.dataset.k;if(k==='on')return;if(x.classList.contains('pos'))return;if(k==='chain'){const c=x.value.split('-').map(Number);if(JSON.stringify(RULES.edl.chain(sb))!==JSON.stringify(c)){sb.chain=c;sb.parcours=c[c.length-1];ch=true;}return;}const v=x.type==='checkbox'?x.checked:x.value;if(sb[k]!==v){sb[k]=v;ch=true;}});});
   if(ch){saveStu(st);$('#dstuh').textContent=st.name;}}
 $('#dstubox').addEventListener('input',ev=>{if(ev.target.matches('#sname,#snotes')){clearTimeout(stuT);stuT=setTimeout(commitStu,500);}});
 $('#dstubox').addEventListener('change',ev=>{commitStu();if(ev.target.dataset.k==='on'){const id=$('#dstubox').dataset.id;const sc=$('#dstubox').scrollTop;openStu(id);$('#dstubox').scrollTop=sc;}});
 $('#dstubox').addEventListener('click',ev=>{const id=$('#dstubox').dataset.id,st=STU[id];if(!st)return;
+  const ps=ev.target.closest('[data-pos]');if(ps){commitStu();const [sid,,n]=ps.dataset.pos.split('|');setStart(id,sid,+n);const sc=$('#dstubox').scrollTop;openStu(id);$('#dstubox').scrollTop=sc;return;}
   const bl=ev.target.closest('[data-bilan]');if(bl){commitStu();bilanPdf(st,bl.dataset.bilan);return;}
   if(ev.target.id==='strans'){commitStu();transmit(st);return;}
   if(ev.target.id==='sdel'){const b=ev.target;if(b.dataset.sure!=='1'){b.dataset.sure='1';b.textContent='Confirmer : supprimer '+st.name;return;}$('#dstubox').dataset.id='';delStu(id);closeDlg('dstu');toast(st.name+' supprimé(e).');}});
@@ -889,11 +931,36 @@ document.addEventListener('click',ev=>{
 $('#csv').addEventListener('click',async()=>{
   const rows=[['Élève','Matière','Réglages','Réussies','Prochaine étape','Détail des résultats','Remarques']];
   sorted().forEach(st=>SUBJ.forEach(s=>{const sb=sbOf(st,s.id);if(!sb)return;const nx=RULES[s.id].steps(sb,sb.res||{});
-    const det=s.units.filter(u=>sb.res&&sb.res[u.n]).map(u=>{const r=sb.res[u.n],pl=r.pl||{},t=[];['A','B','C'].forEach(k=>r[k]&&t.push((s.id==='geo'?'v'+(' ABC'.indexOf(k)):k)+(r[k]==='ok'?' réussi':' raté')));Object.keys(pl).forEach(k=>t.push('plus loin '+k+(pl[k]==='ok'?' réussi':' raté')));return u.n+'. '+u.name+' : '+t.join(', ')+(r.d?' ('+r.d+')':'');}).join(' | ');
-    rows.push([st.name,s.name,s.id==='edl'?'parcours '+(sb.parcours||1):s.id==='cp'?sb.method:'',okCount(st,s.id)+'/'+s.units.length,nx.map(x=>uName(s.id,x.n)+' : '+x.label).join(' ; '),det,st.notes||'']);}));
+    const det=s.units.filter(u=>sb.res&&sb.res[u.n]).map(u=>{const r=sb.res[u.n],pl=r.pl||{},t=[];['ev','ev2','ev3'].forEach(k=>r[k]&&t.push('évaluation de départ'+(k==='ev'?'':' P'+k.slice(2))+' : '+(r[k]==='ok'?'acquise':'à travailler')));['A','B','C'].forEach(k=>r[k]&&t.push((s.id==='geo'?'v'+(' ABC'.indexOf(k)):k)+(r[k]==='ok'?' réussi':' raté')));Object.keys(pl).forEach(k=>t.push('plus loin '+k+(pl[k]==='ok'?' réussi':' raté')));return u.n+'. '+u.name+' : '+t.join(', ')+(r.d?' ('+r.d+')':'');}).join(' | ');
+    rows.push([st.name,s.name,s.id==='edl'?chainTxt(sb):s.id==='cp'?sb.method:'',okCount(st,s.id)+'/'+s.units.length,nx.map(x=>uName(s.id,x.n)+' : '+x.label).join(' ; '),det,st.notes||'']);}));
   const csv='﻿'+rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(';')).join('\r\n');
   await saveFile('Suivi ULIS - '+YEAR+'.csv',new Blob([csv],{type:'text/csv'}));
 });
+
+/* ========== ÉVALUATION DE DÉPART ========== */
+const EVAL={edl:{ele:['EDL 1.1'],ens:['EDL 1.0']},num:{ele:['Évaluation'],ens:["Éval. mode d'emploi"]},geo:{ele:['Évaluation'],ens:[]},cp:{ele:['Évaluation'],ens:['Éval. corrigé']}};
+let evd={id:null,sids:[],isNew:false};
+const docPages=(sid,code)=>{const d=docBy(sid,code);return d?range(1,d.pages).map(p=>[d.file,p]):[];};
+function evalParts(){const ex=[],co=[];evd.sids.forEach(sid=>{EVAL[sid].ele.forEach(c=>ex.push(...docPages(sid,c)));EVAL[sid].ens.forEach(c=>co.push(...docPages(sid,c)));});return {ex,co};}
+function openEval(id,sids,isNew){evd={id,sids:SUBJ.map(s=>s.id).filter(x=>sids.includes(x)),all:sids.slice(),isNew:!!isNew};renderEval();openDlg('dprt');}
+function renderEval(){const st=STU[evd.id];if(!st)return;const {ex,co}=evalParts(),fin=CMODE==='fin'&&co.length,part=CMODE==='part'&&co.length,tot=ex.length+(fin?co.length:0);
+  $('#dprtbox').innerHTML=`<h3 id="dprth">${evd.isNew?'Nouvel élève : '+esc(st.name):'Évaluation de départ · '+esc(st.name)}</h3>
+  <p class="lead" style="font-size:16px;margin:4px 0 10px">${evd.isNew?'<b>1.</b> Imprimez l\'évaluation de départ de ses matières. <b>2.</b> Après l\'évaluation, positionnez l\'élève sur la notion ou la couleur de ceinture où il commence.':'Imprimez l\'évaluation de départ, puis positionnez l\'élève.'}</p>
+  <label class="f">Évaluations à imprimer</label><div class="subjchk" id="evsj">${evd.all.map(sid=>`<label><input type="checkbox" value="${sid}" ${evd.sids.includes(sid)?'checked':''}>${esc(SJ[sid].name)}</label>`).join('')}</div>
+  ${corrChoice('evcm',co.length,evd.sids.length?'La géométrie n\'a pas de corrigé à part : la grille est dans l\'évaluation.':'Cochez au moins une matière.').replace("Corrigés pour l'enseignant : les imprimer ?","Mode d'emploi et corrigés pour l'enseignant : les imprimer ?")}
+  <p class="sum" style="margin-top:12px">${tot} <small>page${tot>1?'s':''}${fin?' (dont '+co.length+' pour l\'enseignant)':''}</small>${part?`<span class="meta" style="font-size:15px;margin-left:10px">+ ${co.length} pages pour l'enseignant à part</span>`:''}</p><div class="status" id="evstat" aria-live="polite"></div>
+  <div class="foot"><button class="btn" data-close>${evd.isNew?'Plus tard':'Fermer'}</button><button class="btn" id="evpos">Positionner l'élève</button>${part?'<button class="btn" id="evgoc">PDF enseignant</button>':''}<button class="btn pri" id="evgo" ${ex.length?'':'disabled'}>Créer le PDF de l'évaluation</button></div>`;}
+$('#dprtbox').addEventListener('click',async ev=>{
+  if(!$('#evsj'))return;
+  const cm=ev.target.closest('#evcm button');if(cm){setCmode(cm.dataset.cm);renderEval();return;}
+  if(ev.target.closest('#evsj input')){evd.sids=$$('#evsj input:checked').map(i=>i.value);renderEval();return;}
+  if(ev.target.id==='evpos'){const id=evd.id;closeDlg('dprt');openStu(id);return;}
+  const st=STU[evd.id],nm=evd.sids.length===1?' - '+SJ[evd.sids[0]].name:'';
+  if(ev.target.id==='evgo'||ev.target.id==='evgoc'){const {ex,co}=evalParts(),b=ev.target;b.disabled=true;
+    const pages=b.id==='evgoc'?co:(CMODE==='fin'?[...ex,...co]:ex);
+    await buildPdf(pages,(b.id==='evgoc'?'Evaluation de depart (enseignant) - ':'Evaluation de depart - ')+st.name+nm+'.pdf',t=>{const s=$('#evstat');if(s)s.textContent=t;});b.disabled=false;}
+});
+document.addEventListener('click',ev=>{const e=ev.target.closest('[data-eval]');if(!e)return;const [id,sid]=e.dataset.eval.split('|');commitStu();closeDlg('dstu');openEval(id,[sid],false);});
 
 /* ========== MISES À JOUR ========== */
 let UPD=null,updT=null;
@@ -978,27 +1045,29 @@ async function makeBilan(st,which){
   const title=which==='all'?'Bilan de suivi - toutes matières':'Bilan de suivi - '+SJ[which].name;
   line(title,{b:1,s:18});y-=4;line('ULIS collège - document de transmission',{s:11,c:grey});y-=10;
   line(`Élève : ${st.name}`,{b:1,s:13});line(`Année scolaire : ${st.year||YEAR}   ·   Bilan édité le ${today()}`,{c:grey});
-  if(which==='all'){y-=6;sids.forEach(sid=>line(`${SJ[sid].name} : ${okCount(st,sid)} / ${SJ[sid].units.length} ${SJ[sid].words} réussies`,{x:10}));}
-  const lab={ok:'Réussie',passe:'À reprendre plus tard',cours:'En cours','':'Non travaillée'};
+  if(which==='all'){y-=6;sids.forEach(sid=>line(`${SJ[sid].name} : ${okCount(st,sid)} / ${SJ[sid].units.length} ${SJ[sid].words} acquises`,{x:10}));}
+  const lab={eval:'Acquise (évaluation de départ)',ok:'Réussie',passe:'À reprendre plus tard',cours:'En cours','':'Non travaillée'};
   sids.forEach((sid,i)=>{const s=SJ[sid],sb=sbOf(st,sid),R=RULES[sid],res=sb.res||{};
     if(which==='all'&&i>0)np();else y-=12;
     page.drawRectangle({x:L,y:y-4,width:W,height:22,color:hex(s.accent)});page.drawText(clean(s.name),{x:L+8,y:y+2,size:13,font:B,color:rgb(1,1,1)});y-=28;
-    const set=sid==='edl'?`Parcours ${sb.parcours||1} (${sb.parcours==2?'niveau 3 - CM1':sb.parcours==3?'niveau 5 - 6e':'niveau 1 - CE1'}) · notion de départ : ${sb.start||1}`
+    const set=sid==='edl'?`${chainTxt(sb).split(' → ').join(' puis ')} · notion de départ : ${sb.start||1}`
       :sid==='cp'?`Ceinture de départ : ${sb.start||1} · soustraction ${sb.method==='cassage'?'par cassage':'par compensation (retenue)'}`
       :sid==='num'?`Départs : entiers ${sb.start||1}, fractions ${sb.startF||21}, décimaux ${sb.startD||28}`:`Ceinture de départ : ${sb.start||1}`;
-    line(set,{c:grey});line(`${okCount(st,sid)} / ${s.units.length} ${s.words} réussies`,{b:1});
+    line(set,{c:grey});line(`${sid==='edl'&&R.chain(sb).length>1?'Parcours '+R.cur(sb)+' : ':''}${okCount(st,sid)} / ${s.units.length} ${s.words} acquises`+(evalCount(st,sid)?` (dont ${evalCount(st,sid)} à l'évaluation de départ)`:''),{b:1});
     const nx=R.steps(sb,res);line('Prochaine étape : '+(nx.length?nx.map(x=>`${uName(sid,x.n)} - ${x.label}`).join(' ; '):'tout est traité'),{b:1});y-=4;
     page.drawLine({start:{x:L,y:y+6},end:{x:L+W,y:y+6},thickness:1,color:rgb(.11,.11,.1)});y-=8;
     let grp='';
     s.units.forEach(u=>{
       if(sid==='num'&&u.parcours!==grp){grp=u.parcours;if(y<110)np();y-=2;line(R.tracks[grp][2],{b:1,s:11,c:hex(s.accent)});}
       const r=res[u.n]||{},pl=r.pl||{},stt=R.state(sb,u.n);const det=[];
+      ['ev','ev2','ev3'].forEach(k=>{if(r[k]==='ko')det.push('à travailler (évaluation de départ'+(k==='ev'?'':' P'+k.slice(2))+')');});
       ['A','B','C'].forEach(k=>r[k]&&det.push((sid==='geo'?'test version '+(' ABC'.indexOf(k)):'test '+k)+(r[k]==='ok'?' réussi':' raté')));
       Object.keys(pl).sort().forEach(k=>det.push('plus loin niv. '+k.replace('b',' (2e essai)')+(pl[k]==='ok'?' réussi':' raté')));
       if(y<90)np();
       const nm=clean(`${u.n}. ${u.name}${u.comp&&sid!=='edl'?' - '+u.comp:''}`);let nmt=nm;while(F.widthOfTextAtSize(nmt,10)>285&&nmt.length>10)nmt=nmt.slice(0,-2);if(nmt!==nm)nmt=nmt.trim()+'…';
       page.drawText(nmt,{x:L,y,size:10,font:B});
-      page.drawText(clean(lab[stt]),{x:L+295,y,size:10,font:stt==='ok'?B:F,color:stt==='ok'?rgb(.15,.5,.25):stt==='passe'?rgb(.75,.4,.05):rgb(.25,.25,.25)});
+      if(sid==='edl'&&R.chain(sb).length>1)det.unshift(R.chain(sb).map(pp=>'P'+pp+' : '+lab[R.stateP(sb,u.n,pp)].toLowerCase()).join(' · '));
+      page.drawText(clean(lab[stt]),{x:L+295,y,size:10,font:stt==='ok'?B:F,color:stt==='ok'||stt==='eval'?rgb(.15,.5,.25):stt==='passe'?rgb(.75,.4,.05):rgb(.25,.25,.25)});
       if(r.d)page.drawText(clean(r.d),{x:L+430,y,size:9,font:F,color:rgb(.4,.4,.4)});y-=12.5;
       if(det.length)line(det.join(' ; '),{x:14,s:9,c:grey});y-=3;});
   });
@@ -1021,7 +1090,7 @@ async function bilanClass(sts,which){
 }
 
 /* ========== DÉMARRAGE ========== */
-window.SUIVI={get STU(){return STU;},RULES,SJ,nextSteps,prtPages:()=>prtPages(),prtParts:()=>prtParts(),plan:()=>plan(),plan2:()=>plan2(),unitPages,sbOf};
+window.SUIVI={get STU(){return STU;},evalParts:()=>evalParts(),RULES,SJ,nextSteps,prtPages:()=>prtPages(),prtParts:()=>prtParts(),plan:()=>plan(),plan2:()=>plan2(),unitPages,sbOf};
 route();start();
 
 })();
